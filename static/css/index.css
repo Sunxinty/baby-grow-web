@@ -1,0 +1,24 @@
+.layui-nav * {
+	font-size: 18px;
+}
+
+.layui-nav-tree .layui-nav-child a {
+	font-size: 16px;
+	padding: 0 45px;
+}
+
+.layui-layout-admin .layui-side,
+.layui-nav-tree {
+	width: 260px;
+}
+
+.layui-side-scroll {
+	width: 280px;
+}
+
+.layui-nav-tree li.layui-nav-item {
+	border-bottom: 1px solid #333;
+}
+.layui-layout-admin .layui-body{
+	bottom: 0;
+}
