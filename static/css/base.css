@@ -1,22 +1,37 @@
-ul,li,p,span,h3,a,i{
-	margin: 0;
-	padding: 0;
+ul,
+li,
+p,
+span,
+h3,
+a,
+i {
+    margin: 0;
+    padding: 0;
 }
-body{
-	background: #f0f0f0;
+
+body {
+    background: #f0f0f0;
 }
-.section{
-	position: relative;
-	width: 100%;
-	margin: 0 auto;
-	overflow: hidden;
+
+.section {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
 }
-.f-left{
-	float: left;
+
+.f-left {
+    float: left;
 }
-.f-right{
-	float: right;
+
+.f-right {
+    float: right;
 }
-.bg-fff{
-	background: #fff;
+
+.bg-fff {
+    background: #fff;
+}
+
+.content {
+    padding: 10px;
 }
