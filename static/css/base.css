@@ -31,3 +31,6 @@ body {
 .bg-fff {
     background: #fff;
 }
+a,a:hover{
+	text-decoration: none;
+}

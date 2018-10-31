@@ -106,6 +106,7 @@
 
 .body {
     padding: 10px;
+    margin-right: 10px;
 }
 
 .my-body .layui-tab, .my-body .layui-tab .layui-tab-content {
