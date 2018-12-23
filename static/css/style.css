@@ -179,7 +179,7 @@
 
 /* login */
 .login-body {
-    background: url("../image/bg.png") repeat fixed;
+    background: url("../image/login_bg.jpg") no-repeat;
 }
 
 .login-box {

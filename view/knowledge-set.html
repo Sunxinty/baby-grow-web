@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>知识文章设置</title>
+		<link rel="stylesheet" href="../lib/bootstrap.min.css" />
+		<link rel="stylesheet" href="../lib/layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../static/fonts/iconfont.css">
+		<link rel="stylesheet" href="../static/css/style.css">
+		<link rel="stylesheet" href="../static/css/knowledge-set.css" />
+		<link rel="icon" href="../static/image/code.png">
+	</head>
+
+	<body class="body">
+		<div class="container">
+			<div class="wiki-list bg-fff">
+				<div class="layui-btn-group">
+					<a href="##" @click="add" class="layui-btn layui-btn-warm layui-btn-radius">创建分类</a>
+				</div>
+				<div class="section my-table">
+					<ul class="section my-table-head">
+						<li>
+							<p class="width-10">序号</p>
+							<p class="width-60">类型名称</p>
+							<p class="width-30">操作</p>
+						</li>
+					</ul>
+					<ul class="section my-table-body">
+						<li v-for="(item,index) in dataList" v-if="index<10">
+							<p class="width-10">{{index+1}}</p>
+							<p class="width-60">{{item.typeName}}</p>
+							<p class="width-30">
+								<a href="##" @click="edit(item)" class="layui-btn">编辑</a>
+								<a href="##" @click="deleteData(item.id)" class="layui-btn layui-btn-danger">删除</a>
+							</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!--指定对象编辑-->
+			<div class="edit-class" v-if="showClass">
+				<div class="section e-c-con">
+					<h3>课堂分类设置</h3>
+					<h4>一级类型</h4>
+					<form class="layui-form" style="padding: 8% 8% 4% 8%;">
+						<div class="layui-form-item">
+							<label class="layui-form-label">名称</label>
+							<div class="layui-input-block">
+								<input type="text" v-model="typeName" name="" class="layui-input" placeholder="分类名称">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<div class="layui-input-block" style="margin-top: 40px;">
+								<button type="button" class="layui-btn" @click="saveClass">确定</button>
+								<button type="button" class="layui-btn layui-btn-primary" @click="closeClass">取消</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript" src="../lib/jquery.min.js" ></script>
+		<script type="text/javascript" src="../lib/layui/layui.js"></script>
+		<script type="text/javascript" src="../lib/vue.min.js"></script>
+		<script type="text/javascript" src="../lib/vue-resource.js"></script>
+		<script type="text/javascript" src="../static/js/config.js" ></script>
+		<script type="text/javascript" src="../lib/ajaxhook.min.js" ></script>
+		<script type="text/javascript" src="../static/js/myTools.js" ></script>
+		<script type="text/javascript" src="../static/js/knowledge-set.js"></script>
+	</body>
+
+</html>

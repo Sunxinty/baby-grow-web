@@ -41,10 +41,8 @@
 .regit-detail{
 	margin-top: 20px;
 	padding: 20px;
+	background: #fff;
 }
 .layui-laypage-count{
 	background: none !important;
-}
-.layui-btn{
-	line-height: 28px;
 }

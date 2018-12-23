@@ -1,0 +1,20 @@
+@import url("base.css");
+.search-form{
+	padding: 20px;
+}
+.user-list{
+	margin-top: 20px;
+	padding: 20px;
+	position: relative;
+	overflow: hidden;
+}
+.regit-detail h3{
+	font-size: 16px;
+	font-weight: bold;
+}
+.layui-laypage-count{
+	background: none !important;
+}
+.iconfont{
+	line-height: 30px;
+}

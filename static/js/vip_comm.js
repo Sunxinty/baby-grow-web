@@ -164,7 +164,7 @@ layui.use(['layer', 'element', 'util'], function () {
             // 赋值
             cardIdx = $(this).index();
             cardLayId = $(this).attr('lay-id');
-            console.log('lay-id:' + cardLayId);
+            //console.log('lay-id:' + cardLayId);
             // 选择框
             layer.tips($('.my-dblclick-box').html(), $(this), {
                 skin: 'dblclick-tips-box',

@@ -1,36 +1,295 @@
-ul,
-li,
+@charset "utf-8";
+
+/* 基础样式 */
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html,body{
+	width: 100%;
+	height: 100%;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
 p,
 span,
-h3,
+img,
 a,
-i {
-    margin: 0;
-    padding: 0;
+input,
+button,
+textarea,
+form,
+ul,
+li,
+ol {
+	margin: 0;
+	padding: 0;
+	font-family: "微软雅黑";
+}
+
+a,
+a:link,
+a:visited,
+a:hover,
+a:active {
+	outline: none;
+	text-decoration: none;
+	display: inline-block;
+}
+
+p,
+span,
+b,
+input,
+button,
+textarea,
+img {
+	border: none;
+	outline: none;
+	display: inline-block;
+}
+
+img {
+	max-width: 100%;
+}
+
+li {
+	float: left;
+	list-style-type: none;
 }
 
 body {
-    background: #f0f0f0;
+	background: #f0f0f0;
 }
 
 .section {
-    position: relative;
-    width: 100%;
-    margin: 0 auto;
-    overflow: hidden;
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+	max-width: 1920px;
+	margin: 0 auto;
 }
 
 .f-left {
-    float: left;
+	float: left;
 }
 
 .f-right {
-    float: right;
+	float: right;
+}
+
+.dis-n {
+	display: none;
+}
+
+.dis-b {
+	display: inline-block;
+}
+
+.c-fff,
+.c-fff p,
+.c-fff h3,
+.c-fff h2,
+.c-fff span,
+.c-fff h1,
+.c-fff a,
+.c-fff h4,
+.c-fff i {
+	color: #fff;
 }
 
 .bg-fff {
-    background: #fff;
+	background-color: #fff;
 }
-a,a:hover{
-	text-decoration: none;
+
+.width-5 {
+	width: 5%;
+}
+
+.width-10 {
+	width: 10%;
+}
+
+.width-15 {
+	width: 15%;
+}
+
+.width-20 {
+	width: 20%;
+}
+
+.width-25 {
+	width: 25%;
+}
+
+.width-30 {
+	width: 30%;
+}
+
+.width-35 {
+	width: 35%;
+}
+
+.width-40 {
+	width: 40%;
+}
+
+.width-45 {
+	width: 45%;
+}
+
+.width-50 {
+	width: 50%;
+}
+
+.width-55 {
+	width: 55%;
+}
+
+.width-60 {
+	width: 60%;
+}
+
+.width-65 {
+	width: 65%;
+}
+
+.width-70 {
+	width: 70%;
+}
+
+.width-75 {
+	width: 75%;
+}
+
+.width-80 {
+	width: 80%;
+}
+
+.width-85 {
+	width: 85%;
+}
+
+.width-90 {
+	width: 90%;
+}
+
+.width-95 {
+	width: 95%;
+}
+
+.width-100 {
+	width: 100%;
+}
+
+
+/* 修改layui样式 */
+
+.layui-form-label {
+	width: 100px;
+    margin: 0;
+    padding: 8px 10px;
+}
+
+.container {
+	width: auto;
+}
+
+.layui-input-block{
+	margin-left: 100px;
+}
+
+.my-table-body .layui-btn{
+	height: 24px;
+	line-height: 24px;
+	padding: 0 10px;
+}
+
+.layui-upload-list{
+	margin: 0 10px;
+	display: inline-block;
+}
+.layui-upload-list img{
+	width: auto;
+	height: 135px;
+}
+/* 公共页面样式 */
+
+.my-table {
+	border: 1px solid #ccc;
+	margin: 10px 0;
+}
+
+.my-table li {
+	width: 100%;
+	border-bottom: 1px solid #ccc;
+	transition: 0.3s ease;
+}
+
+.my-table li p {
+	float: left;
+	padding: 6px 10px;
+	line-height: 28px;
+	height: 40px;
+	font-size: 14px;
+	color: #646464;
+	text-align: center;
+	border-right: 1px solid #ccc;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.my-table li p:last-child {
+	border: none;
+}
+
+.my-table li p img {
+	margin: 5px;
+}
+
+.my-table li p a {
+	margin: 0 5px;
+}
+
+.my-table-head {
+	background: #f2f2f2;
+}
+
+.my-table-body {
+	background: #fff;
+}
+
+.my-table-body li:hover {
+	background: #e5f5d7;
+}
+
+.my-table-body li:last-child {
+	border: none;
+}
+.my-page{
+	margin: 10px 0;
+	text-align: center;
+	float: left;
+	padding: 0 20px;
+}
+.my-page a{
+	font-size: 14px;
+	margin: 0 5px;
+	padding: 5px 15px;
+	border: 1px solid #ccc;
+	color: #646464;
+	transition: 0.3s ease;
+}
+.my-page a.active{
+	background: #205a55;
+	color: #fff;
 }

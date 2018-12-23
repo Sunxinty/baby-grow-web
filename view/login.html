@@ -10,51 +10,41 @@
 		<link rel="stylesheet" href="../lib/layui/css/layui.css">
 		<link rel="stylesheet" href="../static/css/style.css">
 		<link rel="icon" href="../static/image/code.png">
+		<link rel="stylesheet" href="../static/css/login.css" />
 	</head>
 
 	<body>
 
 		<div class="login-main">
 			<header class="layui-elip">后台登录</header>
-			<form class="layui-form">
+			<form class="layui-form" action="">
 				<div class="layui-input-inline">
-					<input type="text" name="username" required lay-verify="username" placeholder="用户名" autocomplete="off" class="layui-input">
+					<input type="text" name="username" v-model="username" required placeholder="用户名"  class="layui-input">
 				</div>
 				<div class="layui-input-inline">
-					<input type="password" name="password" required lay-verify="password" placeholder="密码" autocomplete="off" class="layui-input">
+					<input type="password" name="password" v-model="password" placeholder="密码" class="layui-input">
+				</div>
+				<div class="layui-input-inline">
+					<input type="text" class="layui-input" name="code" v-model="code" placeholder="请输入验证码" style="width: 245px;display: inline-block;">
+					<button type="button" class="layui-btn" style="width: 100px;" @click="getCode">获取验证码</button>
+				</div>
+				<div class="layui-input-inline" v-if="imgUrl!=''">
+					<img :src="imgUrl" @click="getCode" />
 				</div>
 				<div class="layui-input-inline login-btn">
-					<button type="button" lay-submit class="layui-btn">登录</button>
+					<button type="button" class="layui-btn" @click="login">登录</button>
 				</div>
-				<hr/>
-				<p>
-					<a href="javascript:;" class="fl">立即注册</a>
-					<!--<a href="javascript:;" class="fr">忘记密码？</a>-->
-				</p>
+				
 			</form>
 		</div>
 
-		<script src="../lib/layui/layui.js"></script>
-		<script type="text/javascript">
-			layui.use(['form'], function() {
-				var form = layui.form,
-					$ = layui.jquery;
-				form.verify({
-					username: function(value, item) {
-						if(value.length < 2) {
-							return '用户名不得少于2个字符';
-						}
-						if(!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)) {
-							return '用户名不能有特殊字符';
-						}
-						if(/^\d+\d+\d$/.test(value)) {
-							return '用户名不能全为数字';
-						}
-					},
-					password: [/^[\S]{6,20}$/, '密码必须6到20位']
-				});
-			});
-		</script>
+		<script src="../lib/layui/layui.js" type="text/javascript"></script>
+		<script type="text/javascript" src="../lib/md5.js"></script>
+		<!--<script src="http://cdn.bootcss.com/blueimp-md5/1.1.0/js/md5.js"></script>-->
+		<script type="text/javascript" src="../lib/vue.min.js"></script>
+		<script type="text/javascript" src="../lib/vue-resource.js"></script>
+		<script type="text/javascript" src="../static/js/config.js" ></script>
+		<script type="text/javascript" src="../static/js/login.js" ></script>
 	</body>
 
 </html>

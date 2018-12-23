@@ -1,0 +1,10 @@
+@import url("base.css");
+.search-form{
+	padding: 20px;
+}
+.layui-laypage-count{
+	background: none !important;
+}
+.iconfont{
+	line-height: 30px;
+}

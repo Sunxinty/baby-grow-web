@@ -6,13 +6,13 @@
 		<meta name="renderer" content="webkit">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<title>用户列表</title>
+		<title>关爱提醒文章</title>
 		<link rel="stylesheet" href="../lib/bootstrap.min.css" />
 		<link rel="stylesheet" href="../lib/layui/css/layui.css" media="all">
-		<link rel="stylesheet" type="text/css" href="../static/fonts/iconfont.css">
+		<link rel="stylesheet" href="../static/fonts/iconfont.css">
 		<link rel="stylesheet" href="../static/css/style.css">
-		<link rel="stylesheet" href="../static/css/user-list.css" />
-		<link rel="icon" href="static/image/code.png">
+		<link rel="stylesheet" href="../static/css/care-remind-list.css" />
+		<link rel="icon" href="../static/image/code.png">
 	</head>
 
 	<body class="body">
@@ -21,81 +21,54 @@
 				<form class="layui-form">
 					<div class="layui-form-item">
 						<div class="layui-inline">
-							<label class="layui-form-label">用户昵称</label>
+							<label class="layui-form-label">适龄范围</label>
 							<div class="layui-input-inline">
-								<input type="tel" name="" v-model="userName" class="layui-input" placeholder="请输入用户昵称进行查询">
-							</div>
-						</div>
-						<div class="layui-inline">
-							<label class="layui-form-label">用户账号</label>
-							<div class="layui-input-inline">
-								<input type="text" name="" v-model="phone" class="layui-input" placeholder="请输入用户账号进行查询">
-							</div>
-						</div>
-					</div>
-					<div class="layui-form-item">
-						<div class="layui-inline">
-							<label class="layui-form-label">是否会员</label>
-							<div class="layui-input-inline">
-								<select name="" v-model="vip">
-									<option value="">请选择</option>
-									<option value="0">否</option>
-									<option value="1">是</option>
+								<select name="ageRange">
+									<option v-for="n in 12" :value="n">{{n}}月龄</option>
 								</select>
 							</div>
 						</div>
 						<div class="layui-inline">
-							<label class="layui-form-label">性别</label>
+							<label class="layui-form-label">发布时间</label>
 							<div class="layui-input-inline">
-								<select name="sex" v-model="sex">
-									<option value="">请选择</option>
-									<option value="1">男</option>
-									<option value="0">女</option>
-								</select>
+								<input type="text" class="layui-input" id="timeRange" placeholder="点击选择时间范围">
 							</div>
 						</div>
 						<div class="layui-inline">
-							<label class="layui-form-label">注册时间</label>
 							<div class="layui-input-inline">
-								<input type="text" class="layui-input" id="timeRange" placeholder="点击选择时间范围" v-model="timeRange">
+								<button type="button" class="layui-btn">搜索</button>
 							</div>
-						</div>
-					</div>
-					<div class="layui-form-item">
-						<div class="layui-input-block">
-							<button type="button" @click="getData(1)" class="layui-btn">搜索</button>
 						</div>
 					</div>
 				</form>
 			</div>
-			
-			<div class="user-list bg-fff">
-				<h3>当前用户：{{total}}人</h3>
+
+			<div class="careRemind-list bg-fff">
+				<div class="layui-btn-group">
+					<a href="##" @click="add" class="layui-btn layui-btn-warm layui-btn-radius">添加文章</a>
+				</div>
+				<h3>共计：569条</h3>
 				<div class="section my-table">
 					<ul class="section my-table-head">
 						<li>
 							<p class="width-5">序号</p>
-							<p class="width-20">用户昵称</p>
-							<p class="width-10">性别</p>
-							<p class="width-20">账号</p>
-							<p class="width-10">vip会员</p>
-							<p class="width-20">注册时间</p>
-							<p class="width-5">当前宝贝</p>
-							<p class="width-10">操作</p>
+							<p class="width-30">文章名称</p>
+							<p class="width-15">适龄范围</p>
+							<p class="width-20">发布时间</p>
+							<p class="width-10">操作员</p>
+							<p class="width-20">操作</p>
 						</li>
 					</ul>
-					<ul class="section my-table-body" v-if="dataList.length>0">
-						<li v-for="(item,index) in dataList">
-							<p class="width-5">{{index+1+(page-1)*10}}</p>
-							<p class="width-20">{{item.userName}}</p>
-							<p class="width-10">{{item.sex==1?"男":"女"}}</p>
-							<p class="width-20">{{item.phone}}</p>
-							<p class="width-10">{{item.vip==1?"是":"否"}}</p>
-							<p class="width-20">{{item.vipStartTime}}</p>
-							<p class="width-5">{{item.babys||0}}</p>
-							<p class="width-10">
-								<a href="##" class="layui-btn" @click="editData(item.id)">编辑</a>
-								<a href="##" class="layui-btn layui-btn-danger" @click="deleteData(item.id)">删除</a>
+					<ul class="section my-table-body">
+						<li v-for="n in 10">
+							<p class="width-5">{{n}}</p>
+							<p class="width-30">5岁儿童应该吃什么？</p>
+							<p class="width-15">1~2月龄</p>
+							<p class="width-20">2018-10-23 12:23:33</p>
+							<p class="width-10">孙大厨</p>
+							<p class="width-20">
+								<a href="##" @click="edit" class="layui-btn">编辑</a>
+								<a href="##" @click="deleteData" class="layui-btn layui-btn-danger">删除</a>	
 							</p>
 						</li>
 					</ul>
@@ -134,16 +107,15 @@
 				</div>
 			</div>
 		</div>
-		
-		
-		<script type="text/javascript" src="../lib/jquery.min.js" ></script>
+
 		<script type="text/javascript" src="../lib/layui/layui.js"></script>
+		<script type="text/javascript" src="../lib/jquery.min.js" ></script>
 		<script type="text/javascript" src="../lib/vue.min.js"></script>
 		<script type="text/javascript" src="../lib/vue-resource.js"></script>
-		<script type="text/javascript" src="../static/js/config.js" ></script>
+		<script type="text/javascript" src="../static/js/config.js"></script>
 		<script type="text/javascript" src="../lib/ajaxhook.min.js" ></script>
 		<script type="text/javascript" src="../static/js/myTools.js" ></script>
-		<script type="text/javascript" src="../static/js/user-list.js"></script>
+		<script type="text/javascript" src="../static/js/care-remind-list.js"></script>
 	</body>
 
 </html>

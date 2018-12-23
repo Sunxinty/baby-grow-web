@@ -1,0 +1,779 @@
+{
+    "msg": "操作成功",
+    "code": "0000",
+    "data": [
+        {
+            "id": 2,
+            "typeName": "0-1月龄",
+            "createTime": "2018-09-16 13:37:33",
+            "updateTime": "2018-09-16 13:37:35",
+            "rangeValue": "0-1",
+            "sort": null,
+            "isDelete": null,
+            "encyclopeTypes": [
+                {
+                    "id": 1,
+                    "typeName": "敏感期教育",
+                    "createTime": "2018-09-16 14:55:37",
+                    "updateTime": "2018-09-16 14:55:40",
+                    "color": null,
+                    "monthId": 2,
+                    "sort": null,
+                    "isDelete": null,
+                    "encyclopeChilds": [
+                        {
+                            "id": 1,
+                            "typeName": "新生儿黄豆",
+                            "createTime": "2018-09-16 15:06:56",
+                            "updateTime": "2018-09-16 15:06:59",
+                            "encyclopeId": 1,
+                            "sort": null,
+                            "isDelete": null
+                        },
+                        {
+                            "id": 2,
+                            "typeName": "手足口病",
+                            "createTime": "2018-09-16 17:19:27",
+                            "updateTime": "2018-09-16 17:19:29",
+                            "encyclopeId": 1,
+                            "sort": null,
+                            "isDelete": null
+                        },
+                        {
+                            "id": 3,
+                            "typeName": "小儿腹泻",
+                            "createTime": "2018-09-16 17:20:02",
+                            "updateTime": "2018-09-16 17:20:05",
+                            "encyclopeId": 1,
+                            "sort": null,
+                            "isDelete": null
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "typeName": "小儿疾病",
+                    "createTime": "2018-09-16 14:54:29",
+                    "updateTime": "2018-09-16 14:54:30",
+                    "color": null,
+                    "monthId": 2,
+                    "sort": null,
+                    "isDelete": null,
+                    "encyclopeChilds": null
+                },
+                {
+                    "id": 22,
+                    "typeName": "婴儿护理",
+                    "createTime": "2018-09-22 14:40:02",
+                    "updateTime": "2018-09-22 14:40:17",
+                    "color": null,
+                    "monthId": 2,
+                    "sort": null,
+                    "isDelete": null,
+                    "encyclopeChilds": null
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "typeName": "1-2月龄",
+            "createTime": "2018-09-16 13:39:01",
+            "updateTime": "2018-09-16 13:39:03",
+            "rangeValue": "1-2",
+            "sort": null,
+            "isDelete": null,
+            "encyclopeTypes": [
+                {
+                    "id": 3,
+                    "typeName": "生活习惯",
+                    "createTime": "2018-09-16 14:56:53",
+                    "updateTime": "2018-09-16 14:56:55",
+                    "color": "#1E5284",
+                    "monthId": 3,
+                    "sort": null,
+                    "isDelete": null,
+                    "encyclopeChilds": [
+                        {
+                            "id": 4,
+                            "typeName": "新生肺炎",
+                            "createTime": "2018-09-16 17:16:39",
+                            "updateTime": "2018-09-16 17:16:42",
+                            "encyclopeId": 3,
+                            "sort": null,
+                            "isDelete": null
+                        },
+                        {
+                            "id": 5,
+                            "typeName": "小儿鼻塞",
+                            "createTime": "2018-09-16 17:17:09",
+                            "updateTime": "2018-09-16 17:17:12",
+                            "encyclopeId": 3,
+                            "sort": null,
+                            "isDelete": null
+                        },
+                        {
+                            "id": 6,
+                            "typeName": "婴儿消化不良",
+                            "createTime": "2018-09-16 17:17:41",
+                            "updateTime": "2018-09-16 17:17:43",
+                            "encyclopeId": 3,
+                            "sort": null,
+                            "isDelete": null
+                        }
+                    ]
+                },
+                {
+                    "id": 23,
+                    "typeName": "婴儿护理",
+                    "createTime": "2018-09-22 14:40:06",
+                    "updateTime": "2018-09-22 14:40:20",
+                    "color": null,
+                    "monthId": 3,
+                    "sort": null,
+                    "isDelete": null,
+                    "encyclopeChilds": null
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "typeName": "2-3月龄",
+            "createTime": "2018-09-16 13:39:20",
+            "updateTime": "2018-09-16 13:39:23",
+            "rangeValue": "2-3",
+            "sort": null,
+            "isDelete": null,
+            "encyclopeTypes": [
+                {
+                    "id": 4,
+                    "typeName": "婴儿护理",
+                    "createTime": "2018-09-16 14:52:46",
+                    "updateTime": "2018-09-16 14:52:48",
+                    "color": null,
+                    "monthId": 4,
+                    "sort": null,
+                    "isDelete": null,
+                    "encyclopeChilds": [
+                        {
+                            "id": 7,
+                            "typeName": "婴幼儿便秘",
+                            "createTime": "2018-09-22 14:50:06",
+                            "updateTime": "2018-09-22 14:50:20",
+                            "encyclopeId": 4,
+                            "sort": null,
+                            "isDelete": null
+                        },
+                        {
+                            "id": 8,
+                            "typeName": "鹅口疮",
+                            "createTime": "2018-09-22 14:50:08",
+                            "updateTime": "2018-09-22 14:50:23",
+                            "encyclopeId": 4,
+                            "sort": null,
+                            "isDelete": null
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "typeName": "3-4月龄",
+            "createTime": "2018-09-16 13:39:54",
+            "updateTime": "2018-09-16 13:39:56",
+            "rangeValue": "3-4",
+            "sort": null,
+            "isDelete": null,
+            "encyclopeTypes": [
+                {
+                    "id": 5,
+                    "typeName": "幼儿喂养",
+                    "createTime": "2018-09-16 14:51:39",
+                    "updateTime": "2018-09-16 14:51:43",
+                    "color": null,
+                    "monthId": 5,
+                    "sort": null,
+                    "isDelete": null,
+                    "encyclopeChilds": [
+                        {
+                            "id": 10,
+                            "typeName": "婴幼儿咳嗽",
+                            "createTime": "2018-09-22 14:50:14",
+                            "updateTime": "2018-09-22 14:50:29",
+                            "encyclopeId": 5,
+                            "sort": null,
+                            "isDelete": null
+                        }
+                    ]
+                },
+                {
+                    "id": 7,
+                    "typeName": "敏感期教育",
+                    "createTime": "2018-09-22 14:33:39",
+                    "updateTime": "2018-09-22 14:33:56",
+                    "color": null,
+                    "monthId": 5,
+                    "sort": null,
+                    "isDelete": null,
+                    "encyclopeChilds": [
+                        {
+                            "id": 11,
+                            "typeName": "婴幼儿发热",
+                            "createTime": "2018-09-22 14:50:17",
+                            "updateTime": "2018-09-22 14:50:33",
+                            "encyclopeId": 7,
+                            "sort": null,
+                            "isDelete": null
+                        }
+                    ]
+                },
+                {
+                    "id": 24,
+                    "typeName": "婴儿护理",
+                    "createTime": "2018-09-22 14:40:09",
+                    "updateTime": "2018-09-22 14:40:23",
+                    "color": null,
+                    "monthId": 5,
+                    "sort": null,
+                    "isDelete": null,
+                    "encyclopeChilds": null
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "typeName": "4-5月龄",
+            "createTime": "2018-09-16 13:41:08",
+            "updateTime": "2018-09-16 13:41:10",
+            "rangeValue": "4-5",
+            "sort": null,
+            "isDelete": null,
+            "encyclopeTypes": [
+                {
+                    "id": 6,
+                    "typeName": "宝宝发育",
+                    "createTime": "2018-09-16 14:55:00",
+                    "updateTime": "2018-09-16 14:55:02",
+                    "color": null,
+                    "monthId": 6,
+                    "sort": null,
+                    "isDelete": null,
+                    "encyclopeChilds": [
+                        {
+                            "id": 9,
+                            "typeName": "婴儿吐奶",
+                            "createTime": "2018-09-22 14:50:11",
+                            "updateTime": "2018-09-22 14:50:27",
+                            "encyclopeId": 6,
+                            "sort": null,
+                            "isDelete": null
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "typeName": "敏感期教育",
+                    "createTime": "2018-09-22 14:33:44",
+                    "updateTime": "2018-09-22 14:33:59",
+                    "color": null,
+                    "monthId": 6,
+                    "sort": null,
+                    "isDelete": null,
+                    "encyclopeChilds": [
+                        {
+                            "id": 12,
+                            "typeName": "婴幼儿脱肛",
+                            "createTime": "2018-09-22 14:56:18",
+                            "updateTime": "2018-09-22 14:56:21",
+                            "encyclopeId": 8,
+                            "sort": null,
+                            "isDelete": null
+                        }
+                    ]
+                },
+                {
+                    "id": 25,
+                    "typeName": "婴儿护理",
+                    "createTime": "2018-09-22 14:40:12",
+                    "updateTime": "2018-09-22 14:40:26",
+                    "color": null,
+                    "monthId": 6,
+                    "sort": null,
+                    "isDelete": null,
+                    "encyclopeChilds": null
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "typeName": "5-6月龄",
+            "createTime": "2018-09-16 13:42:13",
+            "updateTime": "2018-09-16 13:42:15",
+            "rangeValue": "5-6",
+            "sort": null,
+            "isDelete": null,
+            "encyclopeTypes": [
+                {
+                    "id": 9,
+                    "typeName": "敏感期教育",
+                    "createTime": "2018-09-22 14:33:47",
+                    "updateTime": "2018-09-22 14:34:01",
+                    "color": null,
+                    "monthId": 7,
+                    "sort": null,
+                    "isDelete": null,
+                    "encyclopeChilds": [
+                        {
+                            "id": 13,
+                            "typeName": "麻疹",
+                            "createTime": "2018-09-22 14:56:58",
+                            "updateTime": "2018-09-22 14:57:00",
+                            "encyclopeId": 9,
+                            "sort": null,
+                            "isDelete": null
+                        }
+                    ]
+                },
+                {
+                    "id": 12,
+                    "typeName": "小儿疾病",
+                    "createTime": "2018-09-22 14:36:18",
+                    "updateTime": "2018-09-22 14:36:35",
+                    "color": null,
+                    "monthId": 7,
+                    "sort": null,
+                    "isDelete": null,
+                    "encyclopeChilds": [
+                        {
+                            "id": 16,
+                            "typeName": "泌尿道感染",
+                            "createTime": "2018-09-22 14:58:34",
+                            "updateTime": "2018-09-22 14:58:37",
+                            "encyclopeId": 12,
+                            "sort": null,
+                            "isDelete": null
+                        }
+                    ]
+                },
+                {
+                    "id": 17,
+                    "typeName": "生活习惯",
+                    "createTime": "2018-09-22 14:38:23",
+                    "updateTime": "2018-09-22 14:38:40",
+                    "color": null,
+                    "monthId": 7,
+                    "sort": null,
+                    "isDelete": null,
+                    "encyclopeChilds": [
+                        {
+                            "id": 21,
+                            "typeName": "营养不良",
+                            "createTime": "2018-09-22 15:00:49",
+                            "updateTime": "2018-09-22 15:00:53",
+                            "encyclopeId": 17,
+                            "sort": null,
+                            "isDelete": null
+                        }
+                    ]
+                },
+                {
+                    "id": 26,
+                    "typeName": "婴儿护理",
+                    "createTime": "2018-09-22 14:40:14",
+                    "updateTime": "2018-09-22 14:40:29",
+                    "color": null,
+                    "monthId": 7,
+                    "sort": null,
+                    "isDelete": null,
+                    "encyclopeChilds": null
+                },
+                {
+                    "id": 32,
+                    "typeName": "宝宝发育",
+                    "createTime": "2018-09-22 14:44:32",
+                    "updateTime": "2018-09-22 14:44:47",
+                    "color": null,
+                    "monthId": 7,
+                    "sort": null,
+                    "isDelete": null,
+                    "encyclopeChilds": null
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "typeName": "6-9月龄",
+            "createTime": "2018-09-16 13:43:05",
+            "updateTime": "2018-09-16 13:43:08",
+            "rangeValue": "6-9",
+            "sort": null,
+            "isDelete": null,
+            "encyclopeTypes": [
+                {
+                    "id": 10,
+                    "typeName": "敏感期教育",
+                    "createTime": "2018-09-22 14:33:51",
+                    "updateTime": "2018-09-22 14:34:05",
+                    "color": null,
+                    "monthId": 8,
+                    "sort": null,
+                    "isDelete": null,
+                    "encyclopeChilds": [
+                        {
+                            "id": 14,
+                            "typeName": "结膜炎",
+                            "createTime": "2018-09-22 14:57:42",
+                            "updateTime": "2018-09-22 14:57:44",
+                            "encyclopeId": 10,
+                            "sort": null,
+                            "isDelete": null
+                        }
+                    ]
+                },
+                {
+                    "id": 13,
+                    "typeName": "小儿疾病",
+                    "createTime": "2018-09-22 14:36:23",
+                    "updateTime": "2018-09-22 14:36:37",
+                    "color": null,
+                    "monthId": 8,
+                    "sort": null,
+                    "isDelete": null,
+                    "encyclopeChilds": [
+                        {
+                            "id": 17,
+                            "typeName": "头癣",
+                            "createTime": "2018-09-22 14:59:10",
+                            "updateTime": "2018-09-22 14:59:14",
+                            "encyclopeId": 13,
+                            "sort": null,
+                            "isDelete": null
+                        }
+                    ]
+                },
+                {
+                    "id": 18,
+                    "typeName": "生活习惯",
+                    "createTime": "2018-09-22 14:38:26",
+                    "updateTime": "2018-09-22 14:38:44",
+                    "color": null,
+                    "monthId": 8,
+                    "sort": null,
+                    "isDelete": null,
+                    "encyclopeChilds": [
+                        {
+                            "id": 22,
+                            "typeName": "维生素缺乏症",
+                            "createTime": "2018-09-22 15:01:13",
+                            "updateTime": "2018-09-22 15:01:16",
+                            "encyclopeId": 18,
+                            "sort": null,
+                            "isDelete": null
+                        }
+                    ]
+                },
+                {
+                    "id": 33,
+                    "typeName": "宝宝发育",
+                    "createTime": "2018-09-22 14:44:36",
+                    "updateTime": "2018-09-22 14:44:50",
+                    "color": null,
+                    "monthId": 8,
+                    "sort": null,
+                    "isDelete": null,
+                    "encyclopeChilds": null
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "typeName": "9-1岁",
+            "createTime": "2018-09-16 13:44:11",
+            "updateTime": "2018-09-16 13:44:13",
+            "rangeValue": "9-12",
+            "sort": null,
+            "isDelete": null,
+            "encyclopeTypes": [
+                {
+                    "id": 11,
+                    "typeName": "敏感期教育",
+                    "createTime": "2018-09-22 14:33:54",
+                    "updateTime": "2018-09-22 14:34:07",
+                    "color": null,
+                    "monthId": 9,
+                    "sort": null,
+                    "isDelete": null,
+                    "encyclopeChilds": [
+                        {
+                            "id": 15,
+                            "typeName": "阴茎头包皮炎",
+                            "createTime": "2018-09-22 14:58:06",
+                            "updateTime": "2018-09-22 14:58:09",
+                            "encyclopeId": 11,
+                            "sort": null,
+                            "isDelete": null
+                        }
+                    ]
+                },
+                {
+                    "id": 14,
+                    "typeName": "小儿疾病",
+                    "createTime": "2018-09-22 14:36:26",
+                    "updateTime": "2018-09-22 14:36:40",
+                    "color": null,
+                    "monthId": 9,
+                    "sort": null,
+                    "isDelete": null,
+                    "encyclopeChilds": [
+                        {
+                            "id": 18,
+                            "typeName": "先天性胆道闭锁",
+                            "createTime": "2018-09-22 14:59:37",
+                            "updateTime": "2018-09-22 14:59:39",
+                            "encyclopeId": 14,
+                            "sort": null,
+                            "isDelete": null
+                        }
+                    ]
+                },
+                {
+                    "id": 19,
+                    "typeName": "生活习惯",
+                    "createTime": "2018-09-22 14:38:28",
+                    "updateTime": "2018-09-22 14:38:47",
+                    "color": null,
+                    "monthId": 9,
+                    "sort": null,
+                    "isDelete": null,
+                    "encyclopeChilds": [
+                        {
+                            "id": 23,
+                            "typeName": "维生素过多症",
+                            "createTime": "2018-09-22 15:01:35",
+                            "updateTime": "2018-09-22 15:01:37",
+                            "encyclopeId": 19,
+                            "sort": null,
+                            "isDelete": null
+                        }
+                    ]
+                },
+                {
+                    "id": 27,
+                    "typeName": "幼儿喂养",
+                    "createTime": "2018-09-22 14:41:54",
+                    "updateTime": "2018-09-22 14:42:07",
+                    "color": null,
+                    "monthId": 9,
+                    "sort": null,
+                    "isDelete": null,
+                    "encyclopeChilds": null
+                },
+                {
+                    "id": 34,
+                    "typeName": "宝宝发育",
+                    "createTime": "2018-09-22 14:44:39",
+                    "updateTime": "2018-09-22 14:44:53",
+                    "color": null,
+                    "monthId": 9,
+                    "sort": null,
+                    "isDelete": null,
+                    "encyclopeChilds": null
+                }
+            ]
+        },
+        {
+            "id": 10,
+            "typeName": "1岁-1岁半",
+            "createTime": "2018-09-16 13:50:06",
+            "updateTime": "2018-09-16 13:50:08",
+            "rangeValue": "12-18",
+            "sort": null,
+            "isDelete": null,
+            "encyclopeTypes": [
+                {
+                    "id": 15,
+                    "typeName": "小儿疾病",
+                    "createTime": "2018-09-22 14:36:28",
+                    "updateTime": "2018-09-22 14:36:43",
+                    "color": null,
+                    "monthId": 10,
+                    "sort": null,
+                    "isDelete": null,
+                    "encyclopeChilds": [
+                        {
+                            "id": 19,
+                            "typeName": "急性支气管炎",
+                            "createTime": "2018-09-22 15:00:00",
+                            "updateTime": "2018-09-22 15:00:03",
+                            "encyclopeId": 15,
+                            "sort": null,
+                            "isDelete": null
+                        }
+                    ]
+                },
+                {
+                    "id": 20,
+                    "typeName": "生活习惯",
+                    "createTime": "2018-09-22 14:38:32",
+                    "updateTime": "2018-09-22 14:38:50",
+                    "color": null,
+                    "monthId": 10,
+                    "sort": null,
+                    "isDelete": null,
+                    "encyclopeChilds": [
+                        {
+                            "id": 24,
+                            "typeName": "婴幼儿贫血",
+                            "createTime": "2018-09-22 15:02:08",
+                            "updateTime": "2018-09-22 15:02:10",
+                            "encyclopeId": 20,
+                            "sort": null,
+                            "isDelete": null
+                        }
+                    ]
+                },
+                {
+                    "id": 28,
+                    "typeName": "幼儿喂养",
+                    "createTime": "2018-09-22 14:41:57",
+                    "updateTime": "2018-09-22 14:42:10",
+                    "color": null,
+                    "monthId": 10,
+                    "sort": null,
+                    "isDelete": null,
+                    "encyclopeChilds": null
+                },
+                {
+                    "id": 35,
+                    "typeName": "宝宝发育",
+                    "createTime": "2018-09-22 14:44:42",
+                    "updateTime": "2018-09-22 14:44:56",
+                    "color": null,
+                    "monthId": 10,
+                    "sort": null,
+                    "isDelete": null,
+                    "encyclopeChilds": null
+                }
+            ]
+        },
+        {
+            "id": 11,
+            "typeName": "1岁半-2岁",
+            "createTime": "2018-09-16 14:09:23",
+            "updateTime": "2018-09-16 14:09:25",
+            "rangeValue": "18-24",
+            "sort": null,
+            "isDelete": null,
+            "encyclopeTypes": [
+                {
+                    "id": 16,
+                    "typeName": "小儿疾病",
+                    "createTime": "2018-09-22 14:36:32",
+                    "updateTime": "2018-09-22 14:36:46",
+                    "color": null,
+                    "monthId": 11,
+                    "sort": null,
+                    "isDelete": null,
+                    "encyclopeChilds": [
+                        {
+                            "id": 20,
+                            "typeName": "呼吸道感染",
+                            "createTime": "2018-09-22 15:00:24",
+                            "updateTime": "2018-09-22 15:00:27",
+                            "encyclopeId": 16,
+                            "sort": null,
+                            "isDelete": null
+                        }
+                    ]
+                },
+                {
+                    "id": 21,
+                    "typeName": "生活习惯",
+                    "createTime": "2018-09-22 14:38:36",
+                    "updateTime": "2018-09-22 14:38:52",
+                    "color": null,
+                    "monthId": 11,
+                    "sort": null,
+                    "isDelete": null,
+                    "encyclopeChilds": [
+                        {
+                            "id": 25,
+                            "typeName": "特发性呼吸窘迫综合征",
+                            "createTime": "2018-09-22 15:02:34",
+                            "updateTime": "2018-09-22 15:02:36",
+                            "encyclopeId": 21,
+                            "sort": null,
+                            "isDelete": null
+                        }
+                    ]
+                },
+                {
+                    "id": 29,
+                    "typeName": "幼儿喂养",
+                    "createTime": "2018-09-22 14:42:00",
+                    "updateTime": "2018-09-22 14:42:12",
+                    "color": null,
+                    "monthId": 11,
+                    "sort": null,
+                    "isDelete": null,
+                    "encyclopeChilds": null
+                },
+                {
+                    "id": 36,
+                    "typeName": "宝宝发育",
+                    "createTime": "2018-09-22 14:44:45",
+                    "updateTime": "2018-09-22 14:44:58",
+                    "color": null,
+                    "monthId": 11,
+                    "sort": null,
+                    "isDelete": null,
+                    "encyclopeChilds": null
+                }
+            ]
+        },
+        {
+            "id": 12,
+            "typeName": "2岁-2岁半",
+            "createTime": "2018-09-16 14:09:46",
+            "updateTime": "2018-09-16 14:09:48",
+            "rangeValue": "24-30",
+            "sort": null,
+            "isDelete": null,
+            "encyclopeTypes": [
+                {
+                    "id": 30,
+                    "typeName": "幼儿喂养",
+                    "createTime": "2018-09-22 14:42:02",
+                    "updateTime": "2018-09-22 14:42:15",
+                    "color": null,
+                    "monthId": 12,
+                    "sort": null,
+                    "isDelete": null,
+                    "encyclopeChilds": null
+                }
+            ]
+        },
+        {
+            "id": 13,
+            "typeName": "2岁半-3岁",
+            "createTime": "2018-09-16 14:10:14",
+            "updateTime": "2018-09-16 14:10:17",
+            "rangeValue": "30-36",
+            "sort": null,
+            "isDelete": null,
+            "encyclopeTypes": [
+                {
+                    "id": 31,
+                    "typeName": "幼儿喂养",
+                    "createTime": "2018-09-22 14:42:05",
+                    "updateTime": "2018-09-22 14:42:17",
+                    "color": null,
+                    "monthId": 13,
+                    "sort": null,
+                    "isDelete": null,
+                    "encyclopeChilds": null
+                }
+            ]
+        }
+    ]
+}
