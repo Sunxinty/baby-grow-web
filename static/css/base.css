@@ -114,12 +114,20 @@ body {
 	width: 5%;
 }
 
+.width-58 {
+	width: 5.83333%;
+}
+
 .width-10 {
 	width: 10%;
 }
 
 .width-15 {
 	width: 15%;
+}
+
+.width-175 {
+	width: 17.5%;
 }
 
 .width-20 {
@@ -246,6 +254,21 @@ body {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+}
+
+.my-table li p input[type="text"]{
+	width: 100%;
+	padding: 0 10px;
+	text-align: center;
+	transition: 0.3s ease;
+}
+
+.my-table li p input[disabled="disabled"]{
+	background: #fff;
+}
+
+.my-table li:hover p input[type="text"]{
+	background: #e5f5d7;
 }
 
 .my-table li p:last-child {

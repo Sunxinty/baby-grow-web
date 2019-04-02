@@ -1,6 +1,4 @@
 var layer, $, form;
-var userToken = window.localStorage.getItem("userToken") || "";
-Vue.http.headers.common['token'] = userToken;
 
 layui.use(['layer'], function() {
 	layer = layui.layer,

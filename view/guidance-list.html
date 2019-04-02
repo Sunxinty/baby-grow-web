@@ -56,7 +56,7 @@
 							<p class="width-30">文章名称</p>
 							<p class="width-15">适龄范围</p>
 							<p class="width-20">更新时间</p>
-							<p class="width-10">操作员</p>
+							<p class="width-10">创建者</p>
 							<p class="width-20">操作</p>
 						</li>
 					</ul>
@@ -65,12 +65,12 @@
 							<p class="width-5">{{index+1+(page-1)*10}}</p>
 							<p class="width-30">{{item.title}}</p>
 							<p class="width-15">{{item.monthRangeValue}}</p>
-							<p class="width-20">{{item.updateTime}}</p>
+							<p class="width-20">{{item.createTime}}</p>
 							<p class="width-10">{{item.createUserName}}</p>
 							<p class="width-20">
 								<a href="##" @click="edit(item.id)" class="layui-btn">编辑</a>
 								<a href="##" @click="deleteData(item.id)" class="layui-btn layui-btn-danger">删除</a>
-								<a href="##" @click="commentList(item.id)" class="layui-btn layui-btn-normal">查看评论</a>
+								<!--<a href="##" @click="commentList(item.id)" class="layui-btn layui-btn-normal">查看评论</a>-->
 							</p>
 						</li>
 					</ul>

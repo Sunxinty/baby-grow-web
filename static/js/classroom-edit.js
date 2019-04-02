@@ -2,16 +2,13 @@ var layer, upload, form;
 //var E = window.wangEditor;
 var detailId = window.localStorage.getItem("detailId") || "";
 var userInfo = window.localStorage.getItem("userInfo") || null;
-var userToken = window.localStorage.getItem("userToken") || "";
 
 userInfo = JSON.parse(userInfo)
-
-Vue.http.headers.common['token'] = userToken;
 
 layui.use(['layer', 'upload'], function() {
 	layer = layui.layer,
 	upload = layui.upload;
-
+	
 	var uploadImg = upload.render({
 		elem: '#uploadImg',
 		url: '',
@@ -30,6 +27,8 @@ layui.use(['layer', 'upload'], function() {
 			console.log(res)
 		}
 	});
+	
+	layer.alert("当前不支持上传文件")
 
 })
 
@@ -179,7 +178,9 @@ var editVue = new Vue({
 			_this.$http.get(window.config.HTTPURL + "rest/babyClassroomType/selectByType").then(function(res) {
 				if(res.data.code == "0000") {
 					_this.firstClass = res.data.data;
-					_this.initForm()
+					setTimeout(function() {
+						_this.initForm()
+					}, 0)
 				} else {
 					layer.msg(res.data.msg)
 				}

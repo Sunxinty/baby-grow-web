@@ -33,10 +33,11 @@
 }
 .e-c-con{
 	width: 50%;
-	height: 60%;
+	height: 80%;
 	top: 10%;
 	background: #fff;
 	box-shadow: 0 0 10px #ccc;
+	overflow-y: auto;
 }
 .e-c-con > h3{
 	width: 100%;

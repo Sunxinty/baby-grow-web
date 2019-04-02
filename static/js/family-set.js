@@ -1,6 +1,4 @@
 var layer, $, form;
-var userToken = window.localStorage.getItem("userToken") || "";
-Vue.http.headers.common['token'] = userToken;
 
 layui.use(['layer'], function() {
 	layer = layui.layer,
@@ -30,7 +28,7 @@ var listVue = new Vue({
 			}
 			var _this = this;
 			_this.detailData = data;
-			_this.typeName = _this.detailData.typeName;
+			_this.typeName = _this.detailData.name;
 			_this.showClass = true
 		},
 		deleteData(id) {
@@ -38,7 +36,7 @@ var listVue = new Vue({
 			layer.confirm('你确定要删除该分类？', {
 				btn: ['确定'],
 			}, function(index) {
-				_this.$http.get(window.config.HTTPURL + "rest/babyClassroomType/deleteById?id=" + id).then(function(res) {
+				_this.$http.get(window.config.HTTPURL + "rest/familyRelation/deleteById?id=" + id).then(function(res) {
 					if(res.data.code == "0000") {
 						layer.msg("删除成功！")
 						_this.getData()
@@ -53,7 +51,7 @@ var listVue = new Vue({
 		//查询列表
 		getData() {
 			var _this = this;
-			_this.$http.get(window.config.HTTPURL + "rest/babyClassroomType/selectByType").then(function(res) {
+			_this.$http.get(window.config.HTTPURL + "rest/familyRelation/selectByList").then(function(res) {
 				if(res.data.code == "0000") {
 					_this.dataList = res.data.data;
 					layui.use(['form'], function() {
@@ -68,11 +66,16 @@ var listVue = new Vue({
 		},
 		saveData(){
 			var _this = this;
-			var params = {
-				id: _this.detailData==null?null:_this.detailData.id,
-				typeName: _this.typeName||""
+			if(_this.typeName==""){
+				layer.msg("请输入关系")
+				return;
 			}
-			_this.$http.post(window.config.HTTPURL + "rest/babyClassroomType/saveAndUpdate",JSON.stringify(params)).then(function(res) {
+			var params = {
+				"id": _this.detailData==null?null:_this.detailData.id,
+    			"name": _this.typeName,
+    			"relationType": "OTHER"
+			}
+			_this.$http.post(window.config.HTTPURL + "rest/familyRelation/saveAndUpdate",JSON.stringify(params)).then(function(res) {
 				if(res.data.code == "0000") {
 					layer.msg("保存成功！")
 					setTimeout(function() {

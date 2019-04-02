@@ -17,7 +17,7 @@
 
 	<body class="body">
 		<div class="container">
-			<div class="search-form bg-fff">
+			<!--<div class="search-form bg-fff">
 				<form class="layui-form">
 					<div class="layui-form-item">
 						<div class="layui-inline">
@@ -41,34 +41,34 @@
 						</div>
 					</div>
 				</form>
-			</div>
+			</div>-->
 
 			<div class="careRemind-list bg-fff">
-				<div class="layui-btn-group">
+				<!--<div class="layui-btn-group">
 					<a href="##" @click="add" class="layui-btn layui-btn-warm layui-btn-radius">添加文章</a>
-				</div>
-				<h3>共计：569条</h3>
+				</div>-->
+				<h3>共计：{{totalNumber}}条</h3>
 				<div class="section my-table">
 					<ul class="section my-table-head">
 						<li>
 							<p class="width-5">序号</p>
-							<p class="width-30">文章名称</p>
-							<p class="width-15">适龄范围</p>
-							<p class="width-20">发布时间</p>
-							<p class="width-10">操作员</p>
-							<p class="width-20">操作</p>
+							<p class="width-20">文章名称</p>
+							<p class="width-40">摘要</p>
+							<p class="width-10">适龄(天)</p>
+							<p class="width-15">更新时间</p>
+							<p class="width-10">操作</p>
 						</li>
 					</ul>
 					<ul class="section my-table-body">
-						<li v-for="n in 10">
-							<p class="width-5">{{n}}</p>
-							<p class="width-30">5岁儿童应该吃什么？</p>
-							<p class="width-15">1~2月龄</p>
-							<p class="width-20">2018-10-23 12:23:33</p>
-							<p class="width-10">孙大厨</p>
-							<p class="width-20">
-								<a href="##" @click="edit" class="layui-btn">编辑</a>
-								<a href="##" @click="deleteData" class="layui-btn layui-btn-danger">删除</a>	
+						<li v-for="(item,index) in dataList">
+							<p class="width-5">{{index+1+(page-1)*10}}</p>
+							<p class="width-20">{{item.title}}</p>
+							<p class="width-40">{{item.content}}</p>
+							<p class="width-10">{{item.period}}天</p>
+							<p class="width-15">{{item.updateTime}}</p>
+							<p class="width-10">
+								<a href="##" @click="edit(item.id)" class="layui-btn">编辑</a>
+								<!--<a href="##" @click="deleteData" class="layui-btn layui-btn-danger">删除</a>-->
 							</p>
 						</li>
 					</ul>

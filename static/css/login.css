@@ -1,5 +1,33 @@
 @import url("base.css");
 body{
-	background: url(../image/login_bg.jpg) no-repeat;
+	background: url(../image/bg01.jpg) no-repeat;
 	background-size: 100% 100%;
+}
+.login-main header{
+	margin-top: 0;
+}
+.login-main{
+	padding: 60px;
+    margin-top: 200px;
+    background: rgba(255,255,255,0.3);
+    box-shadow: 0 0 10px #ccc;
+    bottom: auto;
+    animation: loginBox 2s ease;
+}
+
+@-webkit-keyframes loginBox{
+	0%{
+		transform: rotateY(0) translate(-100px,-100px);
+	}
+	100%{
+		transform: rotateY(360deg) translate(0,0);
+	}
+}
+@keyframes loginBox{
+	0%{
+		transform: rotateY(0) translate(-100px,-100px);
+	}
+	100%{
+		transform: rotateY(360deg) translate(0,0);
+	}
 }

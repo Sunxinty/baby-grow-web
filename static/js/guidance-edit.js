@@ -2,11 +2,8 @@ var layer, upload, form, addEdit;
 //var E = window.wangEditor;
 var detailId = window.localStorage.getItem("detailId") || "";
 var userInfo = window.localStorage.getItem("userInfo") || null;
-var userToken = window.localStorage.getItem("userToken") || "";
 
 userInfo = JSON.parse(userInfo)
-
-Vue.http.headers.common['token'] = userToken;
 
 layui.use(['layer', 'upload'], function() {
 	layer = layui.layer,
@@ -30,6 +27,8 @@ layui.use(['layer', 'upload'], function() {
 			console.log(res)
 		}
 	});
+	
+	//layer.alert("当前不支持上传文件")
 
 })
 
@@ -77,6 +76,8 @@ var editVue = new Vue({
 		$("#classTable").on("click", "li p .deleteClass", function(e) {
 			_this.deleteData(e)
 		})
+		
+		initQiniu("save","1")
 	},
 	methods: {
 		saveData() {
@@ -197,7 +198,9 @@ var editVue = new Vue({
 				if(res.data.code == "0000") {
 					_this.firstClass = res.data.data;
 					if(_this.firstClass.length == 0) {
-						_this.initForm()
+						setTimeout(function() {
+							_this.initForm()
+						}, 0)
 						return;
 					}
 					_this.getSecondClass(_this.firstClass[0].id)
@@ -214,7 +217,9 @@ var editVue = new Vue({
 					_this.secondClass = res.data.data;
 					$("#secondClass").html("");
 					if(_this.secondClass.length == 0) {
-						_this.initForm()
+						setTimeout(function() {
+							_this.initForm()
+						}, 0)
 						return;
 					}
 					for(var i = 0; i < _this.secondClass.length; i++) {
@@ -234,13 +239,17 @@ var editVue = new Vue({
 					_this.thirdClass = res.data.data;
 					$("#thirdClass").html("");
 					if(_this.thirdClass.length == 0) {
-						_this.initForm()
+						setTimeout(function() {
+							_this.initForm()
+						}, 0)
 						return;
 					}
 					for(var i = 0; i < _this.thirdClass.length; i++) {
 						$("#thirdClass").append('<input type="checkbox" value="' + _this.thirdClass[i].id + '" lay-skin="primary" title="' + _this.thirdClass[i].typeName + '" name="thirdClass">')
 					}
-					_this.initForm()
+					setTimeout(function() {
+						_this.initForm()
+					}, 0)
 				} else {
 					layer.msg(res.data.msg)
 				}

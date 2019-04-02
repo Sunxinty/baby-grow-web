@@ -23,8 +23,12 @@ window.yuerTools = {
 		} else {
 			return year + "-" + month + "-" + date
 		}
-	},
+	}
 }
+
+//在所有的请求前加token
+window.userToken = window.localStorage.getItem("userToken") || "";
+Vue.http.headers.common['token'] = window.userToken;
 
 if(hookAjax){
 	hookAjax({

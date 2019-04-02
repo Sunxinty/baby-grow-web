@@ -11,6 +11,7 @@
 		<link rel="stylesheet" href="../lib/layui/css/layui.css" media="all">
 		<link rel="stylesheet" type="text/css" href="../static/fonts/iconfont.css">
 		<link rel="stylesheet" href="../static/css/style.css">
+		<link rel="stylesheet" href="../lib/summernote/dist/summernote.css" />
 		<link rel="stylesheet" href="../static/css/care-remind-edit.css" />
 		<link rel="icon" href="static/image/code.png">
 	</head>
@@ -22,7 +23,7 @@
 					<div class="layui-form-item">
 						<label class="layui-form-label">*标题</label>
 						<div class="layui-input-block">
-							<input type="text" name="title" v-model="dataObj.title" placeholder="请输入标题" class="layui-input">
+							<input type="text" name="title" v-model="title" placeholder="请输入标题" class="layui-input">
 						</div>
 					</div>
 					<div class="layui-form-item">
@@ -30,7 +31,7 @@
 						<div class="layui-input-block">
 							<button type="button" class="layui-btn" id="uploadAudio" style="    float: left;margin-top: 10px;">+ 添加音频</button>
 							<div class="layui-upload-list">
-								<audio :src="dataObj.audio" controls style="width: 500px;height: 56px;" id="previewAudio"></audio>
+								<audio :src="sources" controls style="width: 500px;height: 56px;" id="previewAudio"></audio>
 							</div>
 							
 						</div>
@@ -43,7 +44,7 @@
 								<p style="display: block;">点击上传，或将文件拖拽到此处</p>
 							</div>
 							<div class="layui-upload-list">
-								<img :src="dataObj.img" class="layui-upload-img dis-n" id="previewImg">
+								<img :src="firstImg" class="layui-upload-img dis-n" id="previewImg">
 							</div>
 						</div>
 					</div>
@@ -57,7 +58,7 @@
 					<div class="layui-form-item">
 						<label class="layui-form-label">*宝宝年龄</label>
 						<div class="layui-input-block">
-							<input type="text" name="age" v-model="dataObj.age" style="width: 200px;display: inline-block;margin-right: 10px;" class="layui-input">天
+							<input type="text" name="age" v-model="period" style="width: 100px;display: inline-block;margin-right: 10px;" disabled class="layui-input">天
 						</div>
 						<div class="layui-input-block" style="margin-top: 20px;">
 							<button type="button" class="layui-btn" @click="saveData">保存</button>
@@ -66,14 +67,21 @@
 				</form>
 			</div>
 		</div>
-		<script type="text/javascript" src="//unpkg.com/wangeditor/release/wangEditor.min.js"></script>
+		<!--<script type="text/javascript" src="//unpkg.com/wangeditor/release/wangEditor.min.js"></script>-->
 		<script type="text/javascript" src="../lib/jquery.min.js" ></script>
+		<script type="text/javascript" src="../lib/bootstrap.min.js" ></script>
+		<script type="text/javascript" src="../lib/summernote/dist/summernote.js" ></script>
+		<script type="text/javascript" src="../lib/summernote/dist/lang/summernote-zh-CN.js" ></script>
 		<script type="text/javascript" src="../lib/layui/layui.js"></script>
 		<script type="text/javascript" src="../lib/vue.min.js"></script>
 		<script type="text/javascript" src="../lib/vue-resource.js"></script>
-		<script type="text/javascript" src="../static/js/config.js"></script>
 		<script type="text/javascript" src="../lib/ajaxhook.min.js" ></script>
+		<script type="text/javascript" src="../lib/plupload.full.min.js" ></script>
+		<script type="text/javascript" src="../lib/qiniu.min.js" ></script>
+		
+		<script type="text/javascript" src="../static/js/config.js"></script>
 		<script type="text/javascript" src="../static/js/myTools.js" ></script>
+		<script type="text/javascript" src="../static/js/initQiniu.js" ></script>
 		<script type="text/javascript" src="../static/js/care-remind-edit.js"></script>
 	</body>
 

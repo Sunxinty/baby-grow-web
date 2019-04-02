@@ -1,9 +1,9 @@
 var layer, upload;
-var E = window.wangEditor;
-var detailId = window.localStorage.getItem("detailId")||2;
+var detailId = window.localStorage.getItem("cearId") || null;
+//initQiniu("uploadImg", "1")
 
 layui.use(['layer', 'upload'], function() {
-		layer = layui.layer,
+	layer = layui.layer,
 		upload = layui.upload;
 
 	var uploadImg = upload.render({
@@ -11,11 +11,11 @@ layui.use(['layer', 'upload'], function() {
 		url: '',
 		auto: false,
 		//headers: {token: ''},
-		accept:'images',
+		accept: 'images',
 		acceptMime: 'image/*',
-		choose: function(obj){
+		choose: function(obj) {
 			console.log(obj)
-			obj.preview(function(index, file, result){
+			obj.preview(function(index, file, result) {
 				$('#previewImg').show().attr('src', result);
 			})
 		},
@@ -29,54 +29,105 @@ layui.use(['layer', 'upload'], function() {
 		url: '',
 		auto: false,
 		//headers: {token: ''},
-		accept:'audio',
-		choose: function(obj){
+		accept: 'audio',
+		choose: function(obj) {
 			console.log(obj)
-			obj.preview(function(index, file, result){
+			obj.preview(function(index, file, result) {
 				var audioEle = document.getElementById("previewAudio");
-    			audioEle.src = result;
+				audioEle.src = result;
 				audioEle.load();
 			})
-			
+
 		},
 		bindAction: '',
 		done: function(res) {
 			console.log(res)
 		}
 	});
+	
+	layer.alert("当前不支持上传文件")
 })
 
 var commentVue = new Vue({
 	el: ".container",
 	data: {
-		dataObj:{
-			title:"",
-			audio:"",
-			img:"",
-			content:"",
-			age:0
-		},
-		editor:null,
+		dataObj: null,
+		title: "",
+		sources: "",
+		period: null,
+		firstImg: "",
+		editor: null,
 	},
 	mounted: function() {
-		this.editor = new E('#addEdit')
-		this.editor.create()
+		var _this = this;
+		_this.editor = $('#addEdit').summernote({
+			height: 300,
+			tabsize: 2,
+			lang: 'zh-CN',
+			toolbar: [
+				['font', ['bold', 'underline', 'clear']],
+				['fontsize', ['fontsize']],
+				['fontname', ['fontname']],
+				['color', ['color']],
+				['para', ['ul', 'ol', 'paragraph']],
+				['table', ['table']],
+				['insert', ['link', 'picture', 'video']],
+				['view', ['fullscreen', 'codeview', 'help']]
+			],
+			callbacks: function(files, editor, $editable) {
+
+			}
+		});
 		this.getDetail(detailId)
 	},
 	methods: {
 		saveData() {
-			console.log(this.editor.txt.html())
-		},
-		getDetail(id){
 			var _this = this;
-			if(id==null||id==undefined||id==""){
-				return;
+			var params = {
+				"id": detailId,
+				"title": _this.title,
+				"sources": _this.sources,
+				"content": $("#addEdit").summernote("code"),
+				"firstImg": _this.firstImg
 			}
-			else{
+			_this.$http.post(window.config.HTTPURL + "/rest/careRemind/updateById", JSON.stringify(params))
+				.then(function(res) {
+						if(res.data.code == "0000") {
+							layer.msg("保存成功！")
+							setTimeout(function() {
+								var frameIndex = parent.layer.getFrameIndex(window.name)
+								parent.layer.close(frameIndex);
+								window.parent.location.reload();
+							}, 500)
+						} else {
+							layer.msg(res.data.msg)
+						}
+					},
+					function(err) {
+						layer.msg("服务器错误！")
+					}
+				)
+		},
+		getDetail(id) {
+			var _this = this;
+			if(id == null || id == undefined || id == "") {
+				return;
+			} else {
 				$(".layui-upload-img").show()
-//				_this.$http.get().then(function(res){
-//					
-//				})
+				_this.$http.get(window.config.HTTPURL + "/rest/careRemind/selectById?id=" + id).then(function(res) {
+					if(res.data.code == "0000") {
+						_this.dataObj = res.data.data;
+						_this.title = _this.dataObj.title || "";
+						_this.sources = _this.dataObj.sources || "";
+						$("#addEdit").summernote("code", _this.dataObj.content)
+						_this.period = _this.dataObj.period || "";
+						_this.firstImg = _this.dataObj.firstImg || "";
+					} else {
+						layer.msg(res.data.msg)
+					}
+				}, function() {
+					layer.msg("服务器出错！")
+				})
 			}
 		}
 	}

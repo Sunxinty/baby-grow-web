@@ -42,7 +42,7 @@ var staVue = new Vue({
 	el: ".content",
 	data: {
 		pageSize:10,//每页条数
-		totalPageSize:24,//总页数
+		totalPageSize:1,//总页数
 		page:1,//当前页
 	},
 	mounted: function(){

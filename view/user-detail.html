@@ -18,7 +18,49 @@
 	<body class="body">
 		
 		<div class="container">
-			
+			<div class="user-msg bg-fff" v-if="userMsg!=null">
+				<div class="user-msg-top">
+					<img v-if="userMsg.headurl==null" src="../static/image/header.png" />
+					<img v-else :src="userMsg.headurl" />
+					<p>昵称：{{userMsg.userName}}</p>
+					<p>性别：{{userMsg.sex==1?"男":"女"}}</p>
+					<p>会员用户：{{userMsg.vip==1?"是":"否"}}</p>
+				</div>
+				<div class="user-msg-top">
+					<p>用户账号：{{userMsg.phone}}</p>
+					<p>注册时间：{{userMsg.createTime}}</p>
+					<p>宝宝数量：{{userMsg.babys||0}}</p>
+					<p>会员时间：{{userMsg.vipStartTime}}-{{userMsg.vipEndTime}}</p>
+				</div>
+				<div class="user-msg-top">
+					<p>地区：{{userMsg.region}}</p>
+					<p>签名：{{userMsg.remark}}</p>
+				</div>
+			</div>
+			<div class="section user-body-msg bg-fff">
+				<div class="user-nav">
+					<ul class="section">
+						<li :class="{active:isBody}" @click="changeIcon(true)">宝宝资料</li>
+						<li :class="{active:!isBody}" @click="changeIcon(false)">会员详情</li>
+					</ul>
+				</div>
+				<div class="user-msg-list" v-show="!isBody"></div>
+				<div class="body-msg-list" v-show="isBody">
+					<ul class="section" v-if="bodyMsg.length>0">
+						<li v-for="(item,index) in bodyMsg">
+							<img v-if="item.headurl==null" src="../static/image/header.png" />
+							<img v-else :src="item.headurl" />
+							<p>名字：{{item.babyName}}</p>
+							<p>年龄：{{item.age}}</p>
+							<p>出生日期：{{item.birthday}}</p>
+							<p>出生时辰：{{item.birthtime}}</p>
+							<p>亲属关系：{{item.familyRelation}}</p>
+							<p>监护人：{{item.carer}}</p>
+							<a href="javascript:void();">查看详情>></a>
+						</li>
+					</ul>
+				</div>
+			</div>
 		</div>
 		
 		

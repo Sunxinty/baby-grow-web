@@ -1,6 +1,4 @@
 var layer, $, laydate, form;
-var userToken = window.localStorage.getItem("userToken") || "";
-Vue.http.headers.common['token'] = userToken;
 
 layui.use(['layer', 'laydate'], function() {
 	layer = layui.layer,
@@ -20,7 +18,7 @@ layui.use(['layer', 'laydate'], function() {
 var listVue = new Vue({
 	el: ".container",
 	data: {
-		timeRange: yuerTools.getSelfDate(30) + " - " + yuerTools.getSelfDate(0),
+		timeRange: "",
 		ageRange: 0,
 		pageSize: 10, //每页条数
 		totalPageSize: 1, //总页数
@@ -107,15 +105,12 @@ var listVue = new Vue({
 			if(!page) {
 				layer.msg("参数错误")
 				return;
-			} else if(_this.timeRange == "") {
-				layer.msg("请选择时间")
-				return;
 			}
 			var params = {
 				page: page,
 				size: 10,
-				startTime: (_this.timeRange).substr(0, 10) + " 00:00:00",
-				endTime: (_this.timeRange).substr(13) + " 23:59:59",
+				startTime: _this.timeRange == "" ? "" : (_this.timeRange).substr(0, 10) + " 00:00:00",
+				endTime: _this.timeRange == "" ? "" : (_this.timeRange).substr(13) + " 23:59:59",
 				monthTypeId: _this.ageRange
 			}
 			_this.$http.get(window.config.HTTPURL + "/rest/encyclopeArticle/selectByPage?page=" + params.page + "&size=" + params.size + "&startTime=" + params.startTime + "&endTime=" + params.endTime + "&monthTypeId=" + params.monthTypeId).then(function(res) {

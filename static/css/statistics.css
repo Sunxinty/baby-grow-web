@@ -1,4 +1,7 @@
 @import url("base.css");
+html,body{
+	height: auto;
+}
 .sta-number {
     padding: 20px 0;
 }

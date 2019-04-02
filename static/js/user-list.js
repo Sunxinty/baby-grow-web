@@ -1,13 +1,11 @@
 var layer, $, laydate, form;
-var userToken = window.localStorage.getItem("userToken") || "";
 var userInfo = window.localStorage.getItem("userInfo") || null;
 if(userInfo) {
 	userInfo = JSON.parse(userInfo)
 	//console.log("登录用户",userInfo)
 }
-Vue.http.headers.common['token'] = userToken;
 
-layui.use(['form', 'laydate'], function() {
+layui.use(['laydate', 'form'], function() {
 	layer = layui.layer,
 		form = layui.form,
 		laydate = layui.laydate;
@@ -29,10 +27,8 @@ var userListVue = new Vue({
 		total: 0,
 		userName: "",
 		phone: "",
-		vip: "",
 		regType: "",
-		sex: "",
-		timeRange: yuerTools.getSelfDate(30) + " - " + yuerTools.getSelfDate(0),
+		timeRange: yuerTools.getSelfDate(356) + " - " + yuerTools.getSelfDate(0),
 	},
 	mounted: function() {
 		this.getData(this.page)
@@ -67,12 +63,12 @@ var userListVue = new Vue({
 				"fields": {
 					"userName": _this.userName,
 					"phone": _this.phone,
-					"sex": _this.sex == "" ? null : _this.sex,
-					"vip": _this.vip == "" ? null : _this.vip
+					"sex": $("#sex").val() == "" ? null : $("#sex").val(),
+					"vip": $("#vip").val() == "" ? null : $("#vip").val()
 				},
 				"timeRanges": {
-					"startTime": (_this.timeRange).substr(0, 10) + " 00:00:00",
-					"endTime": (_this.timeRange).substr(13) + " 23:59:59",
+					"startTime": _this.timeRange == "" ? null : (_this.timeRange).substr(0, 10) + " 00:00:00",
+					"endTime": _this.timeRange == "" ? null : (_this.timeRange).substr(13) + " 23:59:59",
 				}
 			}
 
@@ -88,17 +84,21 @@ var userListVue = new Vue({
 				layer.msg("服务器错误！")
 			})
 		},
-		//删除用户
-		deleteData(id) {
-			layer.msg("待开发")
-		},
 		//编辑用户
 		editData(id) {
 			if(!id) {
 				layer.msg("参数错误！")
 				return;
 			}
-			layer.msg("待开发")
-		}
+			window.localStorage.setItem("userId",id)
+			layer.open({
+				type: 2,
+				title: "用户详情",
+				area: ['100%', '100%'],
+				fixed: false,
+				maxmin: true,
+				content: '../view/user-detail.html'
+			});
+		},
 	}
 })
