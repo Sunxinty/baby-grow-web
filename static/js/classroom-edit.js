@@ -7,19 +7,21 @@ userInfo = JSON.parse(userInfo)
 
 layui.use(['layer', 'upload'], function() {
 	layer = layui.layer,
-	upload = layui.upload;
-	
+		upload = layui.upload;
+
 	var uploadImg = upload.render({
 		elem: '#uploadImg',
 		url: '',
 		auto: false,
-		//headers: {token: ''},
 		accept: 'imsges',
 		acceptMime: 'imsge/*',
 		choose: function(obj) {
 			console.log(obj)
 			obj.preview(function(index, file, result) {
 				$('#previewImg').show().attr('src', result);
+				setTimeout(function() {
+					qiniuUpload(editVue, file, "img")
+				}, 100)
 			})
 		},
 		bindAction: '',
@@ -27,9 +29,6 @@ layui.use(['layer', 'upload'], function() {
 			console.log(res)
 		}
 	});
-	
-	layer.alert("当前不支持上传文件")
-
 })
 
 var editVue = new Vue({
@@ -45,7 +44,8 @@ var editVue = new Vue({
 		editor: null,
 		firstClass: [], //一级分类数组
 		showClass: false,
-		saveClassData: null
+		saveClassData: null,
+		imgMsg: ""
 	},
 	mounted: function() {
 		var _this = this;
@@ -78,14 +78,14 @@ var editVue = new Vue({
 		saveData() {
 			var _this = this;
 			_this.classroomTypeId = Math.floor($("#classTable li").eq(0).find("p").eq(0).attr("name"))
-			
+
 			if(_this.title == "") {
 				layer.msg("标题不能为空")
 				return;
 			} else if(_this.keyWords == "") {
 				layer.msg("关键字不能为空")
 				return;
-			} 
+			}
 			//else if(_this.editor.txt.html() == "") {
 			//	layer.msg("内容不能为空")
 			//	return;
@@ -186,7 +186,7 @@ var editVue = new Vue({
 				}
 			})
 		},
-		
+
 		//保存分类
 		saveClass() {
 			var _this = this;
@@ -198,7 +198,7 @@ var editVue = new Vue({
 			_this.saveClassData.firstID = $("#firstClass").val()
 			_this.saveClassData.firstName = $("#firstClass option:checked").text()
 
-			$("#classTable").html('<li><p class="width-60" name="'+_this.saveClassData.firstID+'">' + _this.saveClassData.firstName + '</p><p class="width-40"><a href="##" class="layui-btn layui-btn-danger deleteClass">删除</a></p></li>')
+			$("#classTable").html('<li><p class="width-60" name="' + _this.saveClassData.firstID + '">' + _this.saveClassData.firstName + '</p><p class="width-40"><a href="##" class="layui-btn layui-btn-danger deleteClass">删除</a></p></li>')
 
 			layer.msg("保存分类成功！")
 			setTimeout(function() {
@@ -210,7 +210,7 @@ var editVue = new Vue({
 			layui.use(['form'], function() {
 				form = layui.form;
 				form.on('select(firstClass)', function(data) {
-					
+
 				});
 				form.render();
 			})

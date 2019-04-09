@@ -32,6 +32,7 @@
 							<button type="button" class="layui-btn" id="uploadAudio" style="    float: left;margin-top: 10px;">+ 添加音频</button>
 							<div class="layui-upload-list">
 								<audio :src="sources" controls style="width: 500px;height: 56px;" id="previewAudio"></audio>
+								<p>{{audioMsg}}</p>
 							</div>
 							
 						</div>
@@ -45,6 +46,7 @@
 							</div>
 							<div class="layui-upload-list">
 								<img :src="firstImg" class="layui-upload-img dis-n" id="previewImg">
+								<p>{{imgMsg}}</p>
 							</div>
 						</div>
 					</div>

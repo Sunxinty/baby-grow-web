@@ -27,3 +27,7 @@
 	text-align: center;
 	font-size: 20px;
 }
+.layui-upload-list > p{
+	vertical-align: bottom;
+	margin-left: 10px;
+}

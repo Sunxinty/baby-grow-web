@@ -1,6 +1,5 @@
 var layer, upload;
 var detailId = window.localStorage.getItem("cearId") || null;
-//initQiniu("uploadImg", "1")
 
 layui.use(['layer', 'upload'], function() {
 	layer = layui.layer,
@@ -10,13 +9,14 @@ layui.use(['layer', 'upload'], function() {
 		elem: '#uploadImg',
 		url: '',
 		auto: false,
-		//headers: {token: ''},
 		accept: 'images',
 		acceptMime: 'image/*',
 		choose: function(obj) {
-			console.log(obj)
 			obj.preview(function(index, file, result) {
 				$('#previewImg').show().attr('src', result);
+				setTimeout(function() {
+					qiniuUpload(commentVue,file, "img")
+				}, 100)
 			})
 		},
 		bindAction: '',
@@ -28,24 +28,22 @@ layui.use(['layer', 'upload'], function() {
 		elem: '#uploadAudio',
 		url: '',
 		auto: false,
-		//headers: {token: ''},
 		accept: 'audio',
 		choose: function(obj) {
-			console.log(obj)
 			obj.preview(function(index, file, result) {
 				var audioEle = document.getElementById("previewAudio");
 				audioEle.src = result;
 				audioEle.load();
+				setTimeout(function() {
+					qiniuUpload(commentVue, file, "audio")
+				}, 100)
 			})
-
 		},
 		bindAction: '',
 		done: function(res) {
 			console.log(res)
 		}
 	});
-	
-	layer.alert("当前不支持上传文件")
 })
 
 var commentVue = new Vue({
@@ -57,6 +55,8 @@ var commentVue = new Vue({
 		period: null,
 		firstImg: "",
 		editor: null,
+		imgMsg: "",
+		audioMsg: ""
 	},
 	mounted: function() {
 		var _this = this;

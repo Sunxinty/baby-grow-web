@@ -2,3 +2,7 @@
 .search-form{
 	padding: 20px;
 }
+.layui-upload-list > p{
+	vertical-align: bottom;
+	margin-left: 10px;
+}

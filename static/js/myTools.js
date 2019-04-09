@@ -49,6 +49,11 @@ if(hookAjax){
 					top.location.href = "../view/login.html"
 				},1000)
 			}
+			else if(window.userToken==""||window.userToken == null){
+				setTimeout(function(){
+					top.location.href = "../view/login.html"
+				},1000)
+			}
 		},
 		//拦截函数
 		open: function(arg) {}

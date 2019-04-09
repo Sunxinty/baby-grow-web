@@ -7,19 +7,21 @@ userInfo = JSON.parse(userInfo)
 
 layui.use(['layer', 'upload'], function() {
 	layer = layui.layer,
-	upload = layui.upload;
+		upload = layui.upload;
 
 	var uploadImg = upload.render({
 		elem: '#uploadImg',
 		url: '',
 		auto: false,
-		//headers: {token: ''},
 		accept: 'imsges',
 		acceptMime: 'imsge/*',
 		choose: function(obj) {
 			console.log(obj)
 			obj.preview(function(index, file, result) {
 				$('#previewImg').show().attr('src', result);
+				setTimeout(function() {
+					qiniuUpload(editVue, file, "img")
+				}, 100)
 			})
 		},
 		bindAction: '',
@@ -27,9 +29,6 @@ layui.use(['layer', 'upload'], function() {
 			console.log(res)
 		}
 	});
-	
-	layer.alert("当前不支持上传文件")
-
 })
 
 var editVue = new Vue({
@@ -48,7 +47,8 @@ var editVue = new Vue({
 		thirdClass: [], //三级分类数组
 		showClass: false,
 		thirdType: [], //三级type值
-		saveClassData: null
+		saveClassData: null,
+		imgMsg: "",
 	},
 	mounted: function() {
 		var _this = this;
@@ -91,7 +91,7 @@ var editVue = new Vue({
 			} else if(_this.keyWord == "") {
 				layer.msg("关键字不能为空")
 				return;
-			} 
+			}
 			//else if(_this.editor.txt.html() == "") {
 			//	layer.msg("内容不能为空")
 			//	return;

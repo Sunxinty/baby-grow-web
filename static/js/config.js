@@ -8,4 +8,4 @@ var port = window.location.port;
 //测试环境
 window.config = {
 	HTTPURL: "http://ts.free.idcfengye.com/baby-grow-web-mserver/"
-}
+} 
