@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>身高体重配置</title>
+		<link rel="stylesheet" href="../lib/bootstrap.min.css" />
+		<link rel="stylesheet" href="../lib/layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../static/fonts/iconfont.css">
+		<link rel="stylesheet" href="../static/css/style.css">
+		<link rel="stylesheet" href="../static/css/heightWeight-set.css" />
+		<link rel="icon" href="../static/image/code.png">
+	</head>
+
+	<body class="body">
+		<div class="container">
+			<div class="search-form bg-fff">
+				<form class="layui-form">
+					<div class="layui-form-item" style="margin-bottom: 0;">
+						<div class="layui-inline">
+							<label class="layui-form-label">选择性别</label>
+							<div class="layui-input-inline">
+								<select name="" id="" lay-filter="sexValue">
+									<option value="1">男宝宝</option>
+									<option value="2">女宝宝</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="wiki-list bg-fff">
+				<!--<div class="layui-btn-group">
+					<a href="##" @click="add" class="layui-btn layui-btn-warm layui-btn-radius">创建</a>
+				</div>-->
+				<div class="section my-table">
+					<ul class="section my-table-head">
+						<li>
+							<p class="width-5">序号</p>
+							<p class="width-5">月龄</p>
+							<p class="width-175">男宝宝(最小值)</p>
+							<p class="width-175">男宝宝(最大值)</p>
+							<p class="width-175">女宝宝(最小值)</p>
+							<p class="width-175">女宝宝(最大值)</p>
+							<p class="width-10">时间</p>
+							<p class="width-5">操作员</p>
+							<p class="width-5">操作</p>
+						</li>
+						<li>
+							<p class="width-5">/</p>
+							<p class="width-5">/</p>
+							<p class="width-58">身高(cm)</p>
+							<p class="width-58">体重(kg)</p>
+							<p class="width-58">头围(cm)</p>
+							<p class="width-58">身高(cm)</p>
+							<p class="width-58">体重(kg)</p>
+							<p class="width-58">头围(cm)</p>
+							<p class="width-58">身高(cm)</p>
+							<p class="width-58">体重(kg)</p>
+							<p class="width-58">头围(cm)</p>
+							<p class="width-58">身高(cm)</p>
+							<p class="width-58">体重(kg)</p>
+							<p class="width-58">头围(cm)</p>
+							<p class="width-10">/</p>
+							<p class="width-5">/</p>
+							<p class="width-5">/</p>
+						</li>
+					</ul>
+					<ul class="section my-table-body" v-if="dataList.length>0">
+						<li v-for="(item,index) in dataList">
+							<p class="width-5">{{index+1}}</p>
+							<p class="width-5">{{item.month}}</p>
+							<p class="width-58" v-if="item.sex==1">{{item.heightMin/10}}</p>
+							<p class="width-58" v-if="item.sex==2">/</p>
+							<p class="width-58" v-if="item.sex==1">{{item.weightMin/1000}}</p>
+							<p class="width-58" v-if="item.sex==2">/</p>
+							<p class="width-58" v-if="item.sex==1">{{item.headSizeMin/10}}</p>
+							<p class="width-58" v-if="item.sex==2">/</p>
+							<p class="width-58" v-if="item.sex==1">{{item.heightMax/10}}</p>
+							<p class="width-58" v-if="item.sex==2">/</p>
+							<p class="width-58" v-if="item.sex==1">{{item.weightMax/1000}}</p>
+							<p class="width-58" v-if="item.sex==2">/</p>
+							<p class="width-58" v-if="item.sex==1">{{item.headSizeMax/10}}</p>
+							<p class="width-58" v-if="item.sex==2">/</p>
+
+							<p class="width-58" v-if="item.sex==2">{{item.heightMin/10}}</p>
+							<p class="width-58" v-if="item.sex==1">/</p>
+							<p class="width-58" v-if="item.sex==2">{{item.weightMin/1000}}</p>
+							<p class="width-58" v-if="item.sex==1">/</p>
+							<p class="width-58" v-if="item.sex==2">{{item.headSizeMin/10}}</p>
+							<p class="width-58" v-if="item.sex==1">/</p>
+							<p class="width-58" v-if="item.sex==2">{{item.heightMax/10}}</p>
+							<p class="width-58" v-if="item.sex==1">/</p>
+							<p class="width-58" v-if="item.sex==2">{{item.weightMax/1000}}</p>
+							<p class="width-58" v-if="item.sex==1">/</p>
+							<p class="width-58" v-if="item.sex==2">{{item.headSizeMax/10}}</p>
+							<p class="width-58" v-if="item.sex==1">/</p>
+							<p class="width-10" :title="item.createTime">{{item.createTime}}</p>
+							<p class="width-5">操作员</p>
+							<p class="width-5">
+								<a href="##" @click="edit(item.id)" class="layui-btn">编辑</a>
+							</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!--指定对象编辑-->
+			<div class="edit-class" v-if="showClass">
+				<div class="section e-c-con">
+					<h3>宝宝标准身高体重设置</h3>
+					<form class="layui-form" style="padding: 10% 20%;">
+						<div class="layui-form-item">
+							<label class="layui-form-label">性别：</label>
+							<div class="layui-input-block">
+								<input type="radio" name="sex" value="1" title="男" checked="" disabled>
+								<input type="radio" name="sex" value="2" title="女" disabled>
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">月龄：</label>
+							<div class="layui-input-block">
+								<input type="text" disabled class="layui-input" style="width: 250px;" v-model="month">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">身高(cm)：</label>
+							<div class="layui-input-block">
+								<input type="text" class="layui-input" style="width: 100px;display: inline-block;" v-model="heightMin">
+								 ~ 
+								<input type="text" class="layui-input" style="width: 100px;display: inline-block;" v-model="heightMax">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">体重(kg)：</label>
+							<div class="layui-input-block">
+								<input type="text" class="layui-input" style="width: 100px;display: inline-block;" v-model="weightMin">
+								 ~ 
+								<input type="text" class="layui-input" style="width: 100px;display: inline-block;" v-model="weightMax">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">头围(cm)：</label>
+							<div class="layui-input-block">
+								<input type="text" class="layui-input" style="width: 100px;display: inline-block;" v-model="headSizeMin">
+								 ~ 
+								<input type="text" class="layui-input" style="width: 100px;display: inline-block;" v-model="headSizeMax">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<div class="layui-input-block" style="margin-top: 40px;">
+								<button type="button" class="layui-btn" @click="saveData">确定</button>
+								<button type="button" class="layui-btn layui-btn-primary" @click="closeClass">取消</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript" src="../lib/jquery.min.js"></script>
+		<script type="text/javascript" src="../lib/layui/layui.js"></script>
+		<script type="text/javascript" src="../lib/vue.min.js"></script>
+		<script type="text/javascript" src="../lib/vue-resource.js"></script>
+		<script type="text/javascript" src="../static/js/config.js"></script>
+		<script type="text/javascript" src="../lib/ajaxhook.min.js"></script>
+		<script type="text/javascript" src="../static/js/myTools.js"></script>
+		<script type="text/javascript" src="../static/js/heightWeight-set.js"></script>
+	</body>
+
+</html>

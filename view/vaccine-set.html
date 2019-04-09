@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>APP疫苗配置</title>
+		<link rel="stylesheet" href="../lib/bootstrap.min.css" />
+		<link rel="stylesheet" href="../lib/layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../static/fonts/iconfont.css">
+		<link rel="stylesheet" href="../static/css/style.css">
+		<link rel="stylesheet" href="../static/css/vaccine-set.css" />
+		<link rel="icon" href="../static/image/code.png">
+	</head>
+
+	<body class="body">
+		<div class="container">
+			<div class="wiki-list bg-fff">
+				<div class="layui-btn-group">
+					<a href="##" @click="add" class="layui-btn layui-btn-warm layui-btn-radius">创建</a>
+				</div>
+				<div class="section my-table">
+					<ul class="section my-table-head">
+						<li>
+							<p class="width-10">序号</p>
+							<p class="width-20">疫苗名</p>
+							<p class="width-20">适龄阶段</p>
+							<p class="width-30">创建时间</p>
+							<p class="width-20">操作</p>
+						</li>
+					</ul>
+					<ul class="section my-table-body" v-if="dataList.length>0">
+						<li v-for="(item,index) in dataList">
+							<p class="width-10">{{index+1}}</p>
+							<p class="width-20">{{item.sendlingsName}}</p>
+							<p class="width-20">
+								{{item.rangeTime+(item.unit=="DAY"?"天":"月")}}
+							</p>
+							<p class="width-30">{{item.createTime}}</p>
+							<p class="width-20">
+								<a href="##" @click="edit(item.id)" class="layui-btn">编辑</a>
+								<a href="##" @click="deleteData(item.id)" class="layui-btn layui-btn-danger">删除</a>
+							</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!--疫苗配置-->
+			<div class="edit-class" v-show="showClass">
+				<div class="section e-c-con">
+					<h3>疫苗配置</h3>
+					<form class="layui-form" style="padding: 15%;">
+						<div class="layui-form-item">
+							<label class="layui-form-label">疫苗名称：</label>
+							<div class="layui-input-block">
+								<input type="text" v-model="sendlingsName" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">适龄时间：</label>
+							<div class="layui-input-block">
+								<input type="radio" name="unit" value="DAY" title="天" :checked="unit=='DAY'" lay-filter="unit">
+								<input type="number" v-model="rangeTime" class="layui-input" style="width: 200px;display: inline-block;" min="1" max="9999" v-if="unit=='DAY'">
+							</div>
+							<div class="layui-input-block" style="margin-top: 15px;">
+      							<input type="radio"name="unit" value="MONTH" title="月" lay-filter="unit" :checked="unit=='MONTH'">
+      							<input type="number" v-model="rangeTime" class="layui-input" style="width: 200px;display: inline-block;" min="1" max="9999" v-if="unit=='MONTH'">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">疫苗说明：</label>
+							<div class="layui-input-block">
+								<textarea rows="5" v-model="summary" class="layui-textarea"></textarea>
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<div class="layui-input-block" style="margin-top: 40px;">
+								<button type="button" class="layui-btn" @click="saveData">保存</button>
+								<button type="button" class="layui-btn layui-btn-primary" @click="closeClass">取消</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript" src="../lib/jquery.min.js" ></script>
+		<script type="text/javascript" src="../lib/layui/layui.js"></script>
+		<script type="text/javascript" src="../lib/vue.min.js"></script>
+		<script type="text/javascript" src="../lib/vue-resource.js"></script>
+		<script type="text/javascript" src="../static/js/config.js" ></script>
+		<script type="text/javascript" src="../lib/ajaxhook.min.js" ></script>
+		<script type="text/javascript" src="../static/js/myTools.js" ></script>
+		<script type="text/javascript" src="../static/js/vaccine-set.js"></script>
+	</body>
+
+</html>
