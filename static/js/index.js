@@ -8,7 +8,7 @@ layui.use(['layer'], function() {
 		},
 		mounted: function() {
 			this.userInfo = window.localStorage.getItem("userInfo");
-			if(this.userInfo == null || this.userInfo == "") {
+			if(this.userInfo == null || this.userInfo == ""|| this.userInfo == undefined) {
 				layer.msg("请登录！")
 				setTimeout(function(){
 					top.location.href = "view/login.html"

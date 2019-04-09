@@ -75,7 +75,9 @@ var commentVue = new Vue({
 				['view', ['fullscreen', 'codeview', 'help']]
 			],
 			callbacks: function(files, editor, $editable) {
-
+				onImageUpload: function (files) {
+		           console.log(files)
+		        }
 			}
 		});
 		this.getDetail(detailId)
@@ -90,6 +92,7 @@ var commentVue = new Vue({
 				"content": $("#addEdit").summernote("code"),
 				"firstImg": _this.firstImg
 			}
+			//console.log(params)
 			_this.$http.post(window.config.HTTPURL + "/rest/careRemind/updateById", JSON.stringify(params))
 				.then(function(res) {
 						if(res.data.code == "0000") {
