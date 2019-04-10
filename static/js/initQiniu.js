@@ -11,7 +11,8 @@ if(!bucket || bucket == "") {
 	})
 }
 
-function qiniuUpload(vueObj, file, type) {
+function qiniuUpload(vueObj, file, type, sucFn, errFn) {
+	var returnUrl = "";//上传成功后图片的外链地址
 	Vue.http.get(uptoken_url).then(function(res) {
 		uptoken = res.data.data;
 		var fileUrl = bucket + "_" + type + (new Date()).getTime(); //自定义上传后文件名称
@@ -30,6 +31,9 @@ function qiniuUpload(vueObj, file, type) {
 			error(err) { //失败后
 				console.error("上传失败" + err.message)
 				layer.msg("上传失败！")
+				if(errFn){
+					errFn()
+				}
 				if(type && type == "img") {
 					vueObj.imgMsg = fileName + " 上传失败" + err.message
 				} else if(type && type == "audio") {
@@ -38,7 +42,10 @@ function qiniuUpload(vueObj, file, type) {
 			},
 			complete(res) { //成功后
 				layer.msg("上传成功！")
-				console.log(res)
+				returnUrl = window.config.uploadUrl + fileUrl;
+				if(sucFn){
+					sucFn(fileName,returnUrl)
+				}
 				if(type && type == "img") {
 					vueObj.imgMsg = fileName + " 上传成功!"
 				} else if(type && type == "audio") {
@@ -58,7 +65,9 @@ function qiniuUpload(vueObj, file, type) {
 
 		var observable = qiniu.upload(file, fileUrl, uptoken, putExtra, config);
 		var subscription = observable.subscribe(observer); // 上传开始
+
 	}, function() {
 		console.error("获取uptoken出错：服务器错误！")
+		return returnUrl;
 	})
 }

@@ -5,32 +5,6 @@ var userInfo = window.localStorage.getItem("userInfo") || null;
 
 userInfo = JSON.parse(userInfo)
 
-layui.use(['layer', 'upload'], function() {
-	layer = layui.layer,
-		upload = layui.upload;
-
-	var uploadImg = upload.render({
-		elem: '#uploadImg',
-		url: '',
-		auto: false,
-		accept: 'imsges',
-		acceptMime: 'imsge/*',
-		choose: function(obj) {
-			console.log(obj)
-			obj.preview(function(index, file, result) {
-				$('#previewImg').show().attr('src', result);
-				setTimeout(function() {
-					qiniuUpload(editVue, file, "img")
-				}, 100)
-			})
-		},
-		bindAction: '',
-		done: function(res) {
-			console.log(res)
-		}
-	});
-})
-
 var editVue = new Vue({
 	el: ".container",
 	data: {
@@ -52,8 +26,36 @@ var editVue = new Vue({
 	},
 	mounted: function() {
 		var _this = this;
-		//_this.editor = new E('#addEdit');
-		//_this.editor.create();
+		
+		layui.use(['layer', 'upload'], function() {
+			layer = layui.layer,
+				upload = layui.upload;
+			_this.getData()
+			var uploadImg = upload.render({
+				elem: '#uploadImg',
+				url: '',
+				auto: false,
+				accept: 'imsges',
+				acceptMime: 'imsge/*',
+				choose: function(obj) {
+					console.log(obj)
+					obj.preview(function(index, file, result) {
+						$('#previewImg').show().attr('src', result);
+						_this.imgMsg = "准备上传..."
+						setTimeout(function() {
+							qiniuUpload(_this, file, "img", function(name, fileUrl) {
+								_this.firstImg = fileUrl
+							})
+						}, 100)
+					})
+				},
+				bindAction: '',
+				done: function(res) {
+					console.log(res)
+				}
+			});
+		})
+		
 		_this.editor = $('#addEdit').summernote({
 			height: 300,
 			tabsize: 2,
@@ -68,11 +70,17 @@ var editVue = new Vue({
 				['insert', ['link', 'picture', 'video']],
 				['view', ['fullscreen', 'codeview', 'help']]
 			],
-			callbacks: function(files, editor, $editable) {
-
+			callbacks: {
+				onImageUpload: function(files) {
+					//console.log(files);
+					layer.msg("正在上传...")
+					qiniuUpload(null, files[0],"image" , function(name, url) {
+						$('#addEdit').summernote('insertImage',url,'img');
+					})
+				}
 			}
 		});
-		_this.getData();
+		//_this.getData();
 		$("#classTable").on("click", "li p .deleteClass", function(e) {
 			_this.deleteData(e)
 		})
@@ -106,13 +114,12 @@ var editVue = new Vue({
 				title: _this.title,
 				createUserId: userInfo.id,
 				keyWord: _this.keyWord,
-				//content: _this.editor.txt.html(),
 				content: $("#addEdit").summernote("code"),
 				summary: _this.summary,
 				firstImg: _this.firstImg,
 				typeIds: _this.typeIds,
 			}
-
+			//console.log(params)
 			_this.$http.post(window.config.HTTPURL + "/rest/encyclopeArticle/insert", JSON.stringify(params))
 				.then(function(res) {
 						if(res.data.code == "0000") {
@@ -138,7 +145,9 @@ var editVue = new Vue({
 				return;
 			}
 			var _this = this;
+			var loadIndex = layer.load(1,{shade: [0.1,"#000"]})
 			_this.$http.get(window.config.HTTPURL + "/rest/encyclopeArticle/selectById?id=" + detailId).then(function(res) {
+				layer.close(loadIndex);
 				if(res.data.code == "0000") {
 					_this.showTable(res.data.data)
 				} else {
