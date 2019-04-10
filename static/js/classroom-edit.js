@@ -1,5 +1,5 @@
 var layer, upload, form;
-//var E = window.wangEditor;
+
 var detailId = window.localStorage.getItem("detailId") || "";
 var userInfo = window.localStorage.getItem("userInfo") || null;
 
