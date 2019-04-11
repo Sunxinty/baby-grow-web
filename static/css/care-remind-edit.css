@@ -1,8 +1,9 @@
 @import url("base.css");
-.search-form{
+.search-form {
 	padding: 20px;
 }
-.layui-upload-list > p{
+
+.layui-upload-list>p {
 	vertical-align: bottom;
 	margin-left: 10px;
 }

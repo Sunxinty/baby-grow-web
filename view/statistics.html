@@ -1,115 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 
-	<head>
-		<meta charset="UTF-8">
-		<meta name="renderer" content="webkit">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<title>统计管理</title>
-		<link rel="stylesheet" href="../lib/layui/css/layui.css">
-		<link rel="stylesheet" href="../static/css/style.css" />
-		<link rel="stylesheet" href="../lib/bootstrap.min.css " />
-		<link rel="stylesheet" type="text/css" href="../static/fonts/iconfont.css">
-		<link rel="stylesheet" href="//at.alicdn.com/t/font_877393_fsgvxv3c4dd.css">
-		<link rel="stylesheet" href="../static/css/statistics.css" />
-		<link rel="icon" href="static/image/code.png">
-	</head>
+<head>
+	<meta charset="UTF-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>统计管理</title>
+	<link rel="stylesheet" href="../lib/layui/css/layui.css">
+	<link rel="stylesheet" href="../static/css/style.css" />
+	<link rel="stylesheet" href="../lib/bootstrap.min.css " />
+	<link rel="stylesheet" type="text/css" href="../static/fonts/iconfont.css">
+	<link rel="stylesheet" href="//at.alicdn.com/t/font_877393_fsgvxv3c4dd.css">
+	<link rel="stylesheet" href="../static/css/statistics.css" />
+	<link rel="icon" href="static/image/code.png">
+</head>
 
-	<body class="body">
-		<div class="section content">
-			<div class="section sta-number">
-				<div class="bg-fff sta-card">
-					<h3>用户数量</h3>
-					<span class="icon iconfont icon-user" style="color: #2cabe3;"></span>
-					<p>888</p>
-				</div>
-				<div class="bg-fff sta-card">
-					<h3>关爱提醒文章量</h3>
-					<span class="icon iconfont icon-lingsheng" style="color: #707cd2;"></span>
-					<p>888</p>
-				</div>
-				<div class="bg-fff sta-card">
-					<h3>文章数量</h3>
-					<span class="icon iconfont icon-wenzhang2" style="color: #ff7676;"></span>
-					<p>888</p>
-				</div>
-				<div class="bg-fff sta-card">
-					<h3>当前vip数量</h3>
-					<span class="icon iconfont icon-user" style="color: #53e69d;"></span>
-					<p>888</p>
-				</div>
+<body class="body">
+	<div class="section content">
+		<div class="section sta-number">
+			<div class="bg-fff sta-card">
+				<h3>用户数量</h3>
+				<span class="icon iconfont icon-user" style="color: #2cabe3;"></span>
+				<p>888</p>
 			</div>
-			<div class="section bg-fff statistics">
-				<h3>今日注册/访问统计表</h3>
-				<div class="tongji-chart" id="tongjiChart"></div>
+			<div class="bg-fff sta-card">
+				<h3>关爱提醒文章量</h3>
+				<span class="icon iconfont icon-lingsheng" style="color: #707cd2;"></span>
+				<p>888</p>
 			</div>
-			<div class="section regit-detail">
-				<h3>今日注册明细</h3>
-				<div class="section my-table">
-					<ul class="section my-table-head">
-						<li>
-							<p class="width-20">日期</p>
-							<p class="width-20">用户名</p>
-							<p class="width-20">账号</p>
-							<p class="width-10">性别</p>
-							<p class="width-10">宝宝量</p>
-							<p class="width-10">vip会员</p>
-							<p class="width-10">操作</p>
-						</li>
-					</ul>
-					<ul class="section my-table-body">
-						<li v-for="n in 0">
-							<p class="width-20">2018-10-23 12:23:33</p>
-							<p class="width-20">奥巴马</p>
-							<p class="width-20">15288885555</p>
-							<p class="width-10">男</p>
-							<p class="width-10">2</p>
-							<p class="width-10">是</p>
-							<p class="width-10"><a href="##" class="layui-btn">详情</a></p>
-						</li>
-					</ul>
-				</div>
-				<!--10页之内-->
-				<div class="section my-page" v-if="totalPageSize<11">
-					<a href="##" @click="prePage">上一页</a>
-					<a href="##" v-for="n in totalPageSize" :class="{active:n==page}" @click="nowPage(n)">{{n}}</a>
-					<a href="##" @click="nextPage">下一页</a>
-				</div>
-				<!--大于10页-->
-				<div class="section my-page" v-if="totalPageSize>10&&page<totalPageSize-4">
-					<a href="##" @click="nowPage(1)">首页</a>
-					<a href="##" @click="prePage">上一页</a>
-					<a href="##" class="active" @click="nowPage(page)">{{page}}</a>
-					<a href="##" @click="nowPage(page+1)">{{page+1}}</a>
-					<a href="##" @click="nowPage(page+2)">{{page+2}}</a>
-					<a href="##" class="no-active">...</a>
-					<a href="##" @click="nowPage(totalPageSize-2)">{{totalPageSize-2}}</a>
-					<a href="##" @click="nowPage(totalPageSize-1)">{{totalPageSize-1}}</a>
-					<a href="##" @click="nowPage(totalPageSize)">{{totalPageSize}}</a>
-					<a href="##" @click="nextPage">下一页</a>
-				</div>
-				<!--大于10页,当前页大于totalPageSize-5 -->
-				<div class="section my-page" v-if="totalPageSize>10&&page>totalPageSize-5">
-					<a href="##" @click="nowPage(1)">首页</a>
-					<a href="##" @click="prePage">上一页</a>
-					<a href="##" @click="nowPage(1)">1</a>
-					<a href="##" @click="nowPage(2)">2</a>
-					<a href="##" @click="nowPage(3)">3</a>
-					<a href="##" class="no-active">...</a>
-					<a href="##" @click="nowPage(page-2)">{{page-2}}</a>
-					<a href="##" @click="nowPage(page-1)">{{page-1}}</a>
-					<a href="##" @click="nowPage(page)" class="active">{{page}}</a>
-					<a href="##" @click="nextPage">下一页</a>
-				</div>
+			<div class="bg-fff sta-card">
+				<h3>文章数量</h3>
+				<span class="icon iconfont icon-wenzhang2" style="color: #ff7676;"></span>
+				<p>888</p>
+			</div>
+			<div class="bg-fff sta-card">
+				<h3>当前vip数量</h3>
+				<span class="icon iconfont icon-user" style="color: #53e69d;"></span>
+				<p>888</p>
 			</div>
 		</div>
-		<script type="text/javascript" src="../lib/jquery.min.js" ></script>
-		<script type="text/javascript" src="../lib/layui/layui.js"></script>
-		<script type="text/javascript" src="../lib/echarts4.0.3.min.js"></script>
-		<script type="text/javascript" src="../lib/vue.min.js"></script>
-		<script type="text/javascript" src="../lib/vue-resource.js"></script>
-		<script type="text/javascript" src="../static/js/statistics.js"></script>
-	</body>
+		<div class="section bg-fff statistics">
+			<h3>今日注册/访问统计表</h3>
+			<div class="tongji-chart" id="tongjiChart"></div>
+		</div>
+		<div class="section regit-detail">
+			<h3>今日注册明细</h3>
+			<div class="section my-table">
+				<ul class="section my-table-head">
+					<li>
+						<p class="width-20">日期</p>
+						<p class="width-20">用户名</p>
+						<p class="width-20">账号</p>
+						<p class="width-10">性别</p>
+						<p class="width-10">宝宝量</p>
+						<p class="width-10">vip会员</p>
+						<p class="width-10">操作</p>
+					</li>
+				</ul>
+				<ul class="section my-table-body">
+					<li v-for="n in 0">
+						<p class="width-20">2018-10-23 12:23:33</p>
+						<p class="width-20">奥巴马</p>
+						<p class="width-20">15288885555</p>
+						<p class="width-10">男</p>
+						<p class="width-10">2</p>
+						<p class="width-10">是</p>
+						<p class="width-10"><a href="##" class="layui-btn">详情</a></p>
+					</li>
+				</ul>
+			</div>
+			<!--10页之内-->
+			<div class="section my-page" v-if="totalPageSize<11">
+				<a href="##" @click="prePage">上一页</a>
+				<a href="##" v-for="n in totalPageSize" :class="{active:n==page}" @click="nowPage(n)">{{n}}</a>
+				<a href="##" @click="nextPage">下一页</a>
+			</div>
+			<!--大于10页-->
+			<div class="section my-page" v-if="totalPageSize>10&&page<totalPageSize-4">
+				<a href="##" @click="nowPage(1)">首页</a>
+				<a href="##" @click="prePage">上一页</a>
+				<a href="##" class="active" @click="nowPage(page)">{{page}}</a>
+				<a href="##" @click="nowPage(page+1)">{{page+1}}</a>
+				<a href="##" @click="nowPage(page+2)">{{page+2}}</a>
+				<a href="##" class="no-active">...</a>
+				<a href="##" @click="nowPage(totalPageSize-2)">{{totalPageSize-2}}</a>
+				<a href="##" @click="nowPage(totalPageSize-1)">{{totalPageSize-1}}</a>
+				<a href="##" @click="nowPage(totalPageSize)">{{totalPageSize}}</a>
+				<a href="##" @click="nextPage">下一页</a>
+			</div>
+			<!--大于10页,当前页大于totalPageSize-5 -->
+			<div class="section my-page" v-if="totalPageSize>10&&page>totalPageSize-5">
+				<a href="##" @click="nowPage(1)">首页</a>
+				<a href="##" @click="prePage">上一页</a>
+				<a href="##" @click="nowPage(1)">1</a>
+				<a href="##" @click="nowPage(2)">2</a>
+				<a href="##" @click="nowPage(3)">3</a>
+				<a href="##" class="no-active">...</a>
+				<a href="##" @click="nowPage(page-2)">{{page-2}}</a>
+				<a href="##" @click="nowPage(page-1)">{{page-1}}</a>
+				<a href="##" @click="nowPage(page)" class="active">{{page}}</a>
+				<a href="##" @click="nextPage">下一页</a>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="../lib/jquery.min.js"></script>
+	<script type="text/javascript" src="../lib/layui/layui.js"></script>
+	<script type="text/javascript" src="../lib/echarts4.0.3.min.js"></script>
+	<script type="text/javascript" src="../lib/vue.min.js"></script>
+	<script type="text/javascript" src="../lib/vue-resource.js"></script>
+	<script type="text/javascript" src="../static/js/statistics.js"></script>
+</body>
 
 </html>

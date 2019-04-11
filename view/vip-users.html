@@ -1,108 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 
-	<head>
-		<meta charset="UTF-8">
-		<meta name="renderer" content="webkit">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<title>VIP会员配置</title>
-		<link rel="stylesheet" href="../lib/bootstrap.min.css" />
-		<link rel="stylesheet" href="../lib/layui/css/layui.css" media="all">
-		<link rel="stylesheet" href="../static/fonts/iconfont.css">
-		<link rel="stylesheet" href="../static/css/style.css">
-		<link rel="stylesheet" href="../static/css/vip-users.css" />
-		<link rel="icon" href="../static/image/code.png">
-	</head>
+<head>
+	<meta charset="UTF-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>VIP会员配置</title>
+	<link rel="stylesheet" href="../lib/bootstrap.min.css" />
+	<link rel="stylesheet" href="../lib/layui/css/layui.css" media="all">
+	<link rel="stylesheet" href="../static/fonts/iconfont.css">
+	<link rel="stylesheet" href="../static/css/style.css">
+	<link rel="stylesheet" href="../static/css/vip-users.css" />
+	<link rel="icon" href="../static/image/code.png">
+</head>
 
-	<body class="body">
-		<div class="container">
-			<div class="wiki-list bg-fff">
-				<div class="layui-btn-group">
-					<a href="##" @click="add" class="layui-btn layui-btn-warm layui-btn-radius">添加会员</a>
-				</div>
-				<div class="section my-table">
-					<ul class="section my-table-head">
-						<li>
-							<p class="width-5">序号</p>
-							<p class="width-20">vip时间类</p>
-							<p class="width-15">费用(元)</p>
-							<p class="width-20">创建时间</p>
-							<p class="width-15">状态</p>
-							<p class="width-10">操作员</p>
-							<p class="width-15">操作</p>
-						</li>
-					</ul>
-					<ul class="section my-table-body" v-if="dataList.length>0">
-						<li v-for="(item,index) in dataList" v-if="index<10">
-							<p class="width-5">{{index+1}}</p>
-							<p class="width-20">{{item.vipDescribe}}</p>
-							<p class="width-15">{{item.vipCash/100}}</p>
-							<p class="width-20">{{item.createTime}}</p>
-							<!--<p class="width-15">{{item.vipState}}</p>-->
-							<p class="width-15">
-								<span class="switch-btn" :name="item.id" :class="{active:item.vipState==4}" @click="changeStuatus(item.id)"><i></i></span>
-							</p>
-							<p class="width-10">{{item.createUserName}}</p>
-							<p class="width-15">
-								<a href="##" @click="edit(item.id)" class="layui-btn">编辑</a>
-								<a href="##" @click="deleteData(item.id)" class="layui-btn layui-btn-danger">删除</a>
-							</p>
-						</li>
-					</ul>
-				</div>
+<body class="body">
+	<div class="container">
+		<div class="wiki-list bg-fff">
+			<div class="layui-btn-group">
+				<a href="##" @click="add" class="layui-btn layui-btn-warm layui-btn-radius">添加会员</a>
 			</div>
-			<!--指定对象编辑-->
-			<div class="edit-class" v-if="showClass">
-				<div class="section e-c-con">
-					<h3>VIP配置</h3>
-					<!--新增-->
-					<form class="layui-form" style="padding: 15% 8% 4% 8%;">
-						<div class="layui-form-item">
-							<label class="layui-form-label">名称：</label>
-							<div class="layui-input-block">
-								<input type="text" name="" class="layui-input" placeholder="请输入描述" v-model="vipDescribe">
-							</div>
-						</div>
-						<div class="layui-form-item">
-							<label class="layui-form-label">vip时间：</label>
-							<div class="layui-input-block">
-								<input type="radio" lay-filter="viptype" name="viptype" value="1" title="天" :checked="vipType==1">
-								<input type="number" name="vipNumber" class="layui-input" style="width: 200px;display: inline-block;" v-if="vipType==1" v-model="vipNumber" min="1" max="9999">
-							</div>
-							<div class="layui-input-block" style="margin-top: 15px;">
-      							<input type="radio" lay-filter="viptype" name="viptype" value="2" title="月" :checked="vipType==2">
-      							<input type="number" name="vipNumber" class="layui-input" style="width: 200px;display: inline-block;" v-if="vipType==2" v-model="vipNumber" min="1" max="9999">
-							</div>
-							<div class="layui-input-block" style="margin-top: 15px;">
-      							<input type="radio" lay-filter="viptype" name="viptype" value="3" title="终身" :checked="vipType==5">
-							</div>
-						</div>
-						<div class="layui-form-item">
-							<label class="layui-form-label">费用(元)：</label>
-							<div class="layui-input-block">
-								<input type="number" autocomplete="off" name="" class="layui-input" placeholder="0.00" min="0" v-model="vipCash">
-							</div>
-						</div>
-						<div class="layui-form-item">
-							<div class="layui-input-block" style="margin-top: 40px;">
-								<button type="button" class="layui-btn" @click="saveData">保存</button>
-								<button type="button" class="layui-btn layui-btn-primary" @click="closeClass">取消</button>
-							</div>
-						</div>
-					</form>
-				</div>
+			<div class="section my-table">
+				<ul class="section my-table-head">
+					<li>
+						<p class="width-5">序号</p>
+						<p class="width-20">vip时间类</p>
+						<p class="width-15">费用(元)</p>
+						<p class="width-20">创建时间</p>
+						<p class="width-15">状态</p>
+						<p class="width-10">操作员</p>
+						<p class="width-15">操作</p>
+					</li>
+				</ul>
+				<ul class="section my-table-body" v-if="dataList.length>0">
+					<li v-for="(item,index) in dataList" v-if="index<10">
+						<p class="width-5">{{index+1}}</p>
+						<p class="width-20">{{item.vipDescribe}}</p>
+						<p class="width-15">{{item.vipCash/100}}</p>
+						<p class="width-20">{{item.createTime}}</p>
+						<!--<p class="width-15">{{item.vipState}}</p>-->
+						<p class="width-15">
+							<span class="switch-btn" :name="item.id" :class="{active:item.vipState==4}" @click="changeStuatus(item.id)"><i></i></span>
+						</p>
+						<p class="width-10">{{item.createUserName}}</p>
+						<p class="width-15">
+							<a href="##" @click="edit(item.id)" class="layui-btn">编辑</a>
+							<a href="##" @click="deleteData(item.id)" class="layui-btn layui-btn-danger">删除</a>
+						</p>
+					</li>
+				</ul>
 			</div>
 		</div>
+		<!--指定对象编辑-->
+		<div class="edit-class" v-if="showClass">
+			<div class="section e-c-con">
+				<h3>VIP配置</h3>
+				<!--新增-->
+				<form class="layui-form" style="padding: 15% 8% 4% 8%;">
+					<div class="layui-form-item">
+						<label class="layui-form-label">名称：</label>
+						<div class="layui-input-block">
+							<input type="text" name="" class="layui-input" placeholder="请输入描述" v-model="vipDescribe">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">vip时间：</label>
+						<div class="layui-input-block">
+							<input type="radio" lay-filter="viptype" name="viptype" value="1" title="天" :checked="vipType==1">
+							<input type="number" name="vipNumber" class="layui-input" style="width: 200px;display: inline-block;" v-if="vipType==1" v-model="vipNumber"
+							    min="1" max="9999">
+						</div>
+						<div class="layui-input-block" style="margin-top: 15px;">
+							<input type="radio" lay-filter="viptype" name="viptype" value="2" title="月" :checked="vipType==2">
+							<input type="number" name="vipNumber" class="layui-input" style="width: 200px;display: inline-block;" v-if="vipType==2" v-model="vipNumber"
+							    min="1" max="9999">
+						</div>
+						<div class="layui-input-block" style="margin-top: 15px;">
+							<input type="radio" lay-filter="viptype" name="viptype" value="3" title="终身" :checked="vipType==5">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">费用(元)：</label>
+						<div class="layui-input-block">
+							<input type="number" autocomplete="off" name="" class="layui-input" placeholder="0.00" min="0" v-model="vipCash">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<div class="layui-input-block" style="margin-top: 40px;">
+							<button type="button" class="layui-btn" @click="saveData">保存</button>
+							<button type="button" class="layui-btn layui-btn-primary" @click="closeClass">取消</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 
-		<script type="text/javascript" src="../lib/jquery.min.js" ></script>
-		<script type="text/javascript" src="../lib/layui/layui.js"></script>
-		<script type="text/javascript" src="../lib/vue.min.js"></script>
-		<script type="text/javascript" src="../lib/vue-resource.js"></script>
-		<script type="text/javascript" src="../static/js/config.js" ></script>
-		<script type="text/javascript" src="../lib/ajaxhook.min.js" ></script>
-		<script type="text/javascript" src="../static/js/myTools.js" ></script>
-		<script type="text/javascript" src="../static/js/vip-users.js"></script>
-	</body>
+	<script type="text/javascript" src="../lib/jquery.min.js"></script>
+	<script type="text/javascript" src="../lib/layui/layui.js"></script>
+	<script type="text/javascript" src="../lib/vue.min.js"></script>
+	<script type="text/javascript" src="../lib/vue-resource.js"></script>
+	<script type="text/javascript" src="../static/js/config.js"></script>
+	<script type="text/javascript" src="../lib/ajaxhook.min.js"></script>
+	<script type="text/javascript" src="../static/js/myTools.js"></script>
+	<script type="text/javascript" src="../static/js/vip-users.js"></script>
+</body>
 
 </html>

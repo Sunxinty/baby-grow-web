@@ -41,26 +41,26 @@ var option = {
 var staVue = new Vue({
 	el: ".content",
 	data: {
-		pageSize:10,//每页条数
-		totalPageSize:1,//总页数
-		page:1,//当前页
+		pageSize: 10, //每页条数
+		totalPageSize: 1, //总页数
+		page: 1, //当前页
 	},
-	mounted: function(){
+	mounted: function () {
 		var tongjiChart = echarts.init(document.getElementById('tongjiChart'));
 		tongjiChart.setOption(option);
 	},
 	methods: {
-		nextPage(){
-			if(this.page<this.totalPageSize){
+		nextPage() {
+			if (this.page < this.totalPageSize) {
 				this.page++;
 			}
 		},
-		prePage(){
-			if(this.page>1){
+		prePage() {
+			if (this.page > 1) {
 				this.page--;
 			}
 		},
-		nowPage(n){
+		nowPage(n) {
 			this.page = n
 		}
 	}

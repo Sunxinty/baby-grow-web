@@ -8,7 +8,7 @@ userInfo = JSON.parse(userInfo)
 
 Vue.http.headers.common['token'] = userToken;
 
-layui.use(['layer', 'laydate'], function() {
+layui.use(['layer', 'laydate'], function () {
 	var layer = layui.layer,
 		laydate = layui.laydate,
 		$ = layui.jquery;
@@ -27,17 +27,17 @@ var commentVue = new Vue({
 		totalPageSize: 24, //总页数
 		page: 1, //当前页
 	},
-	mounted: function() {
+	mounted: function () {
 
 	},
 	methods: {
 		nextPage() {
-			if(this.page < this.totalPageSize) {
+			if (this.page < this.totalPageSize) {
 				this.page++;
 			}
 		},
 		prePage() {
-			if(this.page > 1) {
+			if (this.page > 1) {
 				this.page--;
 			}
 		},

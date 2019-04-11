@@ -1,5 +1,4 @@
 var layer, upload, form;
-//var E = window.wangEditor;
 var detailId = window.localStorage.getItem("detailId") || "";
 var userInfo = window.localStorage.getItem("userInfo") || null;
 
@@ -21,10 +20,10 @@ var editVue = new Vue({
 		saveClassData: null,
 		imgMsg: ""
 	},
-	mounted: function() {
+	mounted: function () {
 		var _this = this;
 		//加载layui
-		layui.use(['layer', 'upload'], function() {
+		layui.use(['layer', 'upload'], function () {
 			layer = layui.layer,
 				upload = layui.upload;
 			_this.getData()
@@ -34,21 +33,21 @@ var editVue = new Vue({
 				auto: false,
 				accept: 'imsges',
 				acceptMime: 'imsge/*',
-				choose: function(obj) {
+				choose: function (obj) {
 					console.log(obj)
-					obj.preview(function(index, file, result) {
+					obj.preview(function (index, file, result) {
 						$('#previewImg').show().attr('src', result);
 						_this.imgMsg = "准备上传..."
 						//七牛上传
-						setTimeout(function() {
-							qiniuUpload(_this, file, "img", function(name, fileUrl) {
+						setTimeout(function () {
+							qiniuUpload(_this, file, "img", function (name, fileUrl) {
 								_this.firstImg = fileUrl
 							})
 						}, 100)
 					})
 				},
 				bindAction: '',
-				done: function(res) {
+				done: function (res) {
 					console.log(res)
 				}
 			});
@@ -69,17 +68,17 @@ var editVue = new Vue({
 				['view', ['fullscreen', 'codeview', 'help']]
 			],
 			callbacks: {
-				onImageUpload: function(files) {
+				onImageUpload: function (files) {
 					//console.log(files);
 					layer.msg("正在上传...")
-					qiniuUpload(null, files[0],"image" , function(name, url) {
-						$('#addEdit').summernote('insertImage',url,'img');
+					qiniuUpload(null, files[0], "image", function (name, url) {
+						$('#addEdit').summernote('insertImage', url, 'img');
 					})
 				}
 			}
 		});
 		//_this.getData();
-		$("#classTable").on("click", "li p .deleteClass", function(e) {
+		$("#classTable").on("click", "li p .deleteClass", function (e) {
 			_this.deleteData(e)
 		})
 	},
@@ -88,10 +87,10 @@ var editVue = new Vue({
 			var _this = this;
 			_this.classroomTypeId = Math.floor($("#classTable li").eq(0).find("p").eq(0).attr("name"))
 
-			if(_this.title == "") {
+			if (_this.title == "") {
 				layer.msg("标题不能为空")
 				return;
-			} else if(_this.keyWords == "") {
+			} else if (_this.keyWords == "") {
 				layer.msg("关键字不能为空")
 				return;
 			}
@@ -99,7 +98,7 @@ var editVue = new Vue({
 			//	layer.msg("内容不能为空")
 			//	return;
 			//} 
-			else if(_this.summary == "") {
+			else if (_this.summary == "") {
 				layer.msg("摘要不能为空")
 				return;
 			}
@@ -116,10 +115,10 @@ var editVue = new Vue({
 			}
 			//console.log(params)
 			_this.$http.post(window.config.HTTPURL + "/rest/babyClassroom/saveAndUpdate", JSON.stringify(params))
-				.then(function(res) {
-						if(res.data.code == "0000") {
+				.then(function (res) {
+						if (res.data.code == "0000") {
 							layer.msg("保存成功！")
-							setTimeout(function() {
+							setTimeout(function () {
 								var frameIndex = parent.layer.getFrameIndex(window.name)
 								parent.layer.close(frameIndex);
 								window.parent.location.reload();
@@ -128,7 +127,7 @@ var editVue = new Vue({
 							layer.msg(res.data.msg)
 						}
 					},
-					function(err) {
+					function (err) {
 						layer.msg("服务器错误！")
 					}
 				)
@@ -136,19 +135,21 @@ var editVue = new Vue({
 		},
 		//根据id获取数据
 		getData() {
-			if(!detailId || detailId == "") {
+			if (!detailId || detailId == "") {
 				return;
 			}
 			var _this = this;
-			var loadIndex = layer.load(1,{shade: [0.1,"#000"]})
-			_this.$http.get(window.config.HTTPURL + "/rest/babyClassroom/selectById?id=" + detailId).then(function(res) {
+			var loadIndex = layer.load(1, {
+				shade: [0.1, "#000"]
+			})
+			_this.$http.get(window.config.HTTPURL + "/rest/babyClassroom/selectById?id=" + detailId).then(function (res) {
 				layer.close(loadIndex);
-				if(res.data.code == "0000") {
+				if (res.data.code == "0000") {
 					_this.showTable(res.data.data)
 				} else {
 					layer.msg(res.data.msg)
 				}
-			}, function() {
+			}, function () {
 				layer.msg("服务器出错！")
 			})
 		},
@@ -168,7 +169,7 @@ var editVue = new Vue({
 			var p = e.target;
 			layer.confirm('你确定要删除该分类？', {
 				btn: ['确定'],
-			}, function(index) {
+			}, function (index) {
 				$(p).parents("li").remove()
 				layer.closeAll();
 			})
@@ -185,10 +186,10 @@ var editVue = new Vue({
 		//查询一级分类
 		getFirstClass() {
 			var _this = this;
-			_this.$http.get(window.config.HTTPURL + "rest/babyClassroomType/selectByType").then(function(res) {
-				if(res.data.code == "0000") {
+			_this.$http.get(window.config.HTTPURL + "rest/babyClassroomType/selectByType").then(function (res) {
+				if (res.data.code == "0000") {
 					_this.firstClass = res.data.data;
-					setTimeout(function() {
+					setTimeout(function () {
 						_this.initForm()
 					}, 0)
 				} else {
@@ -211,15 +212,15 @@ var editVue = new Vue({
 			$("#classTable").html('<li><p class="width-60" name="' + _this.saveClassData.firstID + '">' + _this.saveClassData.firstName + '</p><p class="width-40"><a href="##" class="layui-btn layui-btn-danger deleteClass">删除</a></p></li>')
 
 			layer.msg("保存分类成功！")
-			setTimeout(function() {
+			setTimeout(function () {
 				_this.showClass = false;
 			}, 500)
 		},
 		initForm() {
 			var _this = this;
-			layui.use(['form'], function() {
+			layui.use(['form'], function () {
 				form = layui.form;
-				form.on('select(firstClass)', function(data) {
+				form.on('select(firstClass)', function (data) {
 
 				});
 				form.render();

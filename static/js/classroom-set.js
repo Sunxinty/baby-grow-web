@@ -1,8 +1,8 @@
 var layer, $, form;
 
-layui.use(['layer'], function() {
+layui.use(['layer'], function () {
 	layer = layui.layer,
-	$ = layui.jquery;
+		$ = layui.jquery;
 })
 
 var listVue = new Vue({
@@ -11,9 +11,9 @@ var listVue = new Vue({
 		dataList: [], //列表数据
 		showClass: false,
 		typeName: "",
-		detailData: null//编辑时的数据
+		detailData: null //编辑时的数据
 	},
-	mounted: function() {
+	mounted: function () {
 		this.getClassData()
 	},
 	methods: {
@@ -23,7 +23,7 @@ var listVue = new Vue({
 			this.showClass = true
 		},
 		edit(data) {
-			if(!data){
+			if (!data) {
 				return;
 			}
 			var _this = this;
@@ -35,15 +35,15 @@ var listVue = new Vue({
 			var _this = this;
 			layer.confirm('你确定要删除该分类？', {
 				btn: ['确定'],
-			}, function(index) {
-				_this.$http.get(window.config.HTTPURL + "rest/babyClassroomType/deleteById?id=" + id).then(function(res) {
-					if(res.data.code == "0000") {
+			}, function (index) {
+				_this.$http.get(window.config.HTTPURL + "rest/babyClassroomType/deleteById?id=" + id).then(function (res) {
+					if (res.data.code == "0000") {
 						layer.msg("删除成功！")
 						_this.getClassData()
 					} else {
 						layer.msg(res.data.msg)
 					}
-				}, function() {
+				}, function () {
 					layer.msg("服务器错误！")
 				})
 			});
@@ -51,40 +51,40 @@ var listVue = new Vue({
 		//查询分类列表
 		getClassData() {
 			var _this = this;
-			_this.$http.get(window.config.HTTPURL + "rest/babyClassroomType/selectByType").then(function(res) {
-				if(res.data.code == "0000") {
+			_this.$http.get(window.config.HTTPURL + "rest/babyClassroomType/selectByType").then(function (res) {
+				if (res.data.code == "0000") {
 					_this.dataList = res.data.data;
-					layui.use(['form'], function() {
+					layui.use(['form'], function () {
 						form = layui.form
 					})
 				} else {
 					layer.msg(res.data.msg)
 				}
-			}, function() {
-					layer.msg("服务器错误！")
-				})
+			}, function () {
+				layer.msg("服务器错误！")
+			})
 		},
-		saveClass(){
+		saveClass() {
 			var _this = this;
 			var params = {
-				id: _this.detailData==null?null:_this.detailData.id,
-				typeName: _this.typeName||""
+				id: _this.detailData == null ? null : _this.detailData.id,
+				typeName: _this.typeName || ""
 			}
-			_this.$http.post(window.config.HTTPURL + "rest/babyClassroomType/saveAndUpdate",JSON.stringify(params)).then(function(res) {
-				if(res.data.code == "0000") {
+			_this.$http.post(window.config.HTTPURL + "rest/babyClassroomType/saveAndUpdate", JSON.stringify(params)).then(function (res) {
+				if (res.data.code == "0000") {
 					layer.msg("保存成功！")
-					setTimeout(function() {
+					setTimeout(function () {
 						_this.getClassData()
 						_this.showClass = false
 					}, 1000)
 				} else {
 					layer.msg(res.data.msg)
 				}
-			}, function() {
-					layer.msg("服务器错误！")
-				})
+			}, function () {
+				layer.msg("服务器错误！")
+			})
 		},
-		closeClass(){
+		closeClass() {
 			this.showClass = false
 		}
 	}

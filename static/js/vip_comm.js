@@ -1,27 +1,26 @@
-
 // 配置
 layui.config({
-    base: './lib/static/js/'  // 模块目录
-}).extend({                     // 模块别名
-    vip_nav: 'vip_nav'
-    , vip_tab: 'vip_tab'
-    , vip_table: 'vip_table'
+    base: './lib/static/js/' // 模块目录
+}).extend({ // 模块别名
+    vip_nav: 'vip_nav',
+    vip_tab: 'vip_tab',
+    vip_table: 'vip_table'
 });
 
 // 主入口方法
 layui.use(['layer', 'element', 'util'], function () {
 
     // 操作对象
-    var device = layui.device()
-        , element = layui.element
-        , layer = layui.layer
-        , util = layui.util
-        , $ = layui.jquery
-        , cardIdx = 0
-        , cardLayId = 0
-        , side = $('.my-side')
-        , body = $('.my-body')
-        , footer = $('.my-footer');
+    var device = layui.device(),
+        element = layui.element,
+        layer = layui.layer,
+        util = layui.util,
+        $ = layui.jquery,
+        cardIdx = 0,
+        cardLayId = 0,
+        side = $('.my-side'),
+        body = $('.my-body'),
+        footer = $('.my-footer');
 
     //阻止IE7以下访问
     if (device.ie && device.ie < 8) {
@@ -32,18 +31,30 @@ layui.use(['layer', 'element', 'util'], function () {
     function navHide(t, st) {
         var time = t ? t : 50;
         st ? localStorage.log = 1 : localStorage.log = 0;
-        side.animate({'left': -260}, time);
-        body.animate({'left': 0}, time);
-        footer.animate({'left': 0}, time);
+        side.animate({
+            'left': -260
+        }, time);
+        body.animate({
+            'left': 0
+        }, time);
+        footer.animate({
+            'left': 0
+        }, time);
     }
 
     // 导航栏展开
     function navShow(t, st) {
         var time = t ? t : 50;
         st ? localStorage.log = 0 : localStorage.log = 1;
-        side.animate({'left': 0}, time);
-        body.animate({'left': 260}, time);
-        footer.animate({'left': 260}, time);
+        side.animate({
+            'left': 0
+        }, time);
+        body.animate({
+            'left': 260
+        }, time);
+        footer.animate({
+            'left': 260
+        }, time);
     }
 
     // 监听导航栏收缩
@@ -68,11 +79,11 @@ layui.use(['layer', 'element', 'util'], function () {
 
     // 添加TAB选项卡
     window.addTab = function (elem, tit, url) {
-        var card = 'card';                                              // 选项卡对象
-        var title = tit ? tit : elem.children('a').html();              // 导航栏text
-        var src = url ? url : elem.children('a').attr('href-url');      // 导航栏跳转URL
-        var id = new Date().getTime();                                  // ID
-        var flag = getTitleId(card, title);                             // 是否有该选项卡存在
+        var card = 'card'; // 选项卡对象
+        var title = tit ? tit : elem.children('a').html(); // 导航栏text
+        var src = url ? url : elem.children('a').attr('href-url'); // 导航栏跳转URL
+        var id = new Date().getTime(); // ID
+        var flag = getTitleId(card, title); // 是否有该选项卡存在
         // 大于0就是有该选项卡了
         if (flag > 0) {
             id = flag;
@@ -80,9 +91,9 @@ layui.use(['layer', 'element', 'util'], function () {
             if (src) {
                 //新增
                 element.tabAdd(card, {
-                    title: '<span>' + title + '</span>'
-                    , content: '<iframe src="' + src + '" frameborder="0"></iframe>'
-                    , id: id
+                    title: '<span>' + title + '</span>',
+                    content: '<iframe src="' + src + '" frameborder="0"></iframe>',
+                    id: id
                 });
                 // 关闭弹窗
                 layer.closeAll();
@@ -207,21 +218,24 @@ layui.use(['layer', 'element', 'util'], function () {
         // 分辨率小于1023  使用内部工具组件
         if ($(window).width() < 1023) {
             util.fixbar({
-                bar1: '&#xe602;'
-                , css: {left: 10, bottom: 54}
-                , click: function (type) {
+                bar1: '&#xe602;',
+                css: {
+                    left: 10,
+                    bottom: 54
+                },
+                click: function (type) {
                     if (type === 'bar1') {
                         //iframe层
                         layer.open({
-                            type: 1,                        // 类型
-                            title: false,                   // 标题
-                            offset: 'l',                    // 定位 左边
-                            closeBtn: 0,                    // 关闭按钮
-                            anim: 0,                        // 动画
-                            shadeClose: true,               // 点击遮罩关闭
-                            shade: 0.8,                     // 半透明
-                            area: ['150px', '100%'],        // 区域
-                            skin: 'my-mobile',              // 样式
+                            type: 1, // 类型
+                            title: false, // 标题
+                            offset: 'l', // 定位 左边
+                            closeBtn: 0, // 关闭按钮
+                            anim: 0, // 动画
+                            shadeClose: true, // 点击遮罩关闭
+                            shade: 0.8, // 半透明
+                            area: ['150px', '100%'], // 区域
+                            skin: 'my-mobile', // 样式
                             content: $('body .my-side').html() // 内容
                         });
                     }

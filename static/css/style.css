@@ -1,5 +1,4 @@
 @charset "utf-8";
-
 .layui-header {
     background: none;
 }
@@ -34,6 +33,7 @@
 }
 
 /* index */
+
 .my-header-btn {
     display: inline-block;
     width: auto;
@@ -86,7 +86,7 @@
     min-height: 100%;
 }
 
-.my-side ul.layui-nav li a i, .layui-nav .layui-nav-child a i, .layui-nav .layui-nav-item a i, .layui-tab-card > .layui-tab-title li span i {
+.my-side ul.layui-nav li a i, .layui-nav .layui-nav-child a i, .layui-nav .layui-nav-item a i, .layui-tab-card>.layui-tab-title li span i {
     margin-right: 5px;
 }
 
@@ -114,7 +114,7 @@
     padding: 0;
 }
 
-.my-body .layui-tab .layui-tab-title li:first-child > i {
+.my-body .layui-tab .layui-tab-title li:first-child>i {
     display: none;
 }
 
@@ -146,12 +146,13 @@
     margin-bottom: 10px;
 }
 
-.my-pay-box > div p {
+.my-pay-box>div p {
     text-align: center;
     margin-bottom: 10px;
 }
 
 /* welcome */
+
 .my-index-main button.layui-icon {
     width: 100%;
     font-size: 20px;
@@ -178,6 +179,7 @@
 }
 
 /* login */
+
 .login-body {
     background: url("../image/login_bg.jpg") no-repeat;
 }
@@ -257,6 +259,7 @@
 }
 
 /* demo */
+
 .site-demo-button div {
     margin: 20px 30px 10px;
 }
@@ -266,6 +269,7 @@
 }
 
 /* check */
+
 input[type='checkbox'] {
     vertical-align: middle;
 }
@@ -304,6 +308,7 @@ input[type='checkbox'] {
 }
 
 /* dblclick css */
+
 .dblclick-tab tr td {
     height: 30px;
     line-height: 30px;
@@ -325,6 +330,7 @@ input[type='checkbox'] {
 }
 
 /* tips 404 */
+
 .my-page-box {
     font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", FontAwesome, sans-serif;
     text-align: center;
@@ -358,6 +364,7 @@ input[type='checkbox'] {
 }
 
 /* tree table */
+
 .my-tree-table-box .tree-table-tree-box {
     width: 20%;
     min-height: 200px;
@@ -375,6 +382,7 @@ input[type='checkbox'] {
 }
 
 /* skin0 */
+
 html .skin-0 .dblclick-tips-box .layui-layer-content {
     background-color: #009688;
 }
@@ -384,15 +392,12 @@ html .skin-0 .dblclick-tips-box i.layui-layer-TipsB {
 }
 
 /* skin1 */
-html .skin-1 .my-header .my-header-logo,
-html .skin-1 .layui-nav .layui-nav-item a,
-html .skin-1 .layui-nav .layui-nav-item a:hover {
+
+html .skin-1 .my-header .my-header-logo, html .skin-1 .layui-nav .layui-nav-item a, html .skin-1 .layui-nav .layui-nav-item a:hover {
     color: #444;
 }
 
-html .skin-1 .my-header,
-html .skin-1 .layui-nav,
-html .skin-1 .layui-nav-child {
+html .skin-1 .my-header, html .skin-1 .layui-nav, html .skin-1 .layui-nav-child {
     background: white;
 }
 
@@ -400,12 +405,7 @@ html .skin-1 .layui-nav .layui-nav-item .layui-nav-child dd.layui-this a {
     color: white;
 }
 
-html .skin-1 .layui-nav .layui-nav-item .layui-nav-child dd.layui-this,
-html .skin-1 .layui-nav .layui-nav-item .layui-nav-child dd.layui-this > a,
-html .skin-1 .layui-nav-tree .layui-nav-item > a:hover,
-html .skin-1 .layui-nav .layui-nav-item .layui-nav-child dd:hover > a,
-html .skin-1 .layui-tab-title li .layui-tab-close:hover,
-html .skin-1 .dblclick-tips-box .layui-layer-content {
+html .skin-1 .layui-nav .layui-nav-item .layui-nav-child dd.layui-this, html .skin-1 .layui-nav .layui-nav-item .layui-nav-child dd.layui-this>a, html .skin-1 .layui-nav-tree .layui-nav-item>a:hover, html .skin-1 .layui-nav .layui-nav-item .layui-nav-child dd:hover>a, html .skin-1 .layui-tab-title li .layui-tab-close:hover, html .skin-1 .dblclick-tips-box .layui-layer-content {
     color: white !important;
     background-color: #666 !important;
 }
@@ -414,7 +414,7 @@ html .skin-1 .dblclick-tips-box i.layui-layer-TipsB {
     border-right-color: #666;
 }
 
-html .skin-1 .layui-nav .layui-nav-itemed > a {
+html .skin-1 .layui-nav .layui-nav-itemed>a {
     background: #444 !important;
 }
 
@@ -427,15 +427,12 @@ html .skin-1 .layui-nav .layui-nav-mored {
 }
 
 /* skin2 */
-html .skin-2 .my-header .my-header-logo,
-html .skin-2 .layui-nav .layui-nav-item a,
-html .skin-2 .layui-nav .layui-nav-item a:hover {
+
+html .skin-2 .my-header .my-header-logo, html .skin-2 .layui-nav .layui-nav-item a, html .skin-2 .layui-nav .layui-nav-item a:hover {
     color: white;
 }
 
-html .skin-2 .my-header,
-html .skin-2 .layui-nav,
-html .skin-2 .layui-nav-child {
+html .skin-2 .my-header, html .skin-2 .layui-nav, html .skin-2 .layui-nav-child {
     background-color: #01AAED;
 }
 
@@ -443,12 +440,7 @@ html .skin-2 .layui-nav .layui-nav-item .layui-nav-child dd.layui-this a {
     color: white;
 }
 
-html .skin-2 .layui-nav .layui-nav-item .layui-nav-child dd.layui-this,
-html .skin-2 .layui-nav .layui-nav-item .layui-nav-child dd.layui-this > a,
-html .skin-2 .layui-nav-tree .layui-nav-item > a:hover,
-html .skin-2 .layui-nav .layui-nav-item .layui-nav-child dd:hover > a,
-html .skin-2 .layui-tab-title li .layui-tab-close:hover,
-html .skin-2 .dblclick-tips-box .layui-layer-content {
+html .skin-2 .layui-nav .layui-nav-item .layui-nav-child dd.layui-this, html .skin-2 .layui-nav .layui-nav-item .layui-nav-child dd.layui-this>a, html .skin-2 .layui-nav-tree .layui-nav-item>a:hover, html .skin-2 .layui-nav .layui-nav-item .layui-nav-child dd:hover>a, html .skin-2 .layui-tab-title li .layui-tab-close:hover, html .skin-2 .dblclick-tips-box .layui-layer-content {
     color: white !important;
     background-color: #00C0F7 !important;
 }
@@ -457,24 +449,22 @@ html .skin-2 .dblclick-tips-box i.layui-layer-TipsB {
     border-right-color: #00C0F7;
 }
 
-html .skin-2 .layui-nav .layui-nav-itemed > a {
+html .skin-2 .layui-nav .layui-nav-itemed>a {
     background-color: #1684af !important;
 }
 
 /* skin0-2 */
-html .skin-2 .layui-nav .layui-nav-more,
-html .skin-1 .layui-nav-tree .layui-nav-more,
-html .skin-2 .layui-nav-tree .layui-nav-more {
+
+html .skin-2 .layui-nav .layui-nav-more, html .skin-1 .layui-nav-tree .layui-nav-more, html .skin-2 .layui-nav-tree .layui-nav-more {
     border-color: white transparent transparent;
 }
 
-html .skin-2 .layui-nav .layui-nav-mored,
-html .skin-1 .layui-nav-itemed .layui-nav-more,
-html .skin-2 .layui-nav-itemed .layui-nav-more {
+html .skin-2 .layui-nav .layui-nav-mored, html .skin-1 .layui-nav-itemed .layui-nav-more, html .skin-2 .layui-nav-itemed .layui-nav-more {
     border-color: transparent transparent white;
 }
 
 /* tools */
+
 .fl {
     float: left;
 }
@@ -501,6 +491,7 @@ html .skin-2 .layui-nav-itemed .layui-nav-more {
 }
 
 /* layui css cover */
+
 html body .layui-nav .layui-nav-bar {
     opacity: 0 !important;
     overflow: hidden !important;
@@ -510,7 +501,7 @@ html body .layui-nav .layui-nav-bar {
     background-color: transparent;
 }
 
-.my-body .layui-tab-card > .layui-tab-title li {
+.my-body .layui-tab-card>.layui-tab-title li {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -522,55 +513,45 @@ html body .layui-nav .layui-nav-bar {
 }
 
 /* media */
+
 @media screen and (max-width: 1023px) {
     .my-header ul.layui-nav, .my-header-btn, .my-side, .layui-field-title, .my-btn-box .fr {
         display: none;
     }
-
     .layui-side-scroll {
         width: 170px;
     }
-
     body div.my-mobile {
         background: #393D49;
     }
-
     body div.my-mobile .layui-layer-content {
         overflow-x: hidden;
     }
-
     .my-header ul.my-header-user-nav {
         display: inline-block;
         padding-left: 0;
         padding-right: 10px;
     }
-
     .my-header ul.my-header-user-nav a {
         padding: 0 10px;
     }
-
     .my-header ul.my-header-user-nav:last-child a:first-child {
         padding-right: 20px;
     }
-
     .my-side, .layui-nav-tree, .my-btn-box input[type='text'] {
         width: 150px;
     }
-
     .my-body {
         left: 0;
         width: 100%;
         overflow-x: auto;
     }
-
     .my-body iframe {
         width: 100%;
     }
-
     select {
         background: white;
     }
-
     .layui-layout-admin .layui-footer {
         left: 0;
     }

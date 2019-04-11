@@ -1,90 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 
-	<head>
-		<meta charset="UTF-8">
-		<meta name="renderer" content="webkit">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<title>关爱提醒文章-编辑文章</title>
-		<link rel="stylesheet" href="../lib/bootstrap.min.css" />
-		<link rel="stylesheet" href="../lib/layui/css/layui.css" media="all">
-		<link rel="stylesheet" type="text/css" href="../static/fonts/iconfont.css">
-		<link rel="stylesheet" href="../static/css/style.css">
-		<link rel="stylesheet" href="../lib/summernote/dist/summernote.css" />
-		<link rel="stylesheet" href="../static/css/care-remind-edit.css" />
-		<link rel="icon" href="static/image/code.png">
-	</head>
+<head>
+	<meta charset="UTF-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>关爱提醒文章-编辑文章</title>
+	<link rel="stylesheet" href="../lib/bootstrap.min.css" />
+	<link rel="stylesheet" href="../lib/layui/css/layui.css" media="all">
+	<link rel="stylesheet" type="text/css" href="../static/fonts/iconfont.css">
+	<link rel="stylesheet" href="../static/css/style.css">
+	<link rel="stylesheet" href="../lib/summernote/dist/summernote.css" />
+	<link rel="stylesheet" href="../static/css/care-remind-edit.css" />
+	<link rel="icon" href="static/image/code.png">
+</head>
 
-	<body class="body">
-		<div class="container">
-			<div class="search-form bg-fff">
-				<form class="layui-form">
-					<div class="layui-form-item">
-						<label class="layui-form-label">*标题</label>
-						<div class="layui-input-block">
-							<input type="text" name="title" v-model="title" placeholder="请输入标题" class="layui-input">
+<body class="body">
+	<div class="container">
+		<div class="search-form bg-fff">
+			<form class="layui-form">
+				<div class="layui-form-item">
+					<label class="layui-form-label">*标题</label>
+					<div class="layui-input-block">
+						<input type="text" name="title" v-model="title" placeholder="请输入标题" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">*添加音频</label>
+					<div class="layui-input-block">
+						<button type="button" class="layui-btn" id="uploadAudio" style="    float: left;margin-top: 10px;">+ 添加音频</button>
+						<div class="layui-upload-list">
+							<audio :src="sources" controls style="width: 500px;height: 56px;" id="previewAudio"></audio>
+							<p>{{audioMsg}}</p>
+						</div>
+
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">*首帧图片</label>
+					<div class="layui-input-block">
+						<div class="layui-upload-drag" style="float: left;" id="uploadImg">
+							<i class="layui-icon"></i>
+							<p style="display: block;">点击上传，或将文件拖拽到此处</p>
+						</div>
+						<div class="layui-upload-list">
+							<img :src="firstImg" class="layui-upload-img dis-n" id="previewImg">
+							<p>{{imgMsg}}</p>
 						</div>
 					</div>
-					<div class="layui-form-item">
-						<label class="layui-form-label">*添加音频</label>
-						<div class="layui-input-block">
-							<button type="button" class="layui-btn" id="uploadAudio" style="    float: left;margin-top: 10px;">+ 添加音频</button>
-							<div class="layui-upload-list">
-								<audio :src="sources" controls style="width: 500px;height: 56px;" id="previewAudio"></audio>
-								<p>{{audioMsg}}</p>
-							</div>
-							
-						</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">*内容</label>
+					<div class="layui-input-block">
+						<div id="addEdit"></div>
+						<!--<textarea id="addEdit" style="display: none;"></textarea>-->
 					</div>
-					<div class="layui-form-item">
-						<label class="layui-form-label">*首帧图片</label>
-						<div class="layui-input-block">
-							<div class="layui-upload-drag" style="float: left;" id="uploadImg">
-								<i class="layui-icon"></i>
-								<p style="display: block;">点击上传，或将文件拖拽到此处</p>
-							</div>
-							<div class="layui-upload-list">
-								<img :src="firstImg" class="layui-upload-img dis-n" id="previewImg">
-								<p>{{imgMsg}}</p>
-							</div>
-						</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">*宝宝年龄</label>
+					<div class="layui-input-block">
+						<input type="text" name="age" v-model="period" style="width: 100px;display: inline-block;margin-right: 10px;" disabled class="layui-input">天
 					</div>
-					<div class="layui-form-item">
-						<label class="layui-form-label">*内容</label>
-						<div class="layui-input-block">
-							<div id="addEdit"></div>
-							<!--<textarea id="addEdit" style="display: none;"></textarea>-->
-						</div>
+					<div class="layui-input-block" style="margin-top: 20px;">
+						<button type="button" class="layui-btn" @click="saveData">保存</button>
 					</div>
-					<div class="layui-form-item">
-						<label class="layui-form-label">*宝宝年龄</label>
-						<div class="layui-input-block">
-							<input type="text" name="age" v-model="period" style="width: 100px;display: inline-block;margin-right: 10px;" disabled class="layui-input">天
-						</div>
-						<div class="layui-input-block" style="margin-top: 20px;">
-							<button type="button" class="layui-btn" @click="saveData">保存</button>
-						</div>
-					</div>
-				</form>
-			</div>
+				</div>
+			</form>
 		</div>
-		<!--<script type="text/javascript" src="//unpkg.com/wangeditor/release/wangEditor.min.js"></script>-->
-		<script type="text/javascript" src="../lib/jquery.min.js" ></script>
-		<script type="text/javascript" src="../lib/bootstrap.min.js" ></script>
-		<script type="text/javascript" src="../lib/summernote/dist/summernote.js" ></script>
-		<script type="text/javascript" src="../lib/summernote/dist/lang/summernote-zh-CN.js" ></script>
-		<script type="text/javascript" src="../lib/layui/layui.js"></script>
-		<script type="text/javascript" src="../lib/vue.min.js"></script>
-		<script type="text/javascript" src="../lib/vue-resource.js"></script>
-		<script type="text/javascript" src="../lib/ajaxhook.min.js" ></script>
-		<script type="text/javascript" src="../lib/plupload.full.min.js" ></script>
-		<script type="text/javascript" src="../lib/qiniu.min.js" ></script>
-		
-		<script type="text/javascript" src="../static/js/config.js"></script>
-		<script type="text/javascript" src="../static/js/myTools.js" ></script>
-		<script type="text/javascript" src="../static/js/initQiniu.js" ></script>
-		<script type="text/javascript" src="../static/js/care-remind-edit.js"></script>
-	</body>
+	</div>
+	<!--引用插件-->
+	<script type="text/javascript" src="../lib/jquery.min.js"></script>
+	<script type="text/javascript" src="../lib/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../lib/summernote/dist/summernote.js"></script>
+	<script type="text/javascript" src="../lib/summernote/dist/lang/summernote-zh-CN.js"></script>
+	<script type="text/javascript" src="../lib/layui/layui.js"></script>
+	<script type="text/javascript" src="../lib/vue.min.js"></script>
+	<script type="text/javascript" src="../lib/vue-resource.js"></script>
+	<script type="text/javascript" src="../lib/ajaxhook.min.js"></script>
+	<script type="text/javascript" src="../lib/plupload.full.min.js"></script>
+	<script type="text/javascript" src="../lib/qiniu.min.js"></script>
+	<!--项目js-->
+	<script type="text/javascript" src="../static/js/config.js"></script>
+	<script type="text/javascript" src="../static/js/myTools.js"></script>
+	<script type="text/javascript" src="../static/js/initQiniu.js"></script>
+	<script type="text/javascript" src="../static/js/care-remind-edit.js"></script>
+</body>
 
 </html>

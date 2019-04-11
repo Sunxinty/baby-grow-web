@@ -1,150 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
 
-	<head>
-		<meta charset="UTF-8">
-		<meta name="renderer" content="webkit">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<title>育儿知识-编辑文章</title>
-		<link rel="stylesheet" href="../lib/bootstrap.min.css" />
-		<link rel="stylesheet" href="../lib/layui/css/layui.css" media="all">
-		<link rel="stylesheet" type="text/css" href="../static/fonts/iconfont.css">
-		<link rel="stylesheet" href="../static/css/style.css">
-		<link rel="stylesheet" href="../lib/summernote/dist/summernote.css" />
-		<link rel="stylesheet" href="../static/css/knowledge-edit.css" />
-		<link rel="icon" href="static/image/code.png">
-	</head>
+<head>
+	<meta charset="UTF-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>育儿知识-编辑文章</title>
+	<link rel="stylesheet" href="../lib/bootstrap.min.css" />
+	<link rel="stylesheet" href="../lib/layui/css/layui.css" media="all">
+	<link rel="stylesheet" type="text/css" href="../static/fonts/iconfont.css">
+	<link rel="stylesheet" href="../static/css/style.css">
+	<link rel="stylesheet" href="../lib/summernote/dist/summernote.css" />
+	<link rel="stylesheet" href="../static/css/knowledge-edit.css" />
+	<link rel="icon" href="static/image/code.png">
+</head>
 
-	<body class="body">
-		<div class="container">
-			<div class="search-form bg-fff">
-				<form class="layui-form">
+<body class="body">
+	<div class="container">
+		<div class="search-form bg-fff">
+			<form class="layui-form">
+				<div class="layui-form-item">
+					<label class="layui-form-label">*标题</label>
+					<div class="layui-input-block">
+						<input type="text" name="title" v-model="title" placeholder="请输入标题" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">*关键字</label>
+					<div class="layui-input-block">
+						<input type="text" name="keyWord" v-model="keyWord" placeholder="请输入关键字" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">*摘要</label>
+					<div class="layui-input-block">
+						<input type="text" name="summary" v-model="summary" placeholder="请输入摘要" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">*首帧图片</label>
+					<div class="layui-input-block">
+						<div class="layui-upload-drag" style="float: left;" id="uploadImg">
+							<i class="layui-icon"></i>
+							<p style="display: block;">点击上传，或将文件拖拽到此处</p>
+						</div>
+						<div class="layui-upload-list">
+							<img :src="firstImg" class="layui-upload-img dis-n" id="previewImg">
+							<p>{{imgMsg}}</p>
+						</div>
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">*内容</label>
+					<div class="layui-input-block">
+						<div id="addEdit"></div>
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">*指定对象</label>
+					<div class="layui-input-block">
+						<button type="button" class="layui-btn layui-btn-normal" @click="showClassFn">添加</button>
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<div class="layui-input-block">
+						<div class="section my-table">
+							<ul class="section my-table-head">
+								<li>
+									<p class="width-10">一级分类</p>
+									<p class="width-20">二级分类</p>
+									<p class="width-50">子类</p>
+									<p class="width-20">操作</p>
+								</li>
+							</ul>
+							<ul class="section my-table-body" id="classTable">
+								<li v-if="articleType.length>0" v-for="(item,index) in articleType">
+									<p class="width-10">{{item.typeName}}</p>
+									<p class="width-20">{{item.encyclopeTypes[0].typeName}}</p>
+									<p class="width-50" :name="item.idStr">{{item.nameStr}}</p>
+									<p class="width-20">
+										<a href="##" class="layui-btn layui-btn-danger deleteClass">删除</a>
+									</p>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="layui-input-block" style="margin-top: 20px;">
+						<button type="button" class="layui-btn" @click="saveData">保存</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<!--指定对象编辑-->
+		<div class="edit-class" v-if="showClass">
+			<div class="section e-c-con">
+				<h3>指定对象编辑</h3>
+				<form class="layui-form" style="padding: 8% 8% 4% 8%;">
 					<div class="layui-form-item">
-						<label class="layui-form-label">*标题</label>
+						<label class="layui-form-label">*一级分类</label>
 						<div class="layui-input-block">
-							<input type="text" name="title" v-model="title" placeholder="请输入标题" class="layui-input">
+							<select name="" id="firstClass" lay-filter="firstClass">
+									<option v-for="(item,index) in firstClass" :value="item.id">{{item.typeName}}</option>
+								</select>
 						</div>
 					</div>
 					<div class="layui-form-item">
-						<label class="layui-form-label">*关键字</label>
+						<label class="layui-form-label">*二级分类</label>
 						<div class="layui-input-block">
-							<input type="text" name="keyWord" v-model="keyWord" placeholder="请输入关键字" class="layui-input">
+							<select name="" id="secondClass" lay-filter="secondClass">
+									<!--<option v-for="(item,index) in secondClass" :value="item.id">{{item.typeName}}</option>-->
+								</select>
 						</div>
 					</div>
 					<div class="layui-form-item">
-						<label class="layui-form-label">*摘要</label>
-						<div class="layui-input-block">
-							<input type="text" name="summary" v-model="summary" placeholder="请输入摘要" class="layui-input">
+						<label class="layui-form-label">*子类</label>
+						<div class="layui-input-block" id="thirdClass">
+							<!--<input type="checkbox" v-for="(item,index) in thirdClass" :value="item.id" lay-skin="primary" :title="item.typeName" name="thirdClass">-->
 						</div>
 					</div>
 					<div class="layui-form-item">
-						<label class="layui-form-label">*首帧图片</label>
-						<div class="layui-input-block">
-							<div class="layui-upload-drag" style="float: left;" id="uploadImg">
-								<i class="layui-icon"></i>
-								<p style="display: block;">点击上传，或将文件拖拽到此处</p>
-							</div>
-							<div class="layui-upload-list">
-								<img :src="firstImg" class="layui-upload-img dis-n" id="previewImg">
-								<p>{{imgMsg}}</p>
-							</div>
-						</div>
-					</div>
-					<div class="layui-form-item">
-						<label class="layui-form-label">*内容</label>
-						<div class="layui-input-block">
-							<div id="addEdit"></div>
-						</div>
-					</div>
-					<div class="layui-form-item">
-						<label class="layui-form-label">*指定对象</label>
-						<div class="layui-input-block">
-							<button type="button" class="layui-btn layui-btn-normal" @click="showClassFn">添加</button>
-						</div>
-					</div>
-					<div class="layui-form-item">
-						<div class="layui-input-block">
-							<div class="section my-table">
-								<ul class="section my-table-head">
-									<li>
-										<p class="width-10">一级分类</p>
-										<p class="width-20">二级分类</p>
-										<p class="width-50">子类</p>
-										<p class="width-20">操作</p>
-									</li>
-								</ul>
-								<ul class="section my-table-body" id="classTable">
-									<li v-if="articleType.length>0" v-for="(item,index) in articleType">
-										<p class="width-10">{{item.typeName}}</p>
-										<p class="width-20">{{item.encyclopeTypes[0].typeName}}</p>
-										<p class="width-50" :name="item.idStr">{{item.nameStr}}</p>
-										<p class="width-20">
-											<a href="##" class="layui-btn layui-btn-danger deleteClass">删除</a>
-										</p>
-									</li>
-								</ul>
-							</div>
-						</div>
-						<div class="layui-input-block" style="margin-top: 20px;">
-							<button type="button" class="layui-btn" @click="saveData">保存</button>
+						<div class="layui-input-block" style="margin-top: 40px;">
+							<button type="button" class="layui-btn" @click="saveClass">确定</button>
+							<button type="button" class="layui-btn layui-btn-primary" @click="closeClass">取消</button>
 						</div>
 					</div>
 				</form>
 			</div>
-			<!--指定对象编辑-->
-			<div class="edit-class" v-if="showClass">
-				<div class="section e-c-con">
-					<h3>指定对象编辑</h3>
-					<form class="layui-form" style="padding: 8% 8% 4% 8%;">
-						<div class="layui-form-item">
-							<label class="layui-form-label">*一级分类</label>
-							<div class="layui-input-block">
-								<select name="" id="firstClass" lay-filter="firstClass">
-									<option v-for="(item,index) in firstClass" :value="item.id">{{item.typeName}}</option>
-								</select>
-							</div>
-						</div>
-						<div class="layui-form-item">
-							<label class="layui-form-label">*二级分类</label>
-							<div class="layui-input-block">
-								<select name="" id="secondClass" lay-filter="secondClass">
-									<!--<option v-for="(item,index) in secondClass" :value="item.id">{{item.typeName}}</option>-->
-								</select>
-							</div>
-						</div>
-						<div class="layui-form-item">
-							<label class="layui-form-label">*子类</label>
-							<div class="layui-input-block" id="thirdClass">
-								<!--<input type="checkbox" v-for="(item,index) in thirdClass" :value="item.id" lay-skin="primary" :title="item.typeName" name="thirdClass">-->
-							</div>
-						</div>
-						<div class="layui-form-item">
-							<div class="layui-input-block" style="margin-top: 40px;">
-								<button type="button" class="layui-btn" @click="saveClass">确定</button>
-								<button type="button" class="layui-btn layui-btn-primary" @click="closeClass">取消</button>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
 		</div>
-		<!--<script type="text/javascript" src="//unpkg.com/wangeditor/release/wangEditor.min.js"></script>-->
-		<script type="text/javascript" src="../lib/jquery.min.js"></script>
-		<script type="text/javascript" src="../lib/bootstrap.min.js" ></script>
-		<script type="text/javascript" src="../lib/summernote/dist/summernote.js" ></script>
-		<script type="text/javascript" src="../lib/summernote/dist/lang/summernote-zh-CN.js" ></script>
-		<script type="text/javascript" src="../lib/layui/layui.js"></script>
-		<script type="text/javascript" src="../lib/vue.min.js"></script>
-		<script type="text/javascript" src="../lib/vue-resource.js"></script>
-		<script type="text/javascript" src="../lib/ajaxhook.min.js" ></script>
-		<script type="text/javascript" src="../lib/qiniu.min.js" ></script>
-		<script type="text/javascript" src="../lib/plupload.full.min.js" ></script>
-		
-		<script type="text/javascript" src="../static/js/config.js"></script>
-		<script type="text/javascript" src="../static/js/myTools.js" ></script>
-		<script type="text/javascript" src="../static/js/initQiniu.js" ></script>
-		<script type="text/javascript" src="../static/js/knowledge-edit.js"></script>
-	</body>
+	</div>
+	<script type="text/javascript" src="../lib/jquery.min.js"></script>
+	<script type="text/javascript" src="../lib/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../lib/summernote/dist/summernote.js"></script>
+	<script type="text/javascript" src="../lib/summernote/dist/lang/summernote-zh-CN.js"></script>
+	<script type="text/javascript" src="../lib/layui/layui.js"></script>
+	<script type="text/javascript" src="../lib/vue.min.js"></script>
+	<script type="text/javascript" src="../lib/vue-resource.js"></script>
+	<script type="text/javascript" src="../lib/ajaxhook.min.js"></script>
+	<script type="text/javascript" src="../lib/qiniu.min.js"></script>
+	<script type="text/javascript" src="../lib/plupload.full.min.js"></script>
+
+	<script type="text/javascript" src="../static/js/config.js"></script>
+	<script type="text/javascript" src="../static/js/myTools.js"></script>
+	<script type="text/javascript" src="../static/js/initQiniu.js"></script>
+	<script type="text/javascript" src="../static/js/knowledge-edit.js"></script>
+</body>
 
 </html>

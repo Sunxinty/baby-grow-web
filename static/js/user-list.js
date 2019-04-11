@@ -1,11 +1,11 @@
 var layer, $, laydate, form;
 var userInfo = window.localStorage.getItem("userInfo") || null;
-if(userInfo) {
+if (userInfo) {
 	userInfo = JSON.parse(userInfo)
 	//console.log("登录用户",userInfo)
 }
 
-layui.use(['laydate', 'form'], function() {
+layui.use(['laydate', 'form'], function () {
 	layer = layui.layer,
 		form = layui.form,
 		laydate = layui.laydate;
@@ -30,18 +30,18 @@ var userListVue = new Vue({
 		regType: "",
 		timeRange: yuerTools.getSelfDate(356) + " - " + yuerTools.getSelfDate(0),
 	},
-	mounted: function() {
+	mounted: function () {
 		this.getData(this.page)
 	},
 	methods: {
 		nextPage() {
-			if(this.page < this.totalPageSize) {
+			if (this.page < this.totalPageSize) {
 				this.page++;
 				this.getData(this.page)
 			}
 		},
 		prePage() {
-			if(this.page > 1) {
+			if (this.page > 1) {
 				this.page--;
 				this.getData(this.page)
 			}
@@ -51,7 +51,7 @@ var userListVue = new Vue({
 			this.getData(this.page)
 		},
 		getData(page) {
-			if(!page) {
+			if (!page) {
 				page = 1
 			}
 			var _this = this;
@@ -72,25 +72,25 @@ var userListVue = new Vue({
 				}
 			}
 
-			_this.$http.post(window.config.HTTPURL + "rest/appUser/selectByWebPage", JSON.stringify(params)).then(function(res) {
-				if(res.data.code == "0000") {
+			_this.$http.post(window.config.HTTPURL + "rest/appUser/selectByWebPage", JSON.stringify(params)).then(function (res) {
+				if (res.data.code == "0000") {
 					_this.dataList = res.data.data.list;
 					_this.totalPageSize = res.data.data.pages;
 					_this.total = res.data.data.total;
 				} else {
 					layer.msg(res.data.msg)
 				}
-			}, function() {
+			}, function () {
 				layer.msg("服务器错误！")
 			})
 		},
 		//编辑用户
 		editData(id) {
-			if(!id) {
+			if (!id) {
 				layer.msg("参数错误！")
 				return;
 			}
-			window.localStorage.setItem("userId",id)
+			window.localStorage.setItem("userId", id)
 			layer.open({
 				type: 2,
 				title: "用户详情",

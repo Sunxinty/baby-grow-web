@@ -24,10 +24,10 @@ var editVue = new Vue({
 		saveClassData: null,
 		imgMsg: "",
 	},
-	mounted: function() {
+	mounted: function () {
 		var _this = this;
-		
-		layui.use(['layer', 'upload'], function() {
+
+		layui.use(['layer', 'upload'], function () {
 			layer = layui.layer,
 				upload = layui.upload;
 			_this.getData()
@@ -37,25 +37,25 @@ var editVue = new Vue({
 				auto: false,
 				accept: 'imsges',
 				acceptMime: 'imsge/*',
-				choose: function(obj) {
+				choose: function (obj) {
 					console.log(obj)
-					obj.preview(function(index, file, result) {
+					obj.preview(function (index, file, result) {
 						$('#previewImg').show().attr('src', result);
 						_this.imgMsg = "准备上传..."
-						setTimeout(function() {
-							qiniuUpload(_this, file, "img", function(name, fileUrl) {
+						setTimeout(function () {
+							qiniuUpload(_this, file, "img", function (name, fileUrl) {
 								_this.firstImg = fileUrl
 							})
 						}, 100)
 					})
 				},
 				bindAction: '',
-				done: function(res) {
+				done: function (res) {
 					console.log(res)
 				}
 			});
 		})
-		
+
 		_this.editor = $('#addEdit').summernote({
 			height: 300,
 			tabsize: 2,
@@ -71,32 +71,32 @@ var editVue = new Vue({
 				['view', ['fullscreen', 'codeview', 'help']]
 			],
 			callbacks: {
-				onImageUpload: function(files) {
+				onImageUpload: function (files) {
 					//console.log(files);
 					layer.msg("正在上传...")
-					qiniuUpload(null, files[0],"image" , function(name, url) {
-						$('#addEdit').summernote('insertImage',url,'img');
+					qiniuUpload(null, files[0], "image", function (name, url) {
+						$('#addEdit').summernote('insertImage', url, 'img');
 					})
 				}
 			}
 		});
 		//_this.getData();
-		$("#classTable").on("click", "li p .deleteClass", function(e) {
+		$("#classTable").on("click", "li p .deleteClass", function (e) {
 			_this.deleteData(e)
 		})
 	},
 	methods: {
 		saveData() {
 			var _this = this;
-			$("#classTable li").each(function(index, item) {
+			$("#classTable li").each(function (index, item) {
 				var name = $(this).find("p").eq(2).attr("name")
 				name = name.split(',')
 				_this.typeIds = _this.typeIds.concat(name)
 			})
-			if(_this.title == "") {
+			if (_this.title == "") {
 				layer.msg("标题不能为空")
 				return;
-			} else if(_this.keyWord == "") {
+			} else if (_this.keyWord == "") {
 				layer.msg("关键字不能为空")
 				return;
 			}
@@ -104,7 +104,7 @@ var editVue = new Vue({
 			//	layer.msg("内容不能为空")
 			//	return;
 			//} 
-			else if(_this.summary == "") {
+			else if (_this.summary == "") {
 				layer.msg("摘要不能为空")
 				return;
 			}
@@ -121,10 +121,10 @@ var editVue = new Vue({
 			}
 			//console.log(params)
 			_this.$http.post(window.config.HTTPURL + "/rest/encyclopeArticle/insert", JSON.stringify(params))
-				.then(function(res) {
-						if(res.data.code == "0000") {
+				.then(function (res) {
+						if (res.data.code == "0000") {
 							layer.msg("保存成功！")
-							setTimeout(function() {
+							setTimeout(function () {
 								var frameIndex = parent.layer.getFrameIndex(window.name)
 								parent.layer.close(frameIndex);
 								window.parent.location.reload();
@@ -133,7 +133,7 @@ var editVue = new Vue({
 							layer.msg(res.data.msg)
 						}
 					},
-					function(err) {
+					function (err) {
 						layer.msg("服务器错误！")
 					}
 				)
@@ -141,19 +141,21 @@ var editVue = new Vue({
 		},
 		//根据id获取数据
 		getData() {
-			if(!detailId || detailId == "") {
+			if (!detailId || detailId == "") {
 				return;
 			}
 			var _this = this;
-			var loadIndex = layer.load(1,{shade: [0.1,"#000"]})
-			_this.$http.get(window.config.HTTPURL + "/rest/encyclopeArticle/selectById?id=" + detailId).then(function(res) {
+			var loadIndex = layer.load(1, {
+				shade: [0.1, "#000"]
+			})
+			_this.$http.get(window.config.HTTPURL + "/rest/encyclopeArticle/selectById?id=" + detailId).then(function (res) {
 				layer.close(loadIndex);
-				if(res.data.code == "0000") {
+				if (res.data.code == "0000") {
 					_this.showTable(res.data.data)
 				} else {
 					layer.msg(res.data.msg)
 				}
-			}, function() {
+			}, function () {
 				layer.msg("服务器出错！")
 			})
 		},
@@ -166,11 +168,11 @@ var editVue = new Vue({
 			this.keyWord = data.keyWord;
 			//_this.editor.txt.html(data.content);
 			$("#addEdit").summernote("code", data.content);
-			for(var i = 0; i < data.articleType.length; i++) {
+			for (var i = 0; i < data.articleType.length; i++) {
 				var encyclopeChilds = data.articleType[i].encyclopeTypes[0].encyclopeChilds;
 				var nameStr = "";
 				var idStr = "";
-				for(var j = 0; j < encyclopeChilds.length; j++) {
+				for (var j = 0; j < encyclopeChilds.length; j++) {
 					nameStr += encyclopeChilds[j].typeName + ","
 					idStr += encyclopeChilds[j].id + ","
 				}
@@ -184,7 +186,7 @@ var editVue = new Vue({
 			var p = e.target;
 			layer.confirm('你确定要删除该分类？', {
 				btn: ['确定'],
-			}, function(index) {
+			}, function (index) {
 				$(p).parents("li").remove()
 				layer.closeAll();
 			})
@@ -201,11 +203,11 @@ var editVue = new Vue({
 		//查询一级分类
 		getFirstClass() {
 			var _this = this;
-			_this.$http.get(window.config.HTTPURL + "rest/encyclopeType/getTypeTree?type=MO").then(function(res) {
-				if(res.data.code == "0000") {
+			_this.$http.get(window.config.HTTPURL + "rest/encyclopeType/getTypeTree?type=MO").then(function (res) {
+				if (res.data.code == "0000") {
 					_this.firstClass = res.data.data;
-					if(_this.firstClass.length == 0) {
-						setTimeout(function() {
+					if (_this.firstClass.length == 0) {
+						setTimeout(function () {
 							_this.initForm()
 						}, 0)
 						return;
@@ -214,7 +216,7 @@ var editVue = new Vue({
 				} else {
 					layer.msg(res.data.msg)
 				}
-				setTimeout(function() {
+				setTimeout(function () {
 					_this.initForm()
 				}, 0)
 			})
@@ -222,24 +224,24 @@ var editVue = new Vue({
 		//查询二级分类
 		getSecondClass(id) {
 			var _this = this;
-			_this.$http.get(window.config.HTTPURL + "rest/encyclopeType/getTypeTree?type=ER&id=" + id).then(function(res) {
-				if(res.data.code == "0000") {
+			_this.$http.get(window.config.HTTPURL + "rest/encyclopeType/getTypeTree?type=ER&id=" + id).then(function (res) {
+				if (res.data.code == "0000") {
 					_this.secondClass = res.data.data;
 					$("#secondClass").html("");
-					if(_this.secondClass.length == 0) {
-						setTimeout(function() {
+					if (_this.secondClass.length == 0) {
+						setTimeout(function () {
 							_this.initForm()
 						}, 0)
 						return;
 					}
-					for(var i = 0; i < _this.secondClass.length; i++) {
+					for (var i = 0; i < _this.secondClass.length; i++) {
 						$("#secondClass").append("<option value='" + _this.secondClass[i].id + "'>" + _this.secondClass[i].typeName + "</option>")
 					}
 					_this.getThirdClass(_this.secondClass[0].id)
 				} else {
 					layer.msg(res.data.msg)
 				}
-				setTimeout(function() {
+				setTimeout(function () {
 					_this.initForm()
 				}, 0)
 			})
@@ -247,23 +249,23 @@ var editVue = new Vue({
 		//查询三级分类
 		getThirdClass(id) {
 			var _this = this;
-			_this.$http.get(window.config.HTTPURL + "rest/encyclopeType/getTypeTree?type=CD&id=" + id).then(function(res) {
-				if(res.data.code == "0000") {
+			_this.$http.get(window.config.HTTPURL + "rest/encyclopeType/getTypeTree?type=CD&id=" + id).then(function (res) {
+				if (res.data.code == "0000") {
 					_this.thirdClass = res.data.data;
 					$("#thirdClass").html("");
-					if(_this.thirdClass.length == 0) {
-						setTimeout(function() {
+					if (_this.thirdClass.length == 0) {
+						setTimeout(function () {
 							_this.initForm()
 						}, 0)
 						return;
 					}
-					for(var i = 0; i < _this.thirdClass.length; i++) {
+					for (var i = 0; i < _this.thirdClass.length; i++) {
 						$("#thirdClass").append('<input type="checkbox" value="' + _this.thirdClass[i].id + '" lay-skin="primary" title="' + _this.thirdClass[i].typeName + '" name="thirdClass">')
 					}
 				} else {
 					layer.msg(res.data.msg)
 				}
-				setTimeout(function() {
+				setTimeout(function () {
 					_this.initForm()
 				}, 0)
 			})
@@ -279,7 +281,7 @@ var editVue = new Vue({
 				thirsId: []
 			};
 
-			$("#thirdClass input:checkbox[name='thirdClass']:checked").each(function(index, item) {
+			$("#thirdClass input:checkbox[name='thirdClass']:checked").each(function (index, item) {
 				_this.saveClassData.thirdNameStr += ($(this).attr("title") + "，")
 				_this.saveClassData.thirsId.push($(this).val())
 			});
@@ -291,18 +293,18 @@ var editVue = new Vue({
 			$("#classTable").append('<li><p class="width-10">' + _this.saveClassData.firstName + '</p><p class="width-20">' + _this.saveClassData.secondName + '</p><p class="width-50" name="' + (_this.saveClassData.thirsId).toString() + '">' + (_this.saveClassData.thirdNameStr).substr(0, _this.saveClassData.thirdNameStr.length - 1) + '</p><p class="width-20"><a href="##" class="layui-btn layui-btn-danger deleteClass">删除</a></p></li>')
 
 			layer.msg("保存分类成功！")
-			setTimeout(function() {
+			setTimeout(function () {
 				_this.showClass = false;
 			}, 500)
 		},
 		initForm() {
 			var _this = this;
-			layui.use(['form'], function() {
+			layui.use(['form'], function () {
 				form = layui.form
-				form.on('select(firstClass)', function(data) {
+				form.on('select(firstClass)', function (data) {
 					_this.getSecondClass(data.value);
 				});
-				form.on('select(secondClass)', function(data) {
+				form.on('select(secondClass)', function (data) {
 					_this.getThirdClass(data.value);
 				});
 				form.render();
