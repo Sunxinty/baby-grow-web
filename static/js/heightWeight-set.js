@@ -45,7 +45,7 @@ var listVue = new Vue({
 		//查询列表
 		getData(type) {
 			var _this = this;
-			_this.$http.get(window.config.HTTPURL + "rest/babyHealthySandar/selectByList?type=" + type).then(function (res) {
+			_this.$http.get(window.config.HTTPURL + "/rest/babyHealthySandar/selectByList?type=" + type).then(function (res) {
 				if (res.data.code == "0000") {
 					_this.dataList = res.data.data;
 				} else {
@@ -57,7 +57,7 @@ var listVue = new Vue({
 		},
 		getDataById(id) {
 			var _this = this;
-			_this.$http.get(window.config.HTTPURL + "rest/babyHealthySandar/selectById?id=" + id).then(function (res) {
+			_this.$http.get(window.config.HTTPURL + "/rest/babyHealthySandar/selectById?id=" + id).then(function (res) {
 				if (res.data.code == "0000") {
 					var data = res.data.data;
 					layui.use(['form'], function () {
@@ -91,7 +91,7 @@ var listVue = new Vue({
 				"weightMax": _this.weightMax * 1000,
 				"headSizeMax": _this.headSizeMax * 10
 			}
-			_this.$http.post(window.config.HTTPURL + "rest/babyHealthySandar/updateById", JSON.stringify(params)).then(function (res) {
+			_this.$http.post(window.config.HTTPURL + "/rest/babyHealthySandar/updateById", JSON.stringify(params)).then(function (res) {
 				if (res.data.code == "0000") {
 					layer.msg("保存成功！")
 					setTimeout(function () {

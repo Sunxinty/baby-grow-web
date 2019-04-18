@@ -65,7 +65,7 @@ var careRemindVue = new Vue({
 				page: _this.page,
 				size: _this.pageSize
 			}
-			_this.$http.post(window.config.HTTPURL + "rest/careRemind/selectByWebPage", JSON.stringify(params)).then(function (res) {
+			_this.$http.post(window.config.HTTPURL + "/rest/careRemind/selectByWebPage", JSON.stringify(params)).then(function (res) {
 				if (res.data.code == "0000") {
 					_this.dataList = res.data.data.list;
 					_this.totalPageSize = res.data.data.pages;

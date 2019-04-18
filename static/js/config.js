@@ -8,6 +8,6 @@ var port = window.location.port;
 
 //测试环境
 window.config = {
-	HTTPURL: "http://ts.free.idcfengye.com/baby-grow-web-mserver/",//接口地址
-	uploadUrl: "http://file.nmmpa.cn/",//图片上传的地址
+	HTTPURL: "http://182.254.196.93/baby-grow-web-mserver",//接口地址
+	uploadUrl: "http://file.nmmpa.cn",//图片上传的地址
 }

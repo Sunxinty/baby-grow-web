@@ -46,7 +46,7 @@ var listVue = new Vue({
 			layer.confirm('你确定要删除该分类？', {
 				btn: ['确定'],
 			}, function (index) {
-				_this.$http.get(window.config.HTTPURL + "rest/vipType/deleteById?id=" + id).then(function (res) {
+				_this.$http.get(window.config.HTTPURL + "/rest/vipType/deleteById?id=" + id).then(function (res) {
 					if (res.data.code == "0000") {
 						layer.msg("删除成功！")
 						_this.getData()
@@ -61,7 +61,7 @@ var listVue = new Vue({
 		//查询列表
 		getData() {
 			var _this = this;
-			_this.$http.get(window.config.HTTPURL + "rest/vipType/selectByList").then(function (res) {
+			_this.$http.get(window.config.HTTPURL + "/rest/vipType/selectByList").then(function (res) {
 				if (res.data.code == "0000") {
 					_this.dataList = res.data.data;
 				} else {
@@ -74,7 +74,7 @@ var listVue = new Vue({
 		//按ID查询vip配置
 		getDataById(id) {
 			var _this = this;
-			_this.$http.get(window.config.HTTPURL + "rest/vipType/selectById?id=" + id).then(function (res) {
+			_this.$http.get(window.config.HTTPURL + "/rest/vipType/selectById?id=" + id).then(function (res) {
 				if (res.data.code == "0000") {
 					_this.detailData = res.data.data;
 					_this.vipType = _this.detailData.vipType;
@@ -95,7 +95,7 @@ var listVue = new Vue({
 		//更改vip禁用状态
 		changeStuatus(id) {
 			var _this = this;
-			_this.$http.get(window.config.HTTPURL + "rest/vipType/updateState?id=" + id).then(function (res) {
+			_this.$http.get(window.config.HTTPURL + "/rest/vipType/updateState?id=" + id).then(function (res) {
 				if (res.data.code == "0000") {
 					$(".switch-btn[name='" + id + "']").toggleClass("active")
 					layer.msg("修改状态成功！")
@@ -128,7 +128,7 @@ var listVue = new Vue({
 				"vipState": Number(_this.vipState),
 				"vipCash": _this.vipCash * 100
 			}
-			_this.$http.post(window.config.HTTPURL + "rest/vipType/saveAndUpdate", JSON.stringify(params)).then(function (res) {
+			_this.$http.post(window.config.HTTPURL + "/rest/vipType/saveAndUpdate", JSON.stringify(params)).then(function (res) {
 				if (res.data.code == "0000") {
 					layer.msg("保存成功！")
 					setTimeout(function () {

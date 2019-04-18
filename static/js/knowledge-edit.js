@@ -74,7 +74,7 @@ var editVue = new Vue({
 					//console.log(files);
 					layer.msg("正在上传...")
 					qiniuUpload(null, files[0], "image", function (name, url) {
-						$('#addEdit').summernote('insertImage', url, 'img');
+						$('#addEdit').summernote('insertImage', window.config.uploadUrl + url, 'img');
 					})
 				}
 			}
@@ -202,7 +202,7 @@ var editVue = new Vue({
 		//查询一级分类
 		getFirstClass() {
 			var _this = this;
-			_this.$http.get(window.config.HTTPURL + "rest/encyclopeType/getTypeTree?type=MO").then(function (res) {
+			_this.$http.get(window.config.HTTPURL + "/rest/encyclopeType/getTypeTree?type=MO").then(function (res) {
 				if (res.data.code == "0000") {
 					_this.firstClass = res.data.data;
 					if (_this.firstClass.length == 0) {
@@ -223,7 +223,7 @@ var editVue = new Vue({
 		//查询二级分类
 		getSecondClass(id) {
 			var _this = this;
-			_this.$http.get(window.config.HTTPURL + "rest/encyclopeType/getTypeTree?type=ER&id=" + id).then(function (res) {
+			_this.$http.get(window.config.HTTPURL + "/rest/encyclopeType/getTypeTree?type=ER&id=" + id).then(function (res) {
 				if (res.data.code == "0000") {
 					_this.secondClass = res.data.data;
 					$("#secondClass").html("");
@@ -248,7 +248,7 @@ var editVue = new Vue({
 		//查询三级分类
 		getThirdClass(id) {
 			var _this = this;
-			_this.$http.get(window.config.HTTPURL + "rest/encyclopeType/getTypeTree?type=CD&id=" + id).then(function (res) {
+			_this.$http.get(window.config.HTTPURL + "/rest/encyclopeType/getTypeTree?type=CD&id=" + id).then(function (res) {
 				if (res.data.code == "0000") {
 					_this.thirdClass = res.data.data;
 					$("#thirdClass").html("");

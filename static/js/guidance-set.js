@@ -66,7 +66,7 @@ var listVue = new Vue({
 			layer.confirm('你确定要删除该分类？', {
 				btn: ['确定'],
 			}, function (index) {
-				_this.$http.get(window.config.HTTPURL + "rest/encyclopeType/delete?id=" + id + "&type=" + type).then(function (res) {
+				_this.$http.get(window.config.HTTPURL + "/rest/encyclopeType/delete?id=" + id + "&type=" + type).then(function (res) {
 					if (res.data.code == "0000") {
 						layer.msg("删除成功！")
 						if (type == "CD") {
@@ -98,7 +98,7 @@ var listVue = new Vue({
 			if (!monthId) {
 				monthId = 0;
 			}
-			_this.$http.get(window.config.HTTPURL + "rest/encyclopeType/getTypeTrees?monthId=" + monthId).then(function (res) {
+			_this.$http.get(window.config.HTTPURL + "/rest/encyclopeType/getTypeTrees?monthId=" + monthId).then(function (res) {
 				_this.dataList = [];
 				_this.secondClass = [];
 				_this.thirdClass = [];
@@ -150,7 +150,7 @@ var listVue = new Vue({
 		//查询月龄
 		getFirstClass(data) {
 			var _this = this;
-			_this.$http.get(window.config.HTTPURL + "rest/encyclopeType/getTypeTree?type=MO").then(function (res) {
+			_this.$http.get(window.config.HTTPURL + "/rest/encyclopeType/getTypeTree?type=MO").then(function (res) {
 				if (res.data.code == "0000") {
 					_this.editFirstClass = res.data.data;
 					if (_this.editFirstClass.length == 0) {
@@ -172,7 +172,7 @@ var listVue = new Vue({
 			if (id == null || id == undefined) {
 				return;
 			}
-			_this.$http.get(window.config.HTTPURL + "rest/encyclopeType/getTypeTree?type=ER&id=" + id).then(function (res) {
+			_this.$http.get(window.config.HTTPURL + "/rest/encyclopeType/getTypeTree?type=ER&id=" + id).then(function (res) {
 				if (res.data.code == "0000") {
 					_this.editSecondClass = res.data.data;
 					if (_this.editSecondClass.length == 0) {
@@ -195,7 +195,7 @@ var listVue = new Vue({
 			if (id == null || id == undefined) {
 				return;
 			}
-			_this.$http.get(window.config.HTTPURL + "rest/encyclopeType/getTypeTree?type=CD&id=" + id).then(function (res) {
+			_this.$http.get(window.config.HTTPURL + "/rest/encyclopeType/getTypeTree?type=CD&id=" + id).then(function (res) {
 				if (res.data.code == "0000") {
 					_this.editThirdClass = res.data.data;
 					if (_this.editThirdClass.length == 0) {
@@ -232,7 +232,7 @@ var listVue = new Vue({
 				$(e).attr("disabled", "disabled").css("background", "none")
 			}
 
-			_this.$http.post(window.config.HTTPURL + "rest/encyclopeType/insertEncyclopeType", JSON.stringify(params)).then(function (res) {
+			_this.$http.post(window.config.HTTPURL + "/rest/encyclopeType/insertEncyclopeType", JSON.stringify(params)).then(function (res) {
 				if (res.data.code == "0000") {
 					layer.msg("保存成功！")
 					setTimeout(function () {
@@ -260,7 +260,7 @@ var listVue = new Vue({
 				"encyclopeId": Math.floor($("input[name='editSecond']").attr("data-id"))
 			}
 
-			_this.$http.post(window.config.HTTPURL + "rest/encyclopeType/insertEncyclopeChild", JSON.stringify(params)).then(function (res) {
+			_this.$http.post(window.config.HTTPURL + "/rest/encyclopeType/insertEncyclopeChild", JSON.stringify(params)).then(function (res) {
 				if (res.data.code == "0000") {
 					layer.msg("保存成功！")
 					$("input[name='tobj0']").val("")

@@ -75,7 +75,7 @@ var listVue = new Vue({
 			layer.confirm('你确定要删除该条文章？', {
 				btn: ['确定'],
 			}, function (index) {
-				_this.$http.get(window.config.HTTPURL + "rest/babyClassroom/deleteById?id=" + id).then(function (res) {
+				_this.$http.get(window.config.HTTPURL + "/rest/babyClassroom/deleteById?id=" + id).then(function (res) {
 					if (res.data.code == "0000") {
 						layer.msg("删除成功！")
 						_this.getData(_this.page)
@@ -117,7 +117,7 @@ var listVue = new Vue({
 					"endTime": _this.timeRange == "" ? "" : (_this.timeRange).substr(13) + " 23:59:59",
 				}
 			}
-			_this.$http.post(window.config.HTTPURL + "rest/babyClassroom/selectByWebPage", JSON.stringify(params)).then(function (res) {
+			_this.$http.post(window.config.HTTPURL + "/rest/babyClassroom/selectByWebPage", JSON.stringify(params)).then(function (res) {
 				if (res.data.code == "0000") {
 					_this.dataList = res.data.data.list;
 					_this.totalNumber = res.data.data.total;
@@ -132,7 +132,7 @@ var listVue = new Vue({
 		//查询分类(此处只获取一级分类)
 		getClassData() {
 			var _this = this;
-			_this.$http.get(window.config.HTTPURL + "rest/babyClassroomType/selectByType").then(function (res) {
+			_this.$http.get(window.config.HTTPURL + "/rest/babyClassroomType/selectByType").then(function (res) {
 				if (res.data.code == "0000") {
 					_this.typeData = res.data.data;
 					_this.getData(_this.page)

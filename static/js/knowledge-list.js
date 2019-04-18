@@ -75,7 +75,7 @@ var listVue = new Vue({
 			layer.confirm('你确定要删除该条文章？', {
 				btn: ['确定'],
 			}, function (index) {
-				_this.$http.get(window.config.HTTPURL + "rest/encyclopeArticle/deleteById?id=" + id).then(function (res) {
+				_this.$http.get(window.config.HTTPURL + "/rest/encyclopeArticle/deleteById?id=" + id).then(function (res) {
 					if (res.data.code == "0000") {
 						layer.msg("删除成功！")
 						_this.getData(_this.page)
@@ -128,7 +128,7 @@ var listVue = new Vue({
 		//查询分类(此处只获取一级分类)
 		getClassData() {
 			var _this = this;
-			_this.$http.get(window.config.HTTPURL + "rest/encyclopeType/getTypeTree?type=MO").then(function (res) {
+			_this.$http.get(window.config.HTTPURL + "/rest/encyclopeType/getTypeTree?type=MO").then(function (res) {
 				if (res.data.code == "0000") {
 					_this.typeData = res.data.data;
 					_this.getData(_this.page)

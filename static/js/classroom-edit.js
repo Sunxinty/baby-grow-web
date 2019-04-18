@@ -72,7 +72,7 @@ var editVue = new Vue({
 					//console.log(files);
 					layer.msg("正在上传...")
 					qiniuUpload(null, files[0], "image", function (name, url) {
-						$('#addEdit').summernote('insertImage', url, 'img');
+						$('#addEdit').summernote('insertImage', window.config.uploadUrl + url, 'img');
 					})
 				}
 			}
@@ -186,7 +186,7 @@ var editVue = new Vue({
 		//查询一级分类
 		getFirstClass() {
 			var _this = this;
-			_this.$http.get(window.config.HTTPURL + "rest/babyClassroomType/selectByType").then(function (res) {
+			_this.$http.get(window.config.HTTPURL + "/rest/babyClassroomType/selectByType").then(function (res) {
 				if (res.data.code == "0000") {
 					_this.firstClass = res.data.data;
 					setTimeout(function () {

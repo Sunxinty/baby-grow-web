@@ -36,7 +36,7 @@ var listVue = new Vue({
 			layer.confirm('你确定要删除该分类？', {
 				btn: ['确定'],
 			}, function (index) {
-				_this.$http.get(window.config.HTTPURL + "rest/babyClassroomType/deleteById?id=" + id).then(function (res) {
+				_this.$http.get(window.config.HTTPURL + "/rest/babyClassroomType/deleteById?id=" + id).then(function (res) {
 					if (res.data.code == "0000") {
 						layer.msg("删除成功！")
 						_this.getClassData()
@@ -51,7 +51,7 @@ var listVue = new Vue({
 		//查询分类列表
 		getClassData() {
 			var _this = this;
-			_this.$http.get(window.config.HTTPURL + "rest/babyClassroomType/selectByType").then(function (res) {
+			_this.$http.get(window.config.HTTPURL + "/rest/babyClassroomType/selectByType").then(function (res) {
 				if (res.data.code == "0000") {
 					_this.dataList = res.data.data;
 					layui.use(['form'], function () {
@@ -70,7 +70,7 @@ var listVue = new Vue({
 				id: _this.detailData == null ? null : _this.detailData.id,
 				typeName: _this.typeName || ""
 			}
-			_this.$http.post(window.config.HTTPURL + "rest/babyClassroomType/saveAndUpdate", JSON.stringify(params)).then(function (res) {
+			_this.$http.post(window.config.HTTPURL + "/rest/babyClassroomType/saveAndUpdate", JSON.stringify(params)).then(function (res) {
 				if (res.data.code == "0000") {
 					layer.msg("保存成功！")
 					setTimeout(function () {

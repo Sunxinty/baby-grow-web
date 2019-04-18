@@ -36,7 +36,7 @@ var listVue = new Vue({
 			layer.confirm('你确定要删除该分类？', {
 				btn: ['确定'],
 			}, function (index) {
-				_this.$http.get(window.config.HTTPURL + "rest/familyRelation/deleteById?id=" + id).then(function (res) {
+				_this.$http.get(window.config.HTTPURL + "/rest/familyRelation/deleteById?id=" + id).then(function (res) {
 					if (res.data.code == "0000") {
 						layer.msg("删除成功！")
 						_this.getData()
@@ -51,7 +51,7 @@ var listVue = new Vue({
 		//查询列表
 		getData() {
 			var _this = this;
-			_this.$http.get(window.config.HTTPURL + "rest/familyRelation/selectByList").then(function (res) {
+			_this.$http.get(window.config.HTTPURL + "/rest/familyRelation/selectByList").then(function (res) {
 				if (res.data.code == "0000") {
 					_this.dataList = res.data.data;
 					layui.use(['form'], function () {
@@ -75,7 +75,7 @@ var listVue = new Vue({
 				"name": _this.typeName,
 				"relationType": "OTHER"
 			}
-			_this.$http.post(window.config.HTTPURL + "rest/familyRelation/saveAndUpdate", JSON.stringify(params)).then(function (res) {
+			_this.$http.post(window.config.HTTPURL + "/rest/familyRelation/saveAndUpdate", JSON.stringify(params)).then(function (res) {
 				if (res.data.code == "0000") {
 					layer.msg("保存成功！")
 					setTimeout(function () {

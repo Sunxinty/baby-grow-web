@@ -46,7 +46,7 @@ var listVue = new Vue({
 			layer.confirm('你确定要删除该疫苗？', {
 				btn: ['确定'],
 			}, function (index) {
-				_this.$http.get(window.config.HTTPURL + "rest/defaultSeedlings/deleteById?id=" + id).then(function (res) {
+				_this.$http.get(window.config.HTTPURL + "/rest/defaultSeedlings/deleteById?id=" + id).then(function (res) {
 					if (res.data.code == "0000") {
 						layer.msg("删除成功！")
 						_this.getDataList()
@@ -64,7 +64,7 @@ var listVue = new Vue({
 			if (!name) {
 				name = ""
 			}
-			_this.$http.get(window.config.HTTPURL + "rest/defaultSeedlings/selectByList?name=" + name).then(function (res) {
+			_this.$http.get(window.config.HTTPURL + "/rest/defaultSeedlings/selectByList?name=" + name).then(function (res) {
 				if (res.data.code == "0000") {
 					_this.dataList = res.data.data;
 				} else {
@@ -77,7 +77,7 @@ var listVue = new Vue({
 		//按ID查询
 		getDataById(id) {
 			var _this = this;
-			_this.$http.get(window.config.HTTPURL + "rest/defaultSeedlings/selectById?id=" + id).then(function (res) {
+			_this.$http.get(window.config.HTTPURL + "/rest/defaultSeedlings/selectById?id=" + id).then(function (res) {
 				if (res.data.code == "0000") {
 					this.showClass = true;
 					var data = res.data.data;
@@ -104,7 +104,7 @@ var listVue = new Vue({
 				"unit": _this.unit,
 				"summary": _this.summary
 			}
-			_this.$http.post(window.config.HTTPURL + "rest/defaultSeedlings/insertAndUpdate", JSON.stringify(params)).then(function (res) {
+			_this.$http.post(window.config.HTTPURL + "/rest/defaultSeedlings/insertAndUpdate", JSON.stringify(params)).then(function (res) {
 				if (res.data.code == "0000") {
 					layer.msg("保存成功！")
 					setTimeout(function () {

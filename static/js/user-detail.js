@@ -75,7 +75,7 @@ var userDetailVue = new Vue({
 				layer.msg("参数错误！")
 				return;
 			}
-			_this.$http.get(window.config.HTTPURL + "rest/appUser/selectById?id=" + id).then(function (res) {
+			_this.$http.get(window.config.HTTPURL + "/rest/appUser/selectById?id=" + id).then(function (res) {
 				if (res.data.code == "0000") {
 					console.log(res.data.data)
 					_this.userMsg = res.data.data;
@@ -94,7 +94,7 @@ var userDetailVue = new Vue({
 				layer.msg("参数错误！")
 				return;
 			}
-			_this.$http.get(window.config.HTTPURL + "rest/appUser/selectByBabyList?id=" + id).then(function (res) {
+			_this.$http.get(window.config.HTTPURL + "/rest/appUser/selectByBabyList?id=" + id).then(function (res) {
 				if (res.data.code == "0000") {
 					console.log(res.data.data)
 					_this.bodyMsg = res.data.data;

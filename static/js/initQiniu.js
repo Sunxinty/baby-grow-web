@@ -1,4 +1,4 @@
-var uptoken_url = window.config.HTTPURL + "rest/qn/getToken";
+var uptoken_url = window.config.HTTPURL + "/rest/qn/getToken";
 var bucket = window.localStorage.getItem("bucket") || "";
 
 if (!bucket || bucket == "") {
@@ -12,7 +12,7 @@ if (!bucket || bucket == "") {
 }
 
 function qiniuUpload(vueObj, file, type, sucFn, errFn) {
-	var returnUrl = ""; //上传成功后图片的外链地址
+	var returnUrl = ""; //上传成功后图片的地址
 	Vue.http.get(uptoken_url).then(function (res) {
 		uptoken = res.data.data;
 		var fileUrl = bucket + "_" + type + (new Date()).getTime(); //自定义上传后文件名称
@@ -42,7 +42,7 @@ function qiniuUpload(vueObj, file, type, sucFn, errFn) {
 			},
 			complete(res) { //成功后
 				layer.msg("上传成功！")
-				returnUrl = window.config.uploadUrl + fileUrl;
+				returnUrl = "/" + fileUrl;
 				if (sucFn) {
 					sucFn(fileName, returnUrl)
 				}

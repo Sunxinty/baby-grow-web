@@ -37,7 +37,7 @@ layui.use(['form'], function () {
 						"password": (md5(_this.password)).toUpperCase(),
 						"code": _this.code
 					}
-					_this.$http.post(window.config.HTTPURL + "rest/user/login", JSON.stringify(params)).then(function (res) {
+					_this.$http.post(window.config.HTTPURL + "/rest/user/login", JSON.stringify(params)).then(function (res) {
 						if (res.data.code == "0000") {
 							layer.msg("登录成功！")
 							var userInfo = JSON.stringify(res.data.data);
@@ -59,7 +59,7 @@ layui.use(['form'], function () {
 					layer.msg("请先输入用户名")
 					return;
 				} else {
-					_this.$http.get(window.config.HTTPURL + "rest/user/getCodeImage?account=" + _this.username).then(function (res) {
+					_this.$http.get(window.config.HTTPURL + "/rest/user/getCodeImage?account=" + _this.username).then(function (res) {
 						if (res.data.code == "0000") {
 							_this.imgUrl = res.data.data
 						} else {
