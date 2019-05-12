@@ -29,7 +29,8 @@ var listVue = new Vue({
 		typeData: []
 	},
 	mounted: function() {
-		this.getClassData()
+		//this.getClassData()
+		this.getData(this.page)
 	},
 	methods: {
 		nextPage() {
@@ -75,7 +76,7 @@ var listVue = new Vue({
 			layer.confirm('你确定要删除该条文章？', {
 				btn: ['确定'],
 			}, function(index) {
-				_this.$http.get(window.config.HTTPURL + "rest/encyclopeArticle/deleteById?id=" + id).then(function(res) {
+				_this.$http.get(window.config.HTTPURL + "rest/babyLore/deleteById?id=" + id).then(function(res) {
 					if(res.data.code == "0000") {
 						layer.msg("删除成功！")
 						_this.getData(_this.page)
@@ -109,11 +110,12 @@ var listVue = new Vue({
 			var params = {
 				page: page,
 				size: 10,
-				startTime: _this.timeRange == "" ? "" : (_this.timeRange).substr(0, 10) + " 00:00:00",
-				endTime: _this.timeRange == "" ? "" : (_this.timeRange).substr(13) + " 23:59:59",
-				monthTypeId: _this.ageRange
+				"timeRanges": {
+					"startTime": _this.timeRange == "" ? "" : (_this.timeRange).substr(0, 10) + " 00:00:00",
+					"endTime": _this.timeRange == "" ? "" : (_this.timeRange).substr(13) + " 23:59:59"
+				}
 			}
-			_this.$http.get(window.config.HTTPURL + "/rest/encyclopeArticle/selectByPage?page=" + params.page + "&size=" + params.size + "&startTime=" + params.startTime + "&endTime=" + params.endTime + "&monthTypeId=" + params.monthTypeId).then(function(res) {
+			_this.$http.post(window.config.HTTPURL + "/rest/babyLore/selectByWebPage", JSON.stringify(params)).then(function(res) {
 				if(res.data.code == "0000") {
 					_this.dataList = res.data.data.list;
 					_this.totalNumber = res.data.data.total;

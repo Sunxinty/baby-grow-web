@@ -116,10 +116,10 @@ var editVue = new Vue({
 				content: $("#addEdit").summernote("code"),
 				summary: _this.summary,
 				firstImg: _this.firstImg,
-				typeIds: _this.typeIds,
+				loreTypeId: _this.typeIds,
 			}
 			//console.log(params)
-			_this.$http.post(window.config.HTTPURL + "/rest/encyclopeArticle/insert", JSON.stringify(params))
+			_this.$http.post(window.config.HTTPURL + "/rest/babyLore/saveAndUpdate", JSON.stringify(params))
 				.then(function(res) {
 						if(res.data.code == "0000") {
 							layer.msg("保存成功！")
@@ -145,7 +145,7 @@ var editVue = new Vue({
 			}
 			var _this = this;
 			var loadIndex = layer.load(1,{shade: [0.1,"#000"]})
-			_this.$http.get(window.config.HTTPURL + "/rest/encyclopeArticle/selectById?id=" + detailId).then(function(res) {
+			_this.$http.get(window.config.HTTPURL + "/rest/babyLore/selectById?id=" + detailId).then(function(res) {
 				layer.close(loadIndex);
 				if(res.data.code == "0000") {
 					_this.showTable(res.data.data)
@@ -163,9 +163,10 @@ var editVue = new Vue({
 			this.summary = data.summary;
 			this.firstImg = data.firstImg;
 			this.keyWord = data.keyWord;
+			$('#previewImg').show().attr('src', data.firstImg);
 			//_this.editor.txt.html(data.content);
 			$("#addEdit").summernote("code", data.content);
-			for(var i = 0; i < data.articleType.length; i++) {
+			/*for(var i = 0; i < data.articleType.length; i++) {
 				var encyclopeChilds = data.articleType[i].encyclopeTypes[0].encyclopeChilds;
 				var nameStr = "";
 				var idStr = "";
@@ -176,7 +177,7 @@ var editVue = new Vue({
 				data.articleType[i].nameStr = (nameStr).substr(0, nameStr.length - 1);
 				data.articleType[i].idStr = (idStr).substr(0, idStr.length - 1);
 			}
-			this.articleType = data.articleType;
+			this.articleType = data.articleType;*/
 		},
 		//删除分类
 		deleteData(e) {
