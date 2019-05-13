@@ -33,7 +33,7 @@ var commentVue = new Vue({
 						_this.imgMsg = "准备上传..."
 						setTimeout(function() {
 							qiniuUpload(_this, file, "img", function(name, fileUrl) {
-								_this.firstImg = fileUrl
+								_this.firstImg = window.config.uploadUrl+fileUrl
 							})
 						}, 100)
 					})

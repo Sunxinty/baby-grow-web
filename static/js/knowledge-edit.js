@@ -12,8 +12,8 @@ var editVue = new Vue({
 		keyWord: "",
 		summary: "",
 		firstImg: "",
-		typeIds: [],
-		articleType: [],
+		typeIds: null,
+		articleType: null,
 		editor: null,
 		firstClass: [], //一级分类数组
 		secondClass: [], //二级分类数组
@@ -43,7 +43,7 @@ var editVue = new Vue({
 						_this.imgMsg = "准备上传..."
 						setTimeout(function() {
 							qiniuUpload(_this, file, "img", function(name, fileUrl) {
-								_this.firstImg = fileUrl
+								_this.firstImg = window.config.uploadUrl+fileUrl
 							})
 						}, 100)
 					})
@@ -87,11 +87,7 @@ var editVue = new Vue({
 	methods: {
 		saveData() {
 			var _this = this;
-			$("#classTable li").each(function(index, item) {
-				var name = $(this).find("p").eq(2).attr("name")
-				name = name.split(',')
-				_this.typeIds = _this.typeIds.concat(name)
-			})
+			
 			if(_this.title == "") {
 				layer.msg("标题不能为空")
 				return;
@@ -166,18 +162,8 @@ var editVue = new Vue({
 			$('#previewImg').show().attr('src', data.firstImg);
 			//_this.editor.txt.html(data.content);
 			$("#addEdit").summernote("code", data.content);
-			/*for(var i = 0; i < data.articleType.length; i++) {
-				var encyclopeChilds = data.articleType[i].encyclopeTypes[0].encyclopeChilds;
-				var nameStr = "";
-				var idStr = "";
-				for(var j = 0; j < encyclopeChilds.length; j++) {
-					nameStr += encyclopeChilds[j].typeName + ","
-					idStr += encyclopeChilds[j].id + ","
-				}
-				data.articleType[i].nameStr = (nameStr).substr(0, nameStr.length - 1);
-				data.articleType[i].idStr = (idStr).substr(0, idStr.length - 1);
-			}
-			this.articleType = data.articleType;*/
+			this.typeIds = data.loreType[0].childs[0].childs[0].id;
+			this.articleType = data.loreType[0];
 		},
 		//删除分类
 		deleteData(e) {
@@ -201,7 +187,7 @@ var editVue = new Vue({
 		//查询一级分类
 		getFirstClass() {
 			var _this = this;
-			_this.$http.get(window.config.HTTPURL + "rest/encyclopeType/getTypeTree?type=MO").then(function(res) {
+			_this.$http.get(window.config.HTTPURL + "rest/babyLoreType/selectByTypeList?pId=0").then(function(res) {
 				if(res.data.code == "0000") {
 					_this.firstClass = res.data.data;
 					if(_this.firstClass.length == 0) {
@@ -222,7 +208,7 @@ var editVue = new Vue({
 		//查询二级分类
 		getSecondClass(id) {
 			var _this = this;
-			_this.$http.get(window.config.HTTPURL + "rest/encyclopeType/getTypeTree?type=ER&id=" + id).then(function(res) {
+			_this.$http.get(window.config.HTTPURL + "rest/babyLoreType/selectByTypeList?pId=" + id).then(function(res) {
 				if(res.data.code == "0000") {
 					_this.secondClass = res.data.data;
 					$("#secondClass").html("");
@@ -247,7 +233,7 @@ var editVue = new Vue({
 		//查询三级分类
 		getThirdClass(id) {
 			var _this = this;
-			_this.$http.get(window.config.HTTPURL + "rest/encyclopeType/getTypeTree?type=CD&id=" + id).then(function(res) {
+			_this.$http.get(window.config.HTTPURL + "rest/babyLoreType/selectByTypeList?pId=" + id).then(function(res) {
 				if(res.data.code == "0000") {
 					_this.thirdClass = res.data.data;
 					$("#thirdClass").html("");
@@ -258,7 +244,7 @@ var editVue = new Vue({
 						return;
 					}
 					for(var i = 0; i < _this.thirdClass.length; i++) {
-						$("#thirdClass").append('<input type="checkbox" value="' + _this.thirdClass[i].id + '" lay-skin="primary" title="' + _this.thirdClass[i].typeName + '" name="thirdClass">')
+						$("#thirdClass").append('<input type="radio" value="' + _this.thirdClass[i].id + '" lay-skin="primary" title="' + _this.thirdClass[i].typeName + '" name="thirdClass">')
 					}
 				} else {
 					layer.msg(res.data.msg)
@@ -271,24 +257,20 @@ var editVue = new Vue({
 		//保存分类
 		saveClass() {
 			var _this = this;
+			
 			_this.saveClassData = {
-				thirdNameStr: "",
+				thirdName: "",
 				firstID: null,
 				firstName: "",
-				secondName: "",
-				thirsId: []
+				secondName: ""
 			};
-
-			$("#thirdClass input:checkbox[name='thirdClass']:checked").each(function(index, item) {
-				_this.saveClassData.thirdNameStr += ($(this).attr("title") + "，")
-				_this.saveClassData.thirsId.push($(this).val())
-			});
-
 			_this.saveClassData.firstID = $("#firstClass").val()
 			_this.saveClassData.firstName = $("#firstClass option:checked").text()
 			_this.saveClassData.secondName = $("#secondClass option:checked").text()
-
-			$("#classTable").append('<li><p class="width-10">' + _this.saveClassData.firstName + '</p><p class="width-20">' + _this.saveClassData.secondName + '</p><p class="width-50" name="' + (_this.saveClassData.thirsId).toString() + '">' + (_this.saveClassData.thirdNameStr).substr(0, _this.saveClassData.thirdNameStr.length - 1) + '</p><p class="width-20"><a href="##" class="layui-btn layui-btn-danger deleteClass">删除</a></p></li>')
+			_this.saveClassData.thirdName = $("#thirdClass input[type='radio']:checked").attr("title")
+			_this.typeIds = $("#thirdClass input[type='radio']:checked").val()
+			
+			$("#classTable").html('<li><p class="width-10">' + _this.saveClassData.firstName + '</p><p class="width-20">' + _this.saveClassData.secondName + '</p><p class="width-50">' + _this.saveClassData.thirdName + '</p><p class="width-20"><a href="##" class="layui-btn layui-btn-danger deleteClass">删除</a></p></li>')
 
 			layer.msg("保存分类成功！")
 			setTimeout(function() {

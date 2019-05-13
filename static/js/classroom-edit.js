@@ -42,7 +42,7 @@ var editVue = new Vue({
 						//七牛上传
 						setTimeout(function() {
 							qiniuUpload(_this, file, "img", function(name, fileUrl) {
-								_this.firstImg = fileUrl
+								_this.firstImg = window.config.uploadUrl+fileUrl
 							})
 						}, 100)
 					})

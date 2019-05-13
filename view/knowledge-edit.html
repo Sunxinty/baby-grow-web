@@ -75,10 +75,10 @@
 									</li>
 								</ul>
 								<ul class="section my-table-body" id="classTable">
-									<li v-if="articleType.length>0" v-for="(item,index) in articleType">
-										<p class="width-10">{{item.typeName}}</p>
-										<p class="width-20">{{item.encyclopeTypes[0].typeName}}</p>
-										<p class="width-50" :name="item.idStr">{{item.nameStr}}</p>
+									<li v-if="articleType">
+										<p class="width-10">{{articleType.typeName}}</p>
+										<p class="width-20">{{articleType.childs[0].typeName}}</p>
+										<p class="width-50">{{articleType.childs[0].childs[0].typeName}}</p>
 										<p class="width-20">
 											<a href="##" class="layui-btn layui-btn-danger deleteClass">删除</a>
 										</p>

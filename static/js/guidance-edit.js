@@ -44,7 +44,7 @@ var editVue = new Vue({
 						_this.imgMsg = "准备上传..."
 						setTimeout(function() {
 							qiniuUpload(_this, file, "img", function(name, fileUrl) {
-								_this.firstImg = fileUrl
+								_this.firstImg = window.config.uploadUrl+fileUrl
 							})
 						}, 100)
 					})
@@ -164,6 +164,7 @@ var editVue = new Vue({
 			this.summary = data.summary;
 			this.firstImg = data.firstImg;
 			this.keyWord = data.keyWord;
+			$('#previewImg').show().attr('src', this.firstImg);
 			//_this.editor.txt.html(data.content);
 			$("#addEdit").summernote("code", data.content)
 			for(var i = 0; i < data.articleType.length; i++) {

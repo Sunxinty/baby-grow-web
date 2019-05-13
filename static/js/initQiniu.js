@@ -42,7 +42,7 @@ function qiniuUpload(vueObj, file, type, sucFn, errFn) {
 			},
 			complete(res) { //成功后
 				layer.msg("上传成功！")
-				returnUrl = window.config.uploadUrl + fileUrl;
+				returnUrl = fileUrl;
 				if(sucFn){
 					sucFn(fileName,returnUrl)
 				}
