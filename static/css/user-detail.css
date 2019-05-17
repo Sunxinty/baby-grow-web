@@ -89,3 +89,14 @@
 .body-msg-list li a{
 	color: #ff6156;
 }
+.detail-box{
+	padding: 20px;
+}
+.detail-box p{
+	width: 48%;
+	margin: 0 1%;
+	float: left;
+	text-align: left;
+	line-height: 22px;
+	font-size: 16px;
+}

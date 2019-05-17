@@ -40,14 +40,14 @@
 			<div class="section user-body-msg bg-fff">
 				<div class="user-nav">
 					<ul class="section">
-						<li :class="{active:isBody}" @click="changeIcon(true)">宝宝资料</li>
-						<li :class="{active:!isBody}" @click="changeIcon(false)">会员详情</li>
+						<li :class="{active:isBaby}" @click="changeIcon(true)">宝宝资料</li>
+						<li :class="{active:!isBaby}" @click="changeIcon(false)">会员详情</li>
 					</ul>
 				</div>
-				<div class="user-msg-list" v-show="!isBody"></div>
-				<div class="body-msg-list" v-show="isBody">
-					<ul class="section" v-if="bodyMsg.length>0">
-						<li v-for="(item,index) in bodyMsg">
+				<div class="user-msg-list" v-show="!isBaby"></div>
+				<div class="body-msg-list" v-show="isBaby">
+					<ul class="section" v-if="babyMsg.length>0">
+						<li v-for="(item,index) in babyMsg">
 							<img v-if="item.headurl==null" src="../static/image/header.png" />
 							<img v-else :src="item.headurl" />
 							<p>名字：{{item.babyName}}</p>
@@ -56,7 +56,7 @@
 							<p>出生时辰：{{item.birthtime}}</p>
 							<p>亲属关系：{{item.familyRelation}}</p>
 							<p>监护人：{{item.carer}}</p>
-							<a href="javascript:void();">查看详情>></a>
+							<a href="javascript:void();" @click="getBodyDetail(item.id)">查看详情>></a>
 						</li>
 					</ul>
 				</div>
