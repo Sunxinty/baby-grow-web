@@ -119,27 +119,27 @@ var userDetailVue = new Vue({
 			_this.$http.get(window.config.HTTPURL + "rest/baby/" + id).then(function(res) {
 				if(res.data.code == "0000") {
 					_this.babyDetail = res.data.data;
-					var sex = _this.babyDetail.sex==1?"男":"女";
-					var detailHtml = 
-					`<div class="section detail-box">
-						<p>宝宝姓名:${_this.babyDetail.babyName}</p>
-						<p>宝宝性别:${sex}</p>
-						<p>出生日期:${_this.babyDetail.birthday}</p>
-						<p>宝宝年龄:${_this.babyDetail.age}</p>
-						<p>宝宝身高:${_this.babyDetail.birthHeight}cm</p>
-						<p>宝宝体重:${_this.babyDetail.birthWeight}g</p>
-						<p>宝宝小名:${_this.babyDetail.nickName}</p>
-						<p>宝宝血型:${_this.babyDetail.bloodType}</p>
-						<p>出生时辰:${_this.babyDetail.birthtime}</p>
-						<p>农历生日:${_this.babyDetail.lunarCalendar}</p>
-						<p>宝宝属相:${_this.babyDetail.zodiac}</p>
-						<p>宝宝星座:${_this.babyDetail.constellation}</p>
-						<p>监护人:${_this.babyDetail.carer}</p>
-						<p>亲属关系:${_this.babyDetail.familyRelation}</p>
+					var sex = _this.babyDetail.sex == 1 ? "男" : "女";
+					var detailHtml =
+						`<div class="section detail-box">
+						<p>宝宝姓名：${_this.babyDetail.babyName}</p>
+						<p>宝宝性别：${sex}</p>
+						<p>出生日期：${_this.babyDetail.birthday}</p>
+						<p>宝宝年龄：${_this.babyDetail.age}</p>
+						<p>宝宝身高：${_this.babyDetail.birthHeight}cm</p>
+						<p>宝宝体重：${_this.babyDetail.birthWeight}g</p>
+						<p>宝宝小名：${_this.babyDetail.nickName}</p>
+						<p>宝宝血型：${_this.babyDetail.bloodType}</p>
+						<p>出生时辰：${_this.babyDetail.birthtime}</p>
+						<p>农历生日：${_this.babyDetail.lunarCalendar}</p>
+						<p>宝宝属相：${_this.babyDetail.zodiac}</p>
+						<p>宝宝星座：${_this.babyDetail.constellation}</p>
+						<p>监护人：${_this.babyDetail.carer}</p>
+						<p>亲属关系：${_this.babyDetail.familyRelation}</p>
 					</div>`
 					layer.open({
 						type: 1,
-						title:"宝宝详情",
+						title: "宝宝详情",
 						skin: 'layui-layer-rim', //加上边框
 						area: ['720px', '400px'], //宽高
 						content: detailHtml

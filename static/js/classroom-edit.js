@@ -1,5 +1,4 @@
 var layer, upload, form;
-
 var detailId = window.localStorage.getItem("detailId") || "";
 var userInfo = window.localStorage.getItem("userInfo") || null;
 
@@ -42,9 +41,9 @@ var editVue = new Vue({
 						//七牛上传
 						setTimeout(function() {
 							qiniuUpload(_this, file, "img", function(name, fileUrl) {
-								_this.firstImg = window.config.uploadUrl+fileUrl
+								_this.firstImg = window.config.uploadUrl + fileUrl
 							})
-						}, 100)
+						}, 500)
 					})
 				},
 				bindAction: '',
@@ -72,8 +71,8 @@ var editVue = new Vue({
 				onImageUpload: function(files) {
 					//console.log(files);
 					layer.msg("正在上传...")
-					qiniuUpload(null, files[0],"image" , function(name, url) {
-						$('#addEdit').summernote('insertImage',url,'img');
+					qiniuUpload(null, files[0], "image", function(name, url) {
+						$('#addEdit').summernote('insertImage', window.config.uploadUrl + url, 'img');
 					})
 				}
 			}
@@ -140,7 +139,9 @@ var editVue = new Vue({
 				return;
 			}
 			var _this = this;
-			var loadIndex = layer.load(1,{shade: [0.1,"#000"]})
+			var loadIndex = layer.load(1, {
+				shade: [0.1, "#000"]
+			})
 			_this.$http.get(window.config.HTTPURL + "/rest/babyClassroom/selectById?id=" + detailId).then(function(res) {
 				layer.close(loadIndex);
 				if(res.data.code == "0000") {
@@ -185,7 +186,7 @@ var editVue = new Vue({
 		//查询一级分类
 		getFirstClass() {
 			var _this = this;
-			_this.$http.get(window.config.HTTPURL + "rest/babyClassroomType/selectByType").then(function(res) {
+			_this.$http.get(window.config.HTTPURL + "/rest/babyClassroomType/selectByType").then(function(res) {
 				if(res.data.code == "0000") {
 					_this.firstClass = res.data.data;
 					setTimeout(function() {

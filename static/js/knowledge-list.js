@@ -1,6 +1,6 @@
 var layer, $, laydate, form;
 
-layui.use(['layer', 'laydate'], function() {
+layui.use(['layer', 'laydate'], function () {
 	layer = layui.layer,
 		laydate = layui.laydate,
 		$ = layui.jquery;
@@ -9,7 +9,7 @@ layui.use(['layer', 'laydate'], function() {
 		elem: '#timeRange',
 		range: true,
 		format: "yyyy-MM-dd",
-		done: function(value, date, endDate) {
+		done: function (value, date, endDate) {
 			console.log(value);
 		}
 	});
@@ -34,13 +34,13 @@ var listVue = new Vue({
 	},
 	methods: {
 		nextPage() {
-			if(this.page < this.totalPageSize) {
+			if (this.page < this.totalPageSize) {
 				this.page++;
 				this.getData(this.page)
 			}
 		},
 		prePage() {
-			if(this.page > 1) {
+			if (this.page > 1) {
 				this.page--;
 				this.getData(this.page)
 			}
@@ -83,7 +83,7 @@ var listVue = new Vue({
 					} else {
 						layer.msg(res.data.msg)
 					}
-				}, function() {
+				}, function () {
 					layer.msg("服务器错误！")
 				})
 			});
@@ -103,7 +103,7 @@ var listVue = new Vue({
 			var _this = this;
 			_this.ageRange = $("#ageRange").val() == null ? 0 : $("#ageRange").val();
 			_this.timeRange = $("#timeRange").val();
-			if(!page) {
+			if (!page) {
 				layer.msg("参数错误")
 				return;
 			}
@@ -123,21 +123,21 @@ var listVue = new Vue({
 				} else {
 					layer.msg(res.data.msg)
 				}
-			}, function() {
+			}, function () {
 				layer.msg("服务器错误！")
 			})
 		},
 		//查询分类(此处只获取一级分类)
 		getClassData() {
 			var _this = this;
-			_this.$http.get(window.config.HTTPURL + "rest/encyclopeType/getTypeTree?type=MO").then(function(res) {
-				if(res.data.code == "0000") {
+			_this.$http.get(window.config.HTTPURL + "/rest/encyclopeType/getTypeTree?type=MO").then(function (res) {
+				if (res.data.code == "0000") {
 					_this.typeData = res.data.data;
 					_this.getData(_this.page)
 				} else {
 					layer.msg(res.data.msg)
 				}
-				layui.use(['form'], function() {
+				layui.use(['form'], function () {
 					form = layui.form
 				})
 			})

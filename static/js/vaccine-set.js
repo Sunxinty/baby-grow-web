@@ -1,6 +1,6 @@
 var layer, $, form;
 
-layui.use(['layer'], function() {
+layui.use(['layer'], function () {
 	layer = layui.layer,
 		$ = layui.jquery;
 })
@@ -17,7 +17,7 @@ var listVue = new Vue({
 		summary: "", //说明
 		thisId: null
 	},
-	mounted: function() {
+	mounted: function () {
 		this.getDataList()
 	},
 	methods: {
@@ -30,12 +30,12 @@ var listVue = new Vue({
 			this.summary = "";
 			this.thisId = null;
 			this.showClass = true
-			setTimeout(function(){
+			setTimeout(function () {
 				_this.initForm()
-			},0)
+			}, 0)
 		},
 		edit(id) {
-			if(!id) {
+			if (!id) {
 				return;
 			}
 			this.thisId = id;
@@ -45,15 +45,15 @@ var listVue = new Vue({
 			var _this = this;
 			layer.confirm('你确定要删除该疫苗？', {
 				btn: ['确定'],
-			}, function(index) {
-				_this.$http.get(window.config.HTTPURL + "rest/defaultSeedlings/deleteById?id=" + id).then(function(res) {
-					if(res.data.code == "0000") {
+			}, function (index) {
+				_this.$http.get(window.config.HTTPURL + "/rest/defaultSeedlings/deleteById?id=" + id).then(function (res) {
+					if (res.data.code == "0000") {
 						layer.msg("删除成功！")
 						_this.getDataList()
 					} else {
 						layer.msg(res.data.msg)
 					}
-				}, function() {
+				}, function () {
 					layer.msg("服务器错误！")
 				})
 			});
@@ -61,37 +61,37 @@ var listVue = new Vue({
 		//查询分类列表
 		getDataList(name) {
 			var _this = this;
-			if(!name) {
+			if (!name) {
 				name = ""
 			}
-			_this.$http.get(window.config.HTTPURL + "rest/defaultSeedlings/selectByList?name=" + name).then(function(res) {
-				if(res.data.code == "0000") {
+			_this.$http.get(window.config.HTTPURL + "/rest/defaultSeedlings/selectByList?name=" + name).then(function (res) {
+				if (res.data.code == "0000") {
 					_this.dataList = res.data.data;
 				} else {
 					layer.msg(res.data.msg)
 				}
-			}, function() {
+			}, function () {
 				layer.msg("服务器错误！")
 			})
 		},
 		//按ID查询
 		getDataById(id) {
 			var _this = this;
-			_this.$http.get(window.config.HTTPURL + "rest/defaultSeedlings/selectById?id=" + id).then(function(res) {
-				if(res.data.code == "0000") {
+			_this.$http.get(window.config.HTTPURL + "/rest/defaultSeedlings/selectById?id=" + id).then(function (res) {
+				if (res.data.code == "0000") {
 					this.showClass = true;
 					var data = res.data.data;
 					_this.sendlingsName = data.sendlingsName;
 					_this.rangeTime = data.rangeTime;
 					_this.summary = data.summary;
 					_this.unit = data.unit;
-					setTimeout(function(){
+					setTimeout(function () {
 						_this.initForm()
-					},0)
+					}, 0)
 				} else {
 					layer.msg(res.data.msg)
 				}
-			}, function() {
+			}, function () {
 				layer.msg("服务器错误！")
 			})
 		},
@@ -99,22 +99,22 @@ var listVue = new Vue({
 			var _this = this;
 			var params = {
 				"id": _this.thisId,
-			    "sendlingsName": _this.sendlingsName,
-			    "rangeTime": _this.rangeTime,
-			    "unit": _this.unit,
-			    "summary": _this.summary
+				"sendlingsName": _this.sendlingsName,
+				"rangeTime": _this.rangeTime,
+				"unit": _this.unit,
+				"summary": _this.summary
 			}
-			_this.$http.post(window.config.HTTPURL + "rest/defaultSeedlings/insertAndUpdate", JSON.stringify(params)).then(function(res) {
-				if(res.data.code == "0000") {
+			_this.$http.post(window.config.HTTPURL + "/rest/defaultSeedlings/insertAndUpdate", JSON.stringify(params)).then(function (res) {
+				if (res.data.code == "0000") {
 					layer.msg("保存成功！")
-					setTimeout(function() {
+					setTimeout(function () {
 						_this.getDataList()
 						_this.showClass = false
 					}, 1000)
 				} else {
 					layer.msg(res.data.msg)
 				}
-			}, function() {
+			}, function () {
 				layer.msg("服务器错误！")
 			})
 		},
@@ -123,9 +123,9 @@ var listVue = new Vue({
 		},
 		initForm() {
 			var _this = this;
-			layui.use(['form'], function() {
+			layui.use(['form'], function () {
 				form = layui.form;
-				form.on('radio(unit)', function(data) {
+				form.on('radio(unit)', function (data) {
 					_this.unit = data.value;
 				});
 				form.render();

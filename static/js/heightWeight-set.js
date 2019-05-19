@@ -1,6 +1,6 @@
 var layer, $, form;
 
-layui.use(['layer'], function() {
+layui.use(['layer'], function () {
 	layer = layui.layer,
 		$ = layui.jquery;
 })
@@ -20,12 +20,12 @@ var listVue = new Vue({
 		sex: 1,
 		thisId: null
 	},
-	mounted: function() {
+	mounted: function () {
 		var _this = this;
 		_this.getData(1)
-		layui.use(['form'], function() {
+		layui.use(['form'], function () {
 			form = layui.form;
-			form.on('select(sexValue)', function(data) {
+			form.on('select(sexValue)', function (data) {
 				_this.getData(data.value)
 			});
 		})
@@ -35,7 +35,7 @@ var listVue = new Vue({
 			this.showClass = true
 		},
 		edit(id) {
-			if(!id) {
+			if (!id) {
 				return;
 			}
 			this.thisId = id;
@@ -45,22 +45,22 @@ var listVue = new Vue({
 		//查询列表
 		getData(type) {
 			var _this = this;
-			_this.$http.get(window.config.HTTPURL + "rest/babyHealthySandar/selectByList?type="+type).then(function(res) {
-				if(res.data.code == "0000") {
+			_this.$http.get(window.config.HTTPURL + "/rest/babyHealthySandar/selectByList?type=" + type).then(function (res) {
+				if (res.data.code == "0000") {
 					_this.dataList = res.data.data;
 				} else {
 					layer.msg(res.data.msg)
 				}
-			}, function() {
+			}, function () {
 				layer.msg("服务器错误！")
 			})
 		},
 		getDataById(id) {
 			var _this = this;
-			_this.$http.get(window.config.HTTPURL + "rest/babyHealthySandar/selectById?id=" + id).then(function(res) {
-				if(res.data.code == "0000") {
+			_this.$http.get(window.config.HTTPURL + "/rest/babyHealthySandar/selectById?id=" + id).then(function (res) {
+				if (res.data.code == "0000") {
 					var data = res.data.data;
-					layui.use(['form'], function() {
+					layui.use(['form'], function () {
 						form = layui.form;
 					})
 					$("input[name=sex][value=1]").attr("checked", data.sex == 1 ? true : false);
@@ -76,7 +76,7 @@ var listVue = new Vue({
 				} else {
 					layer.msg(res.data.msg)
 				}
-			}, function() {
+			}, function () {
 				layer.msg("服务器错误！")
 			})
 		},
@@ -84,24 +84,24 @@ var listVue = new Vue({
 			var _this = this;
 			var params = {
 				"id": _this.thisId,
-				"heightMin": _this.heightMin*10,
-				"weightMin": _this.weightMin*1000,
-				"headSizeMin": _this.headSizeMin*10,
-				"heightMax": _this.heightMax*10,
-				"weightMax": _this.weightMax*1000,
-				"headSizeMax": _this.headSizeMax*10
+				"heightMin": _this.heightMin * 10,
+				"weightMin": _this.weightMin * 1000,
+				"headSizeMin": _this.headSizeMin * 10,
+				"heightMax": _this.heightMax * 10,
+				"weightMax": _this.weightMax * 1000,
+				"headSizeMax": _this.headSizeMax * 10
 			}
-			_this.$http.post(window.config.HTTPURL + "rest/babyHealthySandar/updateById", JSON.stringify(params)).then(function(res) {
-				if(res.data.code == "0000") {
+			_this.$http.post(window.config.HTTPURL + "/rest/babyHealthySandar/updateById", JSON.stringify(params)).then(function (res) {
+				if (res.data.code == "0000") {
 					layer.msg("保存成功！")
-					setTimeout(function() {
+					setTimeout(function () {
 						_this.getData(1)
 						_this.showClass = false
 					}, 1000)
 				} else {
 					layer.msg(res.data.msg)
 				}
-			}, function() {
+			}, function () {
 				layer.msg("服务器错误！")
 			})
 		},

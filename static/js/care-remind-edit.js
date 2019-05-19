@@ -20,7 +20,7 @@ var commentVue = new Vue({
 			layer = layui.layer;
 			upload = layui.upload;
 			_this.getDetail(detailId)
-			
+
 			var uploadImg = upload.render({
 				elem: '#uploadImg',
 				url: '',
@@ -33,7 +33,7 @@ var commentVue = new Vue({
 						_this.imgMsg = "准备上传..."
 						setTimeout(function() {
 							qiniuUpload(_this, file, "img", function(name, fileUrl) {
-								_this.firstImg = window.config.uploadUrl+fileUrl
+								_this.firstImg = window.config.uploadUrl + fileUrl
 							})
 						}, 100)
 					})
@@ -56,7 +56,7 @@ var commentVue = new Vue({
 						_this.audioMsg = "准备上传..."
 						setTimeout(function() {
 							qiniuUpload(_this, file, "audio", function(name, fileUrl) {
-								_this.sources = fileUrl
+								_this.sources = window.config.uploadUrl + fileUrl
 							})
 						}, 100)
 					})
@@ -67,7 +67,7 @@ var commentVue = new Vue({
 				}
 			});
 		})
-		
+
 		//加载富文本编辑器
 		_this.editor = $('#addEdit').summernote({
 			height: 300,
@@ -86,8 +86,8 @@ var commentVue = new Vue({
 			callbacks: {
 				onImageUpload: function(files) {
 					//console.log(files);
-					qiniuUpload(null, files[0],"image" , function(name, url) {
-						$('#addEdit').summernote('insertImage',url,'img');
+					qiniuUpload(null, files[0], "image", function(name, url) {
+						$('#addEdit').summernote('insertImage', window.config.uploadUrl + url, 'img');
 					})
 				}
 			}
@@ -128,10 +128,12 @@ var commentVue = new Vue({
 			if(id == null || id == undefined || id == "") {
 				return;
 			} else {
-				var loadIndex = layer.load(1,{shade: [0.1,"#000"]})
+				var loadIndex = layer.load(1, {
+					shade: [0.1, "#000"]
+				})
 				$(".layui-upload-img").show()
 				_this.$http.get(window.config.HTTPURL + "/rest/careRemind/selectById?id=" + id).then(function(res) {
-					layer.close(loadIndex); 
+					layer.close(loadIndex);
 					if(res.data.code == "0000") {
 						_this.dataObj = res.data.data;
 						_this.title = _this.dataObj.title || "";

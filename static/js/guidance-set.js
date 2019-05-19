@@ -1,6 +1,6 @@
 var layer, $, form;
 
-layui.use(['layer'], function() {
+layui.use(['layer'], function () {
 	layer = layui.layer,
 		$ = layui.jquery;
 })
@@ -27,7 +27,7 @@ var listVue = new Vue({
 		isEdit: false,
 		chioceClass: 0
 	},
-	mounted: function() {
+	mounted: function () {
 		this.getClassData(this.chioceClass)
 		this.getFirstClass()
 	},
@@ -48,7 +48,7 @@ var listVue = new Vue({
 		edit(dataF, dataS) {
 			var _this = this;
 			console.log(dataF, dataS)
-			if(!dataS.typeName || dataS.typeName == "") {
+			if (!dataS.typeName || dataS.typeName == "") {
 				layer.alert("请先添加一级分类！")
 				return;
 			}
@@ -60,25 +60,24 @@ var listVue = new Vue({
 		},
 		deleteData(id, type) {
 			var _this = this;
-			if(!id) {
+			if (!id) {
 				return;
 			}
 			layer.confirm('你确定要删除该分类？', {
 				btn: ['确定'],
-			}, function(index) {
-				_this.$http.get(window.config.HTTPURL + "rest/encyclopeType/delete?id=" + id + "&type=" + type).then(function(res) {
-					if(res.data.code == "0000") {
+			}, function (index) {
+				_this.$http.get(window.config.HTTPURL + "/rest/encyclopeType/delete?id=" + id + "&type=" + type).then(function (res) {
+					if (res.data.code == "0000") {
 						layer.msg("删除成功！")
-						if(type == "CD") {
+						if (type == "CD") {
 							_this.getThirdClass(_this.editSecondObj.id);
-						}
-						else{
+						} else {
 							_this.getClassData(_this.chioceClass)
 						}
 					} else {
 						layer.msg(res.data.msg)
 					}
-				}, function() {
+				}, function () {
 					layer.msg("服务器错误！")
 				})
 			});
@@ -86,7 +85,7 @@ var listVue = new Vue({
 		//编辑一级分类
 		editInput(data, e) {
 			var _this = this;
-			if(data.typeName == "") {
+			if (data.typeName == "") {
 				return;
 			}
 			var e = e || event;
@@ -96,38 +95,38 @@ var listVue = new Vue({
 		//查询分类列表
 		getClassData(monthId) {
 			var _this = this;
-			if(!monthId) {
+			if (!monthId) {
 				monthId = 0;
 			}
-			_this.$http.get(window.config.HTTPURL + "rest/encyclopeType/getTypeTrees?monthId=" + monthId).then(function(res) {
+			_this.$http.get(window.config.HTTPURL + "/rest/encyclopeType/getTypeTrees?monthId=" + monthId).then(function (res) {
 				_this.dataList = [];
 				_this.secondClass = [];
 				_this.thirdClass = [];
-				if(res.data.code == "0000") {
+				if (res.data.code == "0000") {
 					var dataList = res.data.data;
 					var encyclopeTypes = [];
 					var encyclopeChilds = [];
-					if(dataList.length > 0) {
-						for(var i = 0; i < dataList.length; i++) {
+					if (dataList.length > 0) {
+						for (var i = 0; i < dataList.length; i++) {
 							var one = dataList[i].encyclopeTypes;
-							if(one == null || one.length == 0) {
+							if (one == null || one.length == 0) {
 								one = [{
 									typeName: ""
 								}]
 								_this.dataList.push(dataList[i])
 								encyclopeTypes = encyclopeTypes.concat(one)
 							} else {
-								for(var j = 0; j < one.length; j++) {
+								for (var j = 0; j < one.length; j++) {
 									var two = one[j].encyclopeChilds;
 									one[j].thirdStr = "";
 									//one[j].inputStatus = true;
-									if(two == null || two.length == 0) {
+									if (two == null || two.length == 0) {
 										two = [{
 											typeName: ""
 										}]
 										encyclopeChilds = encyclopeChilds.concat(two)
 									} else {
-										for(var k = 0; k < two.length; k++) {
+										for (var k = 0; k < two.length; k++) {
 											one[j].thirdStr += two[k].typeName + "，"
 										}
 										encyclopeChilds = encyclopeChilds.concat(two)
@@ -144,18 +143,18 @@ var listVue = new Vue({
 				} else {
 					layer.msg(res.data.msg)
 				}
-			}, function() {
+			}, function () {
 				layer.msg("服务器错误！")
 			})
 		},
 		//查询月龄
 		getFirstClass(data) {
 			var _this = this;
-			_this.$http.get(window.config.HTTPURL + "rest/encyclopeType/getTypeTree?type=MO").then(function(res) {
-				if(res.data.code == "0000") {
+			_this.$http.get(window.config.HTTPURL + "/rest/encyclopeType/getTypeTree?type=MO").then(function (res) {
+				if (res.data.code == "0000") {
 					_this.editFirstClass = res.data.data;
-					if(_this.editFirstClass.length == 0) {
-						setTimeout(function() {
+					if (_this.editFirstClass.length == 0) {
+						setTimeout(function () {
 							_this.initForm()
 						}, 0)
 						return;
@@ -170,19 +169,19 @@ var listVue = new Vue({
 		//查询一级分类
 		getSecondClass(id) {
 			var _this = this;
-			if(id == null || id == undefined) {
+			if (id == null || id == undefined) {
 				return;
 			}
-			_this.$http.get(window.config.HTTPURL + "rest/encyclopeType/getTypeTree?type=ER&id=" + id).then(function(res) {
-				if(res.data.code == "0000") {
+			_this.$http.get(window.config.HTTPURL + "/rest/encyclopeType/getTypeTree?type=ER&id=" + id).then(function (res) {
+				if (res.data.code == "0000") {
 					_this.editSecondClass = res.data.data;
-					if(_this.editSecondClass.length == 0) {
-						setTimeout(function() {
+					if (_this.editSecondClass.length == 0) {
+						setTimeout(function () {
 							_this.initForm()
 						}, 0)
 						return;
 					}
-					setTimeout(function() {
+					setTimeout(function () {
 						_this.initForm()
 					}, 100)
 				} else {
@@ -193,19 +192,19 @@ var listVue = new Vue({
 		//查询子分类
 		getThirdClass(id) {
 			var _this = this;
-			if(id == null || id == undefined) {
+			if (id == null || id == undefined) {
 				return;
 			}
-			_this.$http.get(window.config.HTTPURL + "rest/encyclopeType/getTypeTree?type=CD&id=" + id).then(function(res) {
-				if(res.data.code == "0000") {
+			_this.$http.get(window.config.HTTPURL + "/rest/encyclopeType/getTypeTree?type=CD&id=" + id).then(function (res) {
+				if (res.data.code == "0000") {
 					_this.editThirdClass = res.data.data;
-					if(_this.editThirdClass.length == 0) {
-						setTimeout(function() {
+					if (_this.editThirdClass.length == 0) {
+						setTimeout(function () {
 							_this.initForm()
 						}, 0)
 						return;
 					}
-					setTimeout(function() {
+					setTimeout(function () {
 						_this.initForm()
 					}, 100)
 				} else {
@@ -218,7 +217,7 @@ var listVue = new Vue({
 			var _this = this;
 			var e = e || event;
 			e = e.target;
-			if(!id) {
+			if (!id) {
 				var params = {
 					"id": null,
 					"typeName": _this.secondClassName,
@@ -233,10 +232,10 @@ var listVue = new Vue({
 				$(e).attr("disabled", "disabled").css("background", "none")
 			}
 
-			_this.$http.post(window.config.HTTPURL + "rest/encyclopeType/insertEncyclopeType", JSON.stringify(params)).then(function(res) {
-				if(res.data.code == "0000") {
+			_this.$http.post(window.config.HTTPURL + "/rest/encyclopeType/insertEncyclopeType", JSON.stringify(params)).then(function (res) {
+				if (res.data.code == "0000") {
 					layer.msg("保存成功！")
-					setTimeout(function() {
+					setTimeout(function () {
 						_this.secondClassName = "";
 						_this.showClass = false;
 						_this.getClassData(_this.chioceClass)
@@ -244,14 +243,14 @@ var listVue = new Vue({
 				} else {
 					layer.msg(res.data.msg)
 				}
-			}, function() {
+			}, function () {
 				layer.msg("服务器错误！")
 			})
 		},
 		//保存子分类
 		saveThirdClass(obj) {
 			var _this = this;
-			if($("input[name='tobj0']").val()==""){
+			if ($("input[name='tobj0']").val() == "") {
 				layer.alert("请输入分类名称！")
 				return;
 			}
@@ -261,31 +260,31 @@ var listVue = new Vue({
 				"encyclopeId": Math.floor($("input[name='editSecond']").attr("data-id"))
 			}
 
-			_this.$http.post(window.config.HTTPURL + "rest/encyclopeType/insertEncyclopeChild", JSON.stringify(params)).then(function(res) {
-				if(res.data.code == "0000") {
+			_this.$http.post(window.config.HTTPURL + "/rest/encyclopeType/insertEncyclopeChild", JSON.stringify(params)).then(function (res) {
+				if (res.data.code == "0000") {
 					layer.msg("保存成功！")
 					$("input[name='tobj0']").val("")
 					_this.getThirdClass(_this.editSecondObj.id);
 				} else {
 					layer.msg(res.data.msg)
 				}
-			}, function() {
+			}, function () {
 				layer.msg("服务器错误！")
 			})
 		},
 		initForm() {
 			var _this = this;
-			layui.use(['form'], function() {
+			layui.use(['form'], function () {
 				form = layui.form;
-				form.on('select(firstClass)', function(data) {});
-				form.on('select(firstClass2)', function(data) {
+				form.on('select(firstClass)', function (data) {});
+				form.on('select(firstClass2)', function (data) {
 					_this.getSecondClass(data.value)
 				});
-				form.on('select(monthValue)', function(data) {
+				form.on('select(monthValue)', function (data) {
 					_this.chioceClass = data.value
 					_this.getClassData(_this.chioceClass)
 				});
-				form.on('select(secondClass)', function(data) {});
+				form.on('select(secondClass)', function (data) {});
 				form.render("select");
 			})
 		},

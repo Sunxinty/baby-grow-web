@@ -16,7 +16,7 @@
 	</head>
 
 	<body class="body">
-		
+
 		<div class="container">
 			<div class="user-msg bg-fff" v-if="userMsg!=null">
 				<div class="user-msg-top">
@@ -32,45 +32,40 @@
 					<p>宝宝数量：{{userMsg.babys||0}}</p>
 					<p>会员时间：{{userMsg.vipStartTime}}-{{userMsg.vipEndTime}}</p>
 				</div>
-				<div class="user-msg-top">
-					<p>地区：{{userMsg.region}}</p>
-					<p>签名：{{userMsg.remark}}</p>
-				</div>
-			</div>
-			<div class="section user-body-msg bg-fff">
-				<div class="user-nav">
-					<ul class="section">
-						<li :class="{active:isBaby}" @click="changeIcon(true)">宝宝资料</li>
-						<li :class="{active:!isBaby}" @click="changeIcon(false)">会员详情</li>
-					</ul>
-				</div>
-				<div class="user-msg-list" v-show="!isBaby"></div>
-				<div class="body-msg-list" v-show="isBaby">
-					<ul class="section" v-if="babyMsg.length>0">
-						<li v-for="(item,index) in babyMsg">
-							<img v-if="item.headurl==null" src="../static/image/header.png" />
-							<img v-else :src="item.headurl" />
-							<p>名字：{{item.babyName}}</p>
-							<p>年龄：{{item.age}}</p>
-							<p>出生日期：{{item.birthday}}</p>
-							<p>出生时辰：{{item.birthtime}}</p>
-							<p>亲属关系：{{item.familyRelation}}</p>
-							<p>监护人：{{item.carer}}</p>
-							<a href="javascript:void();" @click="getBodyDetail(item.id)">查看详情>></a>
-						</li>
-					</ul>
+				<div class="section user-body-msg bg-fff">
+					<div class="user-nav">
+						<ul class="section">
+							<li :class="{active:isBaby}" @click="changeIcon(true)">宝宝资料</li>
+							<li :class="{active:!isBaby}" @click="changeIcon(false)">会员详情</li>
+						</ul>
+					</div>
+					<div class="user-msg-list" v-show="!isBaby"></div>
+					<div class="body-msg-list" v-show="isBaby">
+						<ul class="section" v-if="babyMsg.length>0">
+							<li v-for="(item,index) in babyMsg">
+								<img v-if="item.headurl==null" src="../static/image/header.png" />
+								<img v-else :src="item.headurl" />
+								<p>名字：{{item.babyName}}</p>
+								<p>年龄：{{item.age}}</p>
+								<p>出生日期：{{item.birthday}}</p>
+								<p>出生时辰：{{item.birthtime}}</p>
+								<p>亲属关系：{{item.familyRelation}}</p>
+								<p>监护人：{{item.carer}}</p>
+								<a href="javascript:void();" @click="getBodyDetail(item.id)">查看详情>></a>
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
-		
-		
-		<script type="text/javascript" src="../lib/jquery.min.js" ></script>
+
+		<script type="text/javascript" src="../lib/jquery.min.js"></script>
 		<script type="text/javascript" src="../lib/layui/layui.js"></script>
 		<script type="text/javascript" src="../lib/vue.min.js"></script>
 		<script type="text/javascript" src="../lib/vue-resource.js"></script>
-		<script type="text/javascript" src="../static/js/config.js" ></script>
-		<script type="text/javascript" src="../lib/ajaxhook.min.js" ></script>
-		<script type="text/javascript" src="../static/js/myTools.js" ></script>
+		<script type="text/javascript" src="../static/js/config.js"></script>
+		<script type="text/javascript" src="../lib/ajaxhook.min.js"></script>
+		<script type="text/javascript" src="../static/js/myTools.js"></script>
 		<script type="text/javascript" src="../static/js/user-detail.js"></script>
 	</body>
 

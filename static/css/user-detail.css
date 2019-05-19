@@ -1,57 +1,68 @@
 @import url("base.css");
-.search-form{
+.search-form {
 	padding: 20px;
 }
-.layui-laypage-count{
+
+.layui-laypage-count {
 	background: none !important;
 }
-.iconfont{
+
+.iconfont {
 	line-height: 30px;
 }
-.user-msg{
+
+.user-msg {
 	padding: 20px;
 	position: relative;
 	overflow: hidden;
 	width: 100%;
 }
-.user-msg-top{
+
+.user-msg-top {
 	width: 27.3%;
 	padding-left: 60px;
 	float: left;
 	margin-top: 20px;
 }
-.user-msg-top:nth-of-type(1){
+
+.user-msg-top:nth-of-type(1) {
 	margin-top: 0;
 	text-align: center;
 	padding-left: 0;
 	width: 18%;
 }
-.user-msg-top img{
+
+.user-msg-top img {
 	width: 80px;
 	height: 80px;
 	border-radius: 50%;
 	margin-bottom: 10px;
 }
-.user-msg-top p{
+
+.user-msg-top p {
 	width: 100%;
 	line-height: 36px;
 	font-size: 16px;
 }
-.user-msg-top:nth-of-type(1){
+
+.user-msg-top:nth-of-type(1) {
 	line-height: 26px;
 }
-.user-body-msg{
+
+.user-body-msg {
 	margin-top: 20px;
 	width: 100%;
 	position: relative;
 	overflow: hidden;
 	background: #fff;
 }
-.user-nav{
+
+.user-nav {
 	width: 15%;
 	float: left;
 }
-.user-nav li{
+
+.user-nav li {
 	font-size: 16px;
 	line-height: 46px;
 	width: 100%;
@@ -59,34 +70,40 @@
 	cursor: pointer;
 	transition: 0.5s ease;
 }
-.user-nav li.active{
+
+.user-nav li.active {
 	background: #72dad0;
 	color: #fff;
 }
-.body-msg-list{
+
+.body-msg-list {
 	width: 84%;
 	float: right;
 	padding: 20px;
 }
-.body-msg-list li{
+
+.body-msg-list li {
 	width: 23%;
 	margin: 1%;
 	background: #f8f8f8;
 	padding: 30px 10px 30px 40px;
 }
-.body-msg-list li img{
+
+.body-msg-list li img {
 	width: 80px;
 	height: 80px;
 	float: left;
 	border-radius: 50%;
 	margin-bottom: 30px;
 }
-.body-msg-list li p{
+
+.body-msg-list li p {
 	width: 100%;
 	font-size: 16px;
 	line-height: 40px;
 }
-.body-msg-list li a{
+
+.body-msg-list li a {
 	color: #ff6156;
 }
 .detail-box{
@@ -97,6 +114,6 @@
 	margin: 0 1%;
 	float: left;
 	text-align: left;
-	line-height: 22px;
+	line-height: 30px;
 	font-size: 16px;
 }

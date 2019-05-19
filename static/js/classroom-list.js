@@ -1,6 +1,6 @@
 var layer, $, laydate, form;
 
-layui.use(['layer', 'laydate'], function() {
+layui.use(['layer', 'laydate'], function () {
 	layer = layui.layer,
 		laydate = layui.laydate,
 		$ = layui.jquery;
@@ -9,7 +9,7 @@ layui.use(['layer', 'laydate'], function() {
 		elem: '#timeRange',
 		range: true,
 		format: "yyyy-MM-dd",
-		done: function(value, date, endDate) {
+		done: function (value, date, endDate) {
 			console.log(value);
 		}
 	});
@@ -28,18 +28,18 @@ var listVue = new Vue({
 		totalNumber: 0, //总条数
 		typeData: []
 	},
-	mounted: function() {
+	mounted: function () {
 		this.getClassData()
 	},
 	methods: {
 		nextPage() {
-			if(this.page < this.totalPageSize) {
+			if (this.page < this.totalPageSize) {
 				this.page++;
 				this.getData(this.page)
 			}
 		},
 		prePage() {
-			if(this.page > 1) {
+			if (this.page > 1) {
 				this.page--;
 				this.getData(this.page)
 			}
@@ -74,15 +74,15 @@ var listVue = new Vue({
 			var _this = this;
 			layer.confirm('你确定要删除该条文章？', {
 				btn: ['确定'],
-			}, function(index) {
-				_this.$http.get(window.config.HTTPURL + "rest/babyClassroom/deleteById?id=" + id).then(function(res) {
-					if(res.data.code == "0000") {
+			}, function (index) {
+				_this.$http.get(window.config.HTTPURL + "/rest/babyClassroom/deleteById?id=" + id).then(function (res) {
+					if (res.data.code == "0000") {
 						layer.msg("删除成功！")
 						_this.getData(_this.page)
 					} else {
 						layer.msg(res.data.msg)
 					}
-				}, function() {
+				}, function () {
 					layer.msg("服务器错误！")
 				})
 			});
@@ -102,7 +102,7 @@ var listVue = new Vue({
 			var _this = this;
 			_this.ageRange = $("#ageRange").val() == 0 ? null : $("#ageRange").val();
 			_this.timeRange = $("#timeRange").val();
-			if(!page) {
+			if (!page) {
 				layer.msg("参数错误")
 				return;
 			}
@@ -117,29 +117,29 @@ var listVue = new Vue({
 					"endTime": _this.timeRange == "" ? "" : (_this.timeRange).substr(13) + " 23:59:59",
 				}
 			}
-			_this.$http.post(window.config.HTTPURL + "rest/babyClassroom/selectByWebPage", JSON.stringify(params)).then(function(res) {
-				if(res.data.code == "0000") {
+			_this.$http.post(window.config.HTTPURL + "/rest/babyClassroom/selectByWebPage", JSON.stringify(params)).then(function (res) {
+				if (res.data.code == "0000") {
 					_this.dataList = res.data.data.list;
 					_this.totalNumber = res.data.data.total;
 					_this.totalPageSize = res.data.data.pages == 0 ? 1 : res.data.data.pages;
 				} else {
 					layer.msg(res.data.msg)
 				}
-			}, function() {
+			}, function () {
 				layer.msg("服务器错误！")
 			})
 		},
 		//查询分类(此处只获取一级分类)
 		getClassData() {
 			var _this = this;
-			_this.$http.get(window.config.HTTPURL + "rest/babyClassroomType/selectByType").then(function(res) {
-				if(res.data.code == "0000") {
+			_this.$http.get(window.config.HTTPURL + "/rest/babyClassroomType/selectByType").then(function (res) {
+				if (res.data.code == "0000") {
 					_this.typeData = res.data.data;
 					_this.getData(_this.page)
 				} else {
 					layer.msg(res.data.msg)
 				}
-				layui.use(['form'], function() {
+				layui.use(['form'], function () {
 					form = layui.form
 				})
 			})
