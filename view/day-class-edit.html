@@ -33,7 +33,7 @@
 					</div>
 				</div>
 				<div class="layui-form-item">
-					<label class="layui-form-label">*首帧图片</label>
+					<label class="layui-form-label">首帧图片</label>
 					<div class="layui-input-block">
 						<div class="layui-upload-drag" style="float: left;" id="uploadImg">
 							<i class="layui-icon"></i>
@@ -49,6 +49,13 @@
 					<label class="layui-form-label">*内容</label>
 					<div class="layui-input-block">
 						<textarea rows="10" style="width: 100%;border: 1px solid #ccc;padding: 10px;" v-model="content"></textarea>
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">*期数</label>
+					<div class="layui-input-block" style="line-height: 36px;">
+						<input type="number" min="1" name="period" v-model="period" class="layui-input" style="width: 100px;float: left;">
+						&nbsp;&nbsp;期
 					</div>
 				</div>
 				<div class="layui-form-item">
